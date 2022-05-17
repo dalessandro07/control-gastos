@@ -1,30 +1,26 @@
+const APIKEY = import.meta.env.VITE_RAPIDAPI
+
 const useTranslate = () => {
   const fetchTranslate = async (options) => {
     const res = await fetch(
-      'https://google-translate1.p.rapidapi.com/language/translate/v2',
+      'https://microsoft-translator-text.p.rapidapi.com/translate?to%5B0%5D=en&api-version=3.0&profanityAction=NoAction&textType=plain',
       options
     )
 
     const data = await res.json()
 
-    return data.data.translations[0].translatedText
+    return data[0].translations[0].text
   }
 
-  const translateWord = async (word) => {
-    const encodedParams = new URLSearchParams()
-    encodedParams.append('q', word)
-    encodedParams.append('source', 'es')
-    encodedParams.append('target', 'en')
-
+  const translateWord = async (desc) => {
     const options = {
       method: 'POST',
       headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'Accept-Encoding': 'application/gzip',
-        'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com',
-        'X-RapidAPI-Key': 'e1b156995emsh327f99e96211d13p1213c7jsnd4b61547cfd3'
+        'content-type': 'application/json',
+        'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com',
+        'X-RapidAPI-Key': APIKEY
       },
-      body: encodedParams
+      body: `[{"Text":"${desc}"}]`
     }
 
     return fetchTranslate(options)

@@ -1,8 +1,17 @@
+import { useState } from 'react'
+
+const API_KEY = import.meta.env.VITE_PEXELS_API_KEY
+
 const useAssignImg = () => {
-  const API_KEY = '563492ad6f917000010000018978c9ab2b0d4e75b8ef9aca18e35b7c'
+  const [nroImagen, setNroImagen] = useState(0)
+
+  const recoverData = (data) => {
+    console.log(data)
+    console.log(nroImagen)
+  }
 
   const fetchPhotosFromApi = async (desc) => {
-    const res = await fetch(`https://api.pexels.com/v1/search?query=${desc}&per_page=1`, {
+    const res = await fetch(`https://api.pexels.com/v1/search?query=${desc}&per_page=10`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -12,21 +21,28 @@ const useAssignImg = () => {
 
     const data = await res.json()
 
-    return data?.photos[0]?.src.small
+    recoverData(data)
+    return data?.photos[nroImagen]?.src.small
   }
 
   const assignImg = async (desc) => {
-    const newDescrip = desc.replace(/\s/g, '').toLowerCase()
+    const newDescrip = desc.toLowerCase()
 
-    if (desc.includes('mercado')) {
+    if (desc.toLowerCase().includes('mercado')) {
       return 'https://plazavea.vteximg.com.br/arquivos/ids/628808-450-450/image-eb60a9a8c5e141a3a259656bcf18efb5.jpg'
     } else {
       return await fetchPhotosFromApi(newDescrip)
     }
   }
 
+  const aumentarNroImagen = () => {
+    const num = nroImagen < 10 ? nroImagen + 1 : 0
+    setNroImagen(num)
+  }
+
   return {
-    assignImg
+    assignImg,
+    aumentarNroImagen
   }
 }
 

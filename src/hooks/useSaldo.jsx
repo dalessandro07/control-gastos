@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import useAssignImg from './useAssignImg'
-import useTransalte from './useTranslate'
+import useTranslate from './useTranslate'
 
 const useSaldo = () => {
   const [gastos, setGastos] = useState([])
   const [saldoTotal, setSaldoTotal] = useState(0)
   const [loading, setLoading] = useState(false)
   const { assignImg } = useAssignImg()
-  const { translateWord } = useTransalte()
+  const { translateWord } = useTranslate()
 
   const id = gastos.length > 0 ? gastos.length + 1 : 1
 
@@ -22,7 +22,13 @@ const useSaldo = () => {
 
     setGastos([
       ...gastos,
-      { id, monto, descripcion, fecha, img: await assignImg(translatedDescrip) }
+      {
+        id,
+        monto,
+        descripcion,
+        fecha,
+        img: await assignImg(translatedDescrip)
+      }
     ])
     setSaldoTotal(saldoTotal + monto)
 

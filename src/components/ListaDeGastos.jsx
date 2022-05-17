@@ -6,7 +6,7 @@ import Loading from '../utilities/Loading'
 moment.locale('es')
 
 const ListaDeGastos = ({ gastos }) => {
-  const { loading } = useContext(SaldoContext)
+  const { loading, aumentarNroImagen } = useContext(SaldoContext)
 
   gastos?.sort((a, b) => (moment(a.fecha).isBefore(b.fecha) ? 1 : -1))
 
@@ -25,7 +25,8 @@ const ListaDeGastos = ({ gastos }) => {
               <li className="my-4 flex items-center justify-between py-2" key={gasto.id}>
                 <section className="flex grow items-center">
                   <img
-                    className="mr-2 h-12 w-12 rounded-full object-cover"
+                    onClick={aumentarNroImagen}
+                    className="mr-2 h-12 w-12 cursor-pointer rounded-full object-cover"
                     src={
                       gasto.img ??
                       'https://st4.depositphotos.com/34463872/41265/v/450/depositphotos_412656562-stock-illustration-shopping-bag-design-icon-shopping.jpg'
