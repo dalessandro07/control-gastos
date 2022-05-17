@@ -4,7 +4,7 @@ App de gastos - es una aplicación web en la que puedes llevar un contro de los 
 
 ## Construido con 🛠️
 
-* React
+* React ⚛️
 
 ## Licencia 📄
 
