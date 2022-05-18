@@ -1,26 +1,10 @@
-import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { SaldoContext } from '../context/SaldoContext'
-import { useForm } from 'react-hook-form'
+import React from 'react'
+
 import moment from 'moment'
+import usePrepGasto from '../hooks/usePrepGasto'
 
 const NuevoGasto = () => {
-  const { agregarGasto } = useContext(SaldoContext)
-
-  const navigateTo = useNavigate()
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({
-    mode: 'onChange'
-  })
-
-  const onSubmit = (data) => {
-    agregarGasto(data)
-    navigateTo('/gastos')
-  }
+  const { errors, etiqueta, handleSubmit, onSubmit, register } = usePrepGasto()
 
   return (
     <section className="my-8 rounded-sm pb-4">
@@ -58,22 +42,24 @@ const NuevoGasto = () => {
           {errors.monto && <p className="text-sm text-red-500">{errors.monto.message}</p>}
         </section>
 
-        <label className="my-2 flex items-center justify-between">
-          <p>Fecha:</p>
-          <input
-            className={`${
-              errors.fecha ? 'border-red-500 text-red-500' : 'border-sky-600'
-            } rounded-sm border-2 p-1`}
-            type="date"
-            {...register('fecha', {
-              required: {
-                value: true,
-                message: 'La fecha es obligatoria'
-              },
-              value: moment().format('YYYY-MM-DD')
-            })}
-          />
-        </label>
+        <section>
+          <label className="my-2 flex items-center justify-between">
+            <p>Fecha:</p>
+            <input
+              className={`${
+                errors.fecha ? 'border-red-500 text-red-500' : 'border-sky-600'
+              } rounded-sm border-2 p-1`}
+              type="date"
+              {...register('fecha', {
+                required: {
+                  value: true,
+                  message: 'La fecha es obligatoria'
+                },
+                value: moment().format('YYYY-MM-DD')
+              })}
+            />
+          </label>
+        </section>
 
         <section>
           <label className="my-2 flex flex-col justify-between">
@@ -82,7 +68,7 @@ const NuevoGasto = () => {
             <textarea
               className={`${
                 errors.descripcion ? 'border-red-500 text-red-500' : 'border-sky-600'
-              } mt-4 max-h-48 min-h-[120px] resize-y border-2 p-2`}
+              } mt-4 max-h-60 min-h-[120px] resize-y border-2 p-2`}
               placeholder="Ingrese la descripción"
               type="text"
               {...register('descripcion', {
@@ -97,6 +83,10 @@ const NuevoGasto = () => {
                 maxLength: {
                   value: 250,
                   message: 'La descripción debe tener máximo 250 caracteres'
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ, .-]+$/,
+                  message: 'La descripción debe contener solo letras y números'
                 }
               })}
             />
@@ -105,6 +95,31 @@ const NuevoGasto = () => {
           {errors.descripcion && (
             <p className="text-sm text-red-500">{errors.descripcion.message}</p>
           )}
+
+          <label className="mt-6 mb-1 flex items-center justify-between">
+            <p>Etiqueta:</p>
+
+            <select
+              className={`${
+                errors.fecha ? 'border-red-500 text-red-500' : 'border-sky-600'
+              } rounded-sm border-2 p-1`}
+              type="text"
+              {...register('etiqueta', {
+                required: {
+                  value: true,
+                  message: 'La etiqueta es obligatoria'
+                }
+              })}
+              value={etiqueta}
+              placeholder="Ejm: Comida">
+              <option value="comida">Comida</option>
+              <option value="transporte">Transporte</option>
+              <option value="ropa">Ropa</option>
+              <option value="hogar">Hogar</option>
+              <option value="salud">Salud</option>
+              <option value="otros">Otros</option>
+            </select>
+          </label>
         </section>
 
         <input

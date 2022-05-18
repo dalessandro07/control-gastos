@@ -1,17 +1,8 @@
-import { useState } from 'react'
-
 const API_KEY = import.meta.env.VITE_PEXELS_API_KEY
 
-const useAssignImg = () => {
-  const [nroImagen, setNroImagen] = useState(0)
-
-  const recoverData = (data) => {
-    console.log(data)
-    console.log(nroImagen)
-  }
-
+const useAssignImg = (gastos = []) => {
   const fetchPhotosFromApi = async (desc) => {
-    const res = await fetch(`https://api.pexels.com/v1/search?query=${desc}&per_page=10`, {
+    const res = await fetch(`https://api.pexels.com/v1/search?query=${desc}&per_page=1`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -20,9 +11,7 @@ const useAssignImg = () => {
     })
 
     const data = await res.json()
-
-    recoverData(data)
-    return data?.photos[nroImagen]?.src.small
+    return data?.photos[0]?.src?.small
   }
 
   const assignImg = async (desc) => {
@@ -35,14 +24,8 @@ const useAssignImg = () => {
     }
   }
 
-  const aumentarNroImagen = () => {
-    const num = nroImagen < 10 ? nroImagen + 1 : 0
-    setNroImagen(num)
-  }
-
   return {
-    assignImg,
-    aumentarNroImagen
+    assignImg
   }
 }
 

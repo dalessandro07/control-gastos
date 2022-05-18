@@ -23,16 +23,6 @@ const HomeIndex = () => {
       <main>
         <Gastos gastos={gastos} />
       </main>
-
-      <footer className="m-4 flex justify-end">
-        <h2 className="text-center font-dosis text-sm">
-          Fotos de{' '}
-          <a className="border-b-2 border-amber-300 font-bold" href="https://www.pexels.com/es-es/">
-            Pexels
-          </a>
-        </h2>
-        <img className="ml-2 w-12" src="https://images.pexels.com/lib/api/pexels.png" alt="" />
-      </footer>
     </>
   )
 }

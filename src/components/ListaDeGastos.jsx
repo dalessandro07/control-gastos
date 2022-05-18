@@ -1,14 +1,12 @@
 import React, { useContext } from 'react'
 import { SaldoContext } from './../context/SaldoContext'
-import moment from 'moment'
-import 'moment/dist/locale/es'
+
+import Gasto from './Gasto'
 import Loading from '../utilities/Loading'
-moment.locale('es')
+import GastoLoading from './../utilities/GastoLoading'
 
 const ListaDeGastos = ({ gastos }) => {
-  const { loading, aumentarNroImagen } = useContext(SaldoContext)
-
-  gastos?.sort((a, b) => (moment(a.fecha).isBefore(b.fecha) ? 1 : -1))
+  const { moment, loading } = useContext(SaldoContext)
 
   return (
     <section className="mt-8">
@@ -17,41 +15,29 @@ const ListaDeGastos = ({ gastos }) => {
       </header>
 
       <ul>
-        {loading ? (
+        {gastos.length > 0 ? (
+          <>
+            {gastos.map((gasto) => (
+              <Gasto key={gasto.id} moment={moment} gasto={gasto} />
+            ))}
+            {loading && <GastoLoading />}
+          </>
+        ) : loading ? (
           <Loading />
         ) : (
-          gastos?.map((gasto) => {
-            return (
-              <li className="my-4 flex items-center justify-between py-2" key={gasto.id}>
-                <section className="flex grow items-center">
-                  <img
-                    onClick={aumentarNroImagen}
-                    className="mr-2 h-12 w-12 cursor-pointer rounded-full object-cover"
-                    src={
-                      gasto.img ??
-                      'https://st4.depositphotos.com/34463872/41265/v/450/depositphotos_412656562-stock-illustration-shopping-bag-design-icon-shopping.jpg'
-                    }
-                    alt=""
-                  />
-
-                  <p className="grow overflow-hidden text-ellipsis whitespace-nowrap font-bold">
-                    {gasto.descripcion}
-                  </p>
-                </section>
-
-                <p className="w-1/3 text-right text-sm">
-                  {moment(gasto.fecha).format('DD MMMM YYYY')}
-                </p>
-
-                <section className="flex w-1/4 items-center justify-end text-red-500">
-                  <p className="text-sm">- S/</p>
-                  <p className="text-xl font-bold">{gasto.monto}</p>
-                </section>
-              </li>
-            )
-          })
+          <p className="text-center text-gray-500">No hay gastos registrados</p>
         )}
       </ul>
+
+      <footer className="m-4 flex justify-end">
+        <h2 className="text-center font-dosis text-sm">
+          Fotos de{' '}
+          <a className="border-b-2 border-amber-300 font-bold" href="https://www.pexels.com/es-es/">
+            Pexels
+          </a>
+        </h2>
+        <img className="ml-2 w-12" src="https://images.pexels.com/lib/api/pexels.png" alt="" />
+      </footer>
     </section>
   )
 }

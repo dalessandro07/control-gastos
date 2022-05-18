@@ -1,6 +1,9 @@
 import React, { createContext } from 'react'
-import useSaldo from '../hooks/useSaldo'
-import useAssignImg from './../hooks/useAssignImg'
+import useGasto from '../hooks/useGasto'
+
+import moment from 'moment'
+import 'moment/dist/locale/es'
+moment.locale('es')
 
 export const SaldoContext = createContext({
   saldoTotal: 0,
@@ -12,16 +15,16 @@ export const SaldoContext = createContext({
 })
 
 const SaldoProvider = ({ children }) => {
-  const { gastos, saldoTotal, agregarGasto, loading } = useSaldo()
+  const { gastos, saldoTotal, agregarGasto, loading } = useGasto()
 
-  const { aumentarNroImagen } = useAssignImg()
+  gastos?.sort((a, b) => (moment(a.fecha).isBefore(b.fecha) ? 1 : -1))
 
   const value = {
     saldoTotal,
     agregarGasto,
     gastos,
-    aumentarNroImagen,
-    loading
+    loading,
+    moment
   }
 
   return <SaldoContext.Provider value={value}>{children}</SaldoContext.Provider>

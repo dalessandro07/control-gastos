@@ -1,9 +1,9 @@
 const APIKEY = import.meta.env.VITE_RAPIDAPI
 
 const useTranslate = () => {
-  const fetchTranslate = async (options) => {
+  const fetchTranslate = async (options, lang) => {
     const res = await fetch(
-      'https://microsoft-translator-text.p.rapidapi.com/translate?to%5B0%5D=en&api-version=3.0&profanityAction=NoAction&textType=plain',
+      `https://microsoft-translator-text.p.rapidapi.com/translate?to%5B0%5D=${lang}&api-version=3.0&profanityAction=NoAction&textType=plain`,
       options
     )
 
@@ -12,7 +12,7 @@ const useTranslate = () => {
     return data[0].translations[0].text
   }
 
-  const translateWord = async (desc) => {
+  const translateWord = async (desc, lang) => {
     const options = {
       method: 'POST',
       headers: {
@@ -23,7 +23,7 @@ const useTranslate = () => {
       body: `[{"Text":"${desc}"}]`
     }
 
-    return fetchTranslate(options)
+    return fetchTranslate(options, lang)
   }
 
   return {
