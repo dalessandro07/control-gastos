@@ -70,12 +70,18 @@ const useSendGasto = () => {
   useEffect(() => {
     const subscription = watch((value) => {
       const etiqueta = Object.keys(etiquetasOBJ).find((etiqueta) =>
-        etiquetasOBJ[etiqueta].some((cadaEtiqueta) => value.descripcion.includes(cadaEtiqueta))
+        etiquetasOBJ[etiqueta].some((cadaEtiqueta) =>
+          value.descripcion.toLowerCase().includes(cadaEtiqueta)
+        )
       )
-      setEtiqueta(etiqueta || 'otros')
+      setEtiqueta(etiqueta)
     })
     return () => subscription.unsubscribe()
   }, [watch])
+
+  const cambiarEtiqueta = (value) => {
+    setEtiqueta(value)
+  }
 
   const onSubmit = (data) => {
     const nuevaData = {
@@ -92,7 +98,8 @@ const useSendGasto = () => {
     handleSubmit,
     onSubmit,
     errors,
-    etiqueta
+    etiqueta,
+    cambiarEtiqueta
   }
 }
 

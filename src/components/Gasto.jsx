@@ -5,7 +5,7 @@ const Gasto = ({ gasto, moment }) => {
     <li className="my-4 flex items-center justify-between py-2" key={gasto.id}>
       <section className="flex w-1/3 grow items-center">
         <img
-          className="mr-2 h-12 w-12 rounded-full object-cover"
+          className="mr-2 h-12 w-12 min-w-[48px] rounded-full object-cover"
           src={
             gasto.img ??
             'https://st4.depositphotos.com/34463872/41265/v/450/depositphotos_412656562-stock-illustration-shopping-bag-design-icon-shopping.jpg'

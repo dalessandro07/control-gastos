@@ -3,6 +3,8 @@ import { SaldoContext } from '../context/SaldoContext'
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
 Chart.register(ArcElement, Tooltip, Legend)
+Chart.defaults.font.size = 16
+Chart.defaults.font.weight = 'bold'
 
 const Balance = () => {
   const { gastos } = useContext(SaldoContext)
@@ -12,8 +14,12 @@ const Balance = () => {
     []
   )
 
+  const etiquetasCapitalized = etiquetas.map(
+    (etiqueta) => etiqueta.charAt(0).toUpperCase() + etiqueta.slice(1)
+  )
+
   const data = {
-    labels: etiquetas,
+    labels: etiquetasCapitalized,
     datasets: [
       {
         data: etiquetas.map((etiqueta) => {
@@ -35,7 +41,25 @@ const Balance = () => {
 
       <section className="my-8">
         {gastos.length > 0 ? (
-          <Pie data={data} />
+          <Pie
+            data={data}
+            options={{
+              plugins: {
+                tooltip: {
+                  padding: 15,
+                  boxPadding: 10
+                },
+                legend: {
+                  labels: {
+                    font: {
+                      size: 18
+                    },
+                    boxHeight: 20
+                  }
+                }
+              }
+            }}
+          />
         ) : (
           <p className="text-center text-gray-500">No hay gastos registrados</p>
         )}

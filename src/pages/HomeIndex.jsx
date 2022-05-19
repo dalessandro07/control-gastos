@@ -9,7 +9,7 @@ const HomeIndex = () => {
   const { gastos, saldoTotal } = useContext(SaldoContext)
 
   return (
-    <>
+    <div className="flex h-screen flex-col">
       <header>
         <h1
           onClick={() => navigateTo('/')}
@@ -20,10 +20,8 @@ const HomeIndex = () => {
         <Saldo saldoTotal={saldoTotal} />
       </header>
 
-      <main>
-        <Gastos gastos={gastos} />
-      </main>
-    </>
+      <Gastos gastos={gastos} />
+    </div>
   )
 }
 

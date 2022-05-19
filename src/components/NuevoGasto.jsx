@@ -4,7 +4,7 @@ import moment from 'moment'
 import usePrepGasto from '../hooks/usePrepGasto'
 
 const NuevoGasto = () => {
-  const { errors, etiqueta, handleSubmit, onSubmit, register } = usePrepGasto()
+  const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register } = usePrepGasto()
 
   return (
     <section className="my-8 rounded-sm pb-4">
@@ -13,12 +13,12 @@ const NuevoGasto = () => {
       <form className="mx-auto mt-6 flex w-3/4 flex-col" onSubmit={handleSubmit(onSubmit)}>
         <section className="mb-6">
           <label className="flex items-center justify-center">
-            <p className={errors?.monto ? 'text-3xl text-red-500' : 'text-3xl text-black'}>S/</p>
+            <p className={errors?.monto ? 'text-3xl text-red-500' : 'text-2xl text-black'}>S/</p>
             <input
               className={`${
                 errors.monto ? 'border-red-500 text-red-500' : ''
-              } w-44 rounded-sm text-center text-5xl`}
-              placeholder="25.5"
+              } w-60 rounded-sm bg-gray-100 text-center text-6xl`}
+              placeholder="25.50"
               type="number"
               step={0.1}
               {...register('monto', {
@@ -103,13 +103,13 @@ const NuevoGasto = () => {
               className={`${
                 errors.fecha ? 'border-red-500 text-red-500' : 'border-sky-600'
               } rounded-sm border-2 p-1`}
-              type="text"
               {...register('etiqueta', {
                 required: {
                   value: true,
                   message: 'La etiqueta es obligatoria'
                 }
               })}
+              onChange={(e) => cambiarEtiqueta(e.target.value)}
               value={etiqueta}
               placeholder="Ejm: Comida">
               <option value="comida">Comida</option>

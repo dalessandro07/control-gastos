@@ -9,7 +9,7 @@ const ListaDeGastos = ({ gastos }) => {
   const { moment, loading } = useContext(SaldoContext)
 
   return (
-    <section className="mt-8">
+    <section className="mx-3 mt-8">
       <header className="flex justify-center">
         <h3 className="text-lg font-bold">Historial de gastos</h3>
       </header>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Saldo = ({ saldoTotal }) => {
   return (
-    <header className="my-8 flex justify-center bg-amber-300">
+    <header className="mt-8 flex justify-center bg-amber-300">
       <section className="flex items-center py-3">
         <h2 className="text-sm font-semibold">Total gastado:</h2>
 
