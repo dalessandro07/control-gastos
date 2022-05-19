@@ -43,17 +43,21 @@ const etiquetasOBJ = {
     'lacteos',
     'bebidas',
     'mercado',
+    'metro',
+    'wong',
+    'supermercado',
+    'plaza-vea',
     ...frutas,
     ...verduras
   ],
   transporte: ['transporte', 'pasaje', 'carro', 'auto', 'moto', 'taxi', 'bus', 'combi', 'autobus'],
-  ropa: ['ropa', 'zapatilla', 'accesorio', 'camisa', 'pantalon', 'calzado'],
-  hogar: ['hogar', 'luz', 'agua', 'telefono', 'internet'],
+  ropa: ['ropa', 'zapatilla', 'accesorio', 'camisa', 'pantalon', 'calzado', 'vestido', 'jean'],
+  hogar: ['hogar', 'casa', 'limpieza', 'tocador', 'baño', 'luz', 'agua', 'telefono', 'internet'],
   salud: ['salud', 'medicamento', 'medicina', 'pastilla', 'shampoo', 'hospital', 'consulta']
 }
 
 const useSendGasto = () => {
-  const [etiqueta, setEtiqueta] = useState('')
+  const [etiqueta, setEtiqueta] = useState('otros')
   const { agregarGasto } = useContext(SaldoContext)
 
   const navigateTo = useNavigate()
@@ -84,12 +88,17 @@ const useSendGasto = () => {
   }
 
   const onSubmit = (data) => {
-    const nuevaData = {
-      ...data,
-      etiqueta
+    if (!etiqueta) {
+      setEtiqueta(data.etiqueta)
+      agregarGasto(data)
+    } else {
+      const nuevaData = {
+        ...data,
+        etiqueta
+      }
+      agregarGasto(nuevaData)
     }
 
-    agregarGasto(nuevaData)
     navigateTo('/gastos')
   }
 

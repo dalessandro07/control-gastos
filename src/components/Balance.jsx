@@ -67,4 +67,5 @@ const Balance = () => {
     </section>
   )
 }
+
 export default Balance

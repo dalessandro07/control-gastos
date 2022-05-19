@@ -16,7 +16,7 @@ const NuevoGasto = () => {
             <p className={errors?.monto ? 'text-3xl text-red-500' : 'text-2xl text-black'}>S/</p>
             <input
               className={`${
-                errors.monto ? 'border-red-500 text-red-500' : ''
+                errors.monto ? 'border-red-500 text-red-500 placeholder:text-red-300' : ''
               } w-60 rounded-sm bg-gray-100 text-center text-6xl`}
               placeholder="25.50"
               type="number"
@@ -39,7 +39,7 @@ const NuevoGasto = () => {
             />
           </label>
 
-          {errors.monto && <p className="text-sm text-red-500">{errors.monto.message}</p>}
+          {errors.monto && <p className="text-sm text-red-500">*{errors.monto.message}</p>}
         </section>
 
         <section>
@@ -67,7 +67,9 @@ const NuevoGasto = () => {
 
             <textarea
               className={`${
-                errors.descripcion ? 'border-red-500 text-red-500' : 'border-sky-600'
+                errors.descripcion
+                  ? 'border-red-500 text-red-500 placeholder:text-red-300'
+                  : 'border-sky-600'
               } mt-4 max-h-60 min-h-[120px] resize-y border-2 p-2`}
               placeholder="Ingrese la descripción"
               type="text"
@@ -93,7 +95,7 @@ const NuevoGasto = () => {
           </label>
 
           {errors.descripcion && (
-            <p className="text-sm text-red-500">{errors.descripcion.message}</p>
+            <p className="text-sm text-red-500">*{errors.descripcion.message}</p>
           )}
 
           <label className="mt-6 mb-1 flex items-center justify-between">
@@ -101,8 +103,8 @@ const NuevoGasto = () => {
 
             <select
               className={`${
-                errors.fecha ? 'border-red-500 text-red-500' : 'border-sky-600'
-              } rounded-sm border-2 p-1`}
+                errors.etiqueta ? 'border-red-500 text-red-500' : 'border-sky-600'
+              } cursor-pointer rounded-sm border-b-2 bg-gray-100 p-1`}
               {...register('etiqueta', {
                 required: {
                   value: true,
@@ -110,7 +112,7 @@ const NuevoGasto = () => {
                 }
               })}
               onChange={(e) => cambiarEtiqueta(e.target.value)}
-              value={etiqueta}
+              value={etiqueta || 'otros'}
               placeholder="Ejm: Comida">
               <option value="comida">Comida</option>
               <option value="transporte">Transporte</option>
@@ -120,6 +122,10 @@ const NuevoGasto = () => {
               <option value="otros">Otros</option>
             </select>
           </label>
+
+          {errors.etiqueta && (
+            <p className="text-right text-sm text-red-500">*{errors.etiqueta.message}</p>
+          )}
         </section>
 
         <input
