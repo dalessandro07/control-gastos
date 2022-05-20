@@ -53,7 +53,19 @@ const etiquetasOBJ = {
   transporte: ['transporte', 'pasaje', 'carro', 'auto', 'moto', 'taxi', 'bus', 'combi', 'autobus'],
   ropa: ['ropa', 'zapatilla', 'accesorio', 'camisa', 'pantalon', 'calzado', 'vestido', 'jean'],
   hogar: ['hogar', 'casa', 'limpieza', 'tocador', 'baño', 'luz', 'agua', 'telefono', 'internet'],
-  salud: ['salud', 'medicamento', 'medicina', 'pastilla', 'shampoo', 'hospital', 'consulta']
+  salud: ['salud', 'medicamento', 'medicina', 'pastilla', 'shampoo', 'hospital', 'consulta'],
+  aseo: ['aseo', 'cama', 'baño', 'cocina', 'lavanderia', 'cuidado', 'cepillo', 'corte', 'cabello'],
+  educacion: [
+    'educacion',
+    'escuela',
+    'libro',
+    'curso',
+    'universidad',
+    'colegio',
+    'estudio',
+    'útiles',
+    'utiles'
+  ]
 }
 
 const useSendGasto = () => {

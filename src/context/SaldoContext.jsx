@@ -1,5 +1,7 @@
-import React, { createContext } from 'react'
+import React, { useEffect, createContext } from 'react'
 import useGasto from '../hooks/useGasto'
+
+import { obtenerGastosDB } from '../firebase'
 
 import moment from 'moment'
 import 'moment/dist/locale/es'
@@ -15,7 +17,26 @@ export const SaldoContext = createContext({
 })
 
 const SaldoProvider = ({ children }) => {
-  const { gastos, saldoTotal, agregarGasto, loading } = useGasto()
+  const { gastos, saldoTotal, agregarGasto, obtenerGastos, loading, changeLoading } = useGasto()
+
+  useEffect(() => {
+    const querySnapshot = async () => {
+      changeLoading(true)
+      const gastosDB = await obtenerGastosDB()
+
+      const data = gastosDB.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data()
+        }
+      })
+
+      obtenerGastos(data)
+      changeLoading(false)
+    }
+
+    querySnapshot()
+  }, [])
 
   gastos?.sort((a, b) => (moment(a.fecha).isBefore(b.fecha) ? 1 : -1))
 
