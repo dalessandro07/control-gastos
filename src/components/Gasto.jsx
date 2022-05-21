@@ -1,8 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Gasto = ({ gasto, moment }) => {
+  const navigateTo = useNavigate()
+
   return (
-    <li className="my-4 flex items-center justify-between py-2" key={gasto.id}>
+    <li
+      onClick={() => navigateTo(`/gastos/${gasto.id}`)}
+      className="my-4 flex cursor-pointer items-center justify-between p-2 hover:bg-gray-300 hover:transition-all hover:duration-200"
+      key={gasto.id}>
       <section className="flex w-1/3 grow items-center">
         <img
           className="mr-2 h-12 w-12 min-w-[48px] rounded-full object-cover"

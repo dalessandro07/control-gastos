@@ -4,6 +4,7 @@ import { Link, Route, Routes } from 'react-router-dom'
 import NuevoGasto from './NuevoGasto'
 import ListaDeGastos from './ListaDeGastos'
 import Balance from './Balance'
+import Detalle from './Detalle'
 
 const Gastos = ({ gastos }) => {
   return (
@@ -63,6 +64,8 @@ const Gastos = ({ gastos }) => {
       <section className="mt-4 grow rounded-t-3xl bg-gray-100 pt-2 shadow-2xl">
         <Routes>
           <Route path="/" element={<Balance />} />
+
+          <Route path="/gastos/:id" element={<Detalle gastos={gastos} />} />
 
           <Route path="/gastos" element={<ListaDeGastos gastos={gastos} />} />
 

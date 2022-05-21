@@ -31,8 +31,8 @@ const NuevoGasto = () => {
                   message: 'El monto debe ser mayor o igual a 1'
                 },
                 max: {
-                  value: 100000,
-                  message: 'El monto debe ser menor o igual a 100,000'
+                  value: 10000,
+                  message: 'El monto debe ser menor o igual a 10,000'
                 },
                 valueAsNumber: true
               })}

@@ -39,7 +39,10 @@ const useGasto = () => {
     agregarGastoDB(gastoFinalAgregado)
   }
 
-  const obtenerGastos = (data) => setGastos(data)
+  const obtenerGastos = (data) => {
+    setGastos(data)
+    setSaldoTotal(data.reduce((total, gasto) => total + gasto.monto, 0))
+  }
 
   const changeLoading = (value) => setLoading(value)
 
