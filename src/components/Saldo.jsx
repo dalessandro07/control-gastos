@@ -10,9 +10,13 @@ const Saldo = ({ saldoTotal }) => {
       <section className="flex w-full justify-center bg-amber-300 py-3">
         <article className="mx-2 flex">
           <p className="text-gray-800">S/</p>
-          <p className="text-5xl font-bold">
-            {loading ? <p className="animate-bounce">...</p> : saldoTotal.toFixed(2)}
-          </p>
+          <section className="">
+            {loading ? (
+              <section className="animate-bounce text-2xl font-bold">...</section>
+            ) : (
+              <p className="text-5xl font-bold">{saldoTotal.toFixed(2)}</p>
+            )}
+          </section>
         </article>
       </section>
     </header>

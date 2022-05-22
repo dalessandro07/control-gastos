@@ -1,6 +1,6 @@
-import useEtiquetas from '../hooks/useEtiquetas'
+import useEtiquetas from './useEtiquetas'
 
-const usePieChart = (gastos = []) => {
+const useChart = (gastos = []) => {
   const { etiquetas, etiquetasCapitalized, changeSelectTag, selectedTag } = useEtiquetas(gastos)
 
   const dataPie = {
@@ -51,4 +51,4 @@ const usePieChart = (gastos = []) => {
   return { dataPie, optionsPie, selectedTag }
 }
 
-export default usePieChart
+export default useChart

@@ -4,6 +4,10 @@ import useTranslate from './useTranslate'
 
 import { agregarGastoDB } from '../firebase'
 
+import moment from 'moment'
+import 'moment/dist/locale/es'
+moment.locale('es')
+
 const useGasto = () => {
   const [gastos, setGastos] = useState([])
   const [saldoTotal, setSaldoTotal] = useState(0)
@@ -45,6 +49,8 @@ const useGasto = () => {
   }
 
   const changeLoading = (value) => setLoading(value)
+
+  gastos?.sort((a, b) => (moment(a.fecha).isBefore(b.fecha) ? 1 : -1))
 
   return {
     gastos,

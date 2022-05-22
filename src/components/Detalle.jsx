@@ -30,7 +30,9 @@ const Detalle = ({ gastos }) => {
 
             <p className="mt-4 text-2xl text-red-500">s/ {detalleGasto?.monto?.toFixed(2)}</p>
 
-            <p className="font-semibold">{detalleGasto?.descripcion}</p>
+            <p className="text-gray-500">{detalleGasto?.etiqueta}</p>
+
+            <p className="text-lg font-semibold">{detalleGasto?.descripcion}</p>
 
             <section className="flex">
               <p className="mx-2 text-gray-700">{moment(detalleGasto?.fecha).fromNow()}</p>

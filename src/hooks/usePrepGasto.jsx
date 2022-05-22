@@ -52,7 +52,7 @@ const etiquetasOBJ = {
   ],
   transporte: ['transporte', 'pasaje', 'carro', 'auto', 'moto', 'taxi', 'bus', 'combi', 'autobus'],
   ropa: ['ropa', 'zapatilla', 'accesorio', 'camisa', 'pantalon', 'calzado', 'vestido', 'jean'],
-  hogar: ['hogar', 'casa', 'limpieza', 'tocador', 'baño', 'luz', 'agua', 'telefono', 'internet'],
+  hogar: ['hogar', 'casa', 'limpieza', 'tocador', 'baño'],
   salud: ['salud', 'medicamento', 'medicina', 'pastilla', 'shampoo', 'hospital', 'consulta'],
   aseo: ['aseo', 'cama', 'baño', 'cocina', 'lavanderia', 'cuidado', 'cepillo', 'corte', 'cabello'],
   educacion: [
@@ -65,6 +65,17 @@ const etiquetasOBJ = {
     'estudio',
     'útiles',
     'utiles'
+  ],
+  servicios: [
+    'servicios',
+    'servicio',
+    'luz',
+    'agua',
+    'telefono',
+    'internet',
+    'teléfono',
+    'cable',
+    'celu'
   ]
 }
 

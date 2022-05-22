@@ -1,5 +1,6 @@
 import React, { useEffect, createContext } from 'react'
 import useGasto from '../hooks/useGasto'
+import useImportExport from '../hooks/useImportExport'
 
 import { obtenerGastosDB } from '../firebase'
 
@@ -18,6 +19,8 @@ export const SaldoContext = createContext({
 
 const SaldoProvider = ({ children }) => {
   const { gastos, saldoTotal, agregarGasto, obtenerGastos, loading, changeLoading } = useGasto()
+
+  const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos)
 
   useEffect(() => {
     const querySnapshot = async () => {
@@ -38,14 +41,14 @@ const SaldoProvider = ({ children }) => {
     querySnapshot()
   }, [])
 
-  gastos?.sort((a, b) => (moment(a.fecha).isBefore(b.fecha) ? 1 : -1))
-
   const value = {
     saldoTotal,
     agregarGasto,
     gastos,
     loading,
-    moment
+    moment,
+    exportarGastos,
+    importarGastos
   }
 
   return <SaldoContext.Provider value={value}>{children}</SaldoContext.Provider>

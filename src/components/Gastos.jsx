@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { SaldoContext } from './../context/SaldoContext'
+
 import { Link, Route, Routes } from 'react-router-dom'
 
 import NuevoGasto from './NuevoGasto'
@@ -7,6 +9,8 @@ import Balance from './Balance'
 import Detalle from './Detalle'
 
 const Gastos = ({ gastos }) => {
+  const { moment, loading } = useContext(SaldoContext)
+
   return (
     <main className="flex grow flex-col">
       <header className="mt-6 mb-2 flex items-center justify-between">
@@ -67,7 +71,10 @@ const Gastos = ({ gastos }) => {
 
           <Route path="/gastos/:id" element={<Detalle gastos={gastos} />} />
 
-          <Route path="/gastos" element={<ListaDeGastos gastos={gastos} />} />
+          <Route
+            path="/gastos"
+            element={<ListaDeGastos gastos={gastos} moment={moment} loading={loading} />}
+          />
 
           <Route path="/nuevo-gasto" element={<NuevoGasto />} />
         </Routes>
