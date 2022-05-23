@@ -14,6 +14,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/prop-types': ['off'],
-    'multiline-ternary': ['off']
+    'multiline-ternary': ['off'],
+    'space-before-function-paren': ['off']
   }
 }
