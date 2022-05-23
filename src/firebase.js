@@ -10,12 +10,12 @@ import {
 } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDynvgSRWL-lEeiL1ygpBDhkvuLCWIIImQ',
-  authDomain: 'app-control-gastos-e45bb.firebaseapp.com',
-  projectId: 'app-control-gastos-e45bb',
-  storageBucket: 'app-control-gastos-e45bb.appspot.com',
-  messagingSenderId: '685429614303',
-  appId: '1:685429614303:web:480897cc498f481e2e2b6a'
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID
 }
 
 const app = initializeApp(firebaseConfig)
