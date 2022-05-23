@@ -67,6 +67,16 @@ const Gastos = ({ gastos }) => {
 
       <section className="mt-4 grow rounded-t-3xl bg-gray-100 pt-2 shadow-2xl">
         <Routes>
+          <Route
+            path="*"
+            element={
+              <section className="flex h-full flex-col items-center justify-center">
+                <h2 className="text-2xl">No se encontró esta página.</h2>
+                <p className="text-4xl text-red-600">404</p>
+              </section>
+            }
+          />
+
           <Route path="/" element={<Balance />} />
 
           <Route path="/gastos/:id" element={<Detalle gastos={gastos} />} />
@@ -76,7 +86,9 @@ const Gastos = ({ gastos }) => {
             element={<ListaDeGastos gastos={gastos} moment={moment} loading={loading} />}
           />
 
-          <Route path="/nuevo-gasto" element={<NuevoGasto />} />
+          <Route path="/nuevo-gasto" element={<NuevoGasto mode="new" />} />
+
+          <Route path="/editar-gasto/:id" element={<NuevoGasto mode="edit" />} />
         </Routes>
       </section>
     </main>

@@ -2,7 +2,12 @@ import { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import { actualizarGastoDB } from '../firebase'
+
 import { SaldoContext } from '../context/SaldoContext'
+import { toast } from 'react-toastify'
+
+import moment from 'moment'
 
 const frutas = [
   'manzana',
@@ -85,6 +90,7 @@ const etiquetasOBJ = {
     'juego',
     'juegos',
     'peliculas',
+    'deporte',
     'cine',
     'futbol',
     'pelota',
@@ -104,7 +110,8 @@ const useSendGasto = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors },
+    setValue
   } = useForm({
     mode: 'onChange'
   })
@@ -126,18 +133,38 @@ const useSendGasto = () => {
   }
 
   const onSubmit = (data) => {
-    if (!etiqueta) {
-      setEtiqueta(data.etiqueta)
-      agregarGasto(data)
+    if (data.idDB) {
+      actualizarGastoDB(data.idDB, data)
+      navigateTo('/gastos')
+      toast.success('Gasto actualizado')
     } else {
-      const nuevaData = {
-        ...data,
-        etiqueta
+      if (!etiqueta) {
+        setEtiqueta(data.etiqueta)
+        agregarGasto(data)
+      } else {
+        const nuevaData = {
+          ...data,
+          etiqueta
+        }
+        agregarGasto(nuevaData)
       }
-      agregarGasto(nuevaData)
-    }
 
-    navigateTo('/gastos')
+      navigateTo('/gastos')
+    }
+  }
+
+  const setValueToForm = (gasto, mode) => {
+    if (gasto.monto && mode === 'edit') {
+      setValue('monto', gasto.monto)
+      setValue('fecha', gasto.fecha)
+      setValue('descripcion', gasto.descripcion)
+      setValue('idDB', gasto.idDB)
+    } else {
+      setValue('monto', '')
+      setValue('fecha', moment().format('YYYY-MM-DD'))
+      setValue('descripcion', '')
+      setValue('idDB', '')
+    }
   }
 
   return {
@@ -146,7 +173,8 @@ const useSendGasto = () => {
     onSubmit,
     errors,
     etiqueta,
-    cambiarEtiqueta
+    cambiarEtiqueta,
+    setValueToForm
   }
 }
 

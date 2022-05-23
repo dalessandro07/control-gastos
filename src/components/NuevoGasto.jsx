@@ -1,14 +1,22 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
 import moment from 'moment'
-import usePrepGasto from '../hooks/usePrepGasto'
 
-const NuevoGasto = () => {
-  const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register } = usePrepGasto()
+import usePrepGasto from '../hooks/usePrepGasto'
+import useEditGasto from '../hooks/useEditGasto'
+
+const NuevoGasto = ({ mode = 'new' }) => {
+  const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, setValueToForm } =
+    usePrepGasto()
+
+  const { title, button, gasto } = useEditGasto(mode)
+
+  useEffect(() => {
+    setValueToForm(gasto, mode)
+  }, [mode])
 
   return (
     <section className="my-8 rounded-sm pb-4">
-      <h2 className="pt-4 text-center text-lg font-semibold">Nuevo gasto</h2>
+      <h2 className="pt-4 text-center text-lg font-semibold">{title} gasto</h2>
 
       <form className="mx-auto mt-6 flex w-3/4 flex-col" onSubmit={handleSubmit(onSubmit)}>
         <section className="mb-6">
@@ -139,7 +147,7 @@ const NuevoGasto = () => {
               : 'bg-amber-300'
           } mt-6 flex cursor-pointer justify-center rounded-sm p-2 font-semibold`}
           type="submit"
-          value="Agregar"
+          value={button}
         />
       </form>
     </section>

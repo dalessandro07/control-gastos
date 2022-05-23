@@ -1,5 +1,13 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from 'firebase/firestore'
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  updateDoc
+} from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDynvgSRWL-lEeiL1ygpBDhkvuLCWIIImQ',
@@ -17,6 +25,8 @@ const agregarGastoDB = (gasto) => addDoc(collection(db, 'gastos'), gasto)
 
 const borrarGastoDB = (id) => deleteDoc(doc(db, 'gastos', id))
 
+const actualizarGastoDB = (id, gasto) => updateDoc(doc(db, 'gastos', id), gasto)
+
 const obtenerGastosDB = (callback) => onSnapshot(collection(db, 'gastos'), callback)
 
-export { db, agregarGastoDB, obtenerGastosDB, borrarGastoDB }
+export { db, agregarGastoDB, obtenerGastosDB, borrarGastoDB, actualizarGastoDB }
