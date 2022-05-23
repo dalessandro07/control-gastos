@@ -118,10 +118,11 @@ const NuevoGasto = () => {
               <option value="transporte">Transporte</option>
               <option value="servicios">Servicios</option>
               <option value="salud">Salud</option>
+              <option value="educacion">Educación</option>
               <option value="ropa">Ropa</option>
               <option value="hogar">Hogar</option>
+              <option value="diversion">Diversión</option>
               <option value="aseo">Útiles de Aseo</option>
-              <option value="educacion">Educación</option>
               <option value="otros">Otros</option>
             </select>
           </label>

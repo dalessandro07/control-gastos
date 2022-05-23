@@ -7,6 +7,8 @@ import HomeIndex from './pages/HomeIndex'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+import './firebase'
+
 const App = () => {
   return (
     <SaldoProvider>

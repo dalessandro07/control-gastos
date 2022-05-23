@@ -76,6 +76,21 @@ const etiquetasOBJ = {
     'teléfono',
     'cable',
     'celu'
+  ],
+  diversion: [
+    'diversion',
+    'pelicula',
+    'cine',
+    'teatro',
+    'juego',
+    'juegos',
+    'peliculas',
+    'cine',
+    'futbol',
+    'pelota',
+    'gatorade',
+    'sporade',
+    'net'
   ]
 }
 

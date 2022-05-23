@@ -1,12 +1,19 @@
 import React, { useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import { borrarGastoDB } from '../firebase'
+
 import { SaldoContext } from '../context/SaldoContext'
+
+import { toast } from 'react-toastify'
 import Loading from '../utilities/Loading'
 import moment from 'moment'
+import Modal from './Modal'
 
 const Detalle = ({ gastos }) => {
   const { id } = useParams()
   const { loading } = useContext(SaldoContext)
+
+  const navigateTo = useNavigate()
 
   const detalleGasto = gastos.find((gasto) => gasto.id === Number(id)) || {}
 
@@ -41,6 +48,21 @@ const Detalle = ({ gastos }) => {
           </section>
         )}
       </article>
+
+      <footer className="my-6 flex justify-center">
+        {!loading && (
+          <Modal
+            textButtonModal="Eliminar Gasto"
+            titleModal="¿Desea eliminar este gasto?"
+            paragraphModal="Esta acción no se puede deshacer."
+            callbackButtonConfirm={() => {
+              borrarGastoDB(detalleGasto?.idDB)
+              toast.info('Gasto eliminado correctamente')
+              navigateTo('/gastos')
+            }}
+          />
+        )}
+      </footer>
     </section>
   )
 }

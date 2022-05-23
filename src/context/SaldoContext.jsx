@@ -23,22 +23,20 @@ const SaldoProvider = ({ children }) => {
   const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos)
 
   useEffect(() => {
-    const querySnapshot = async () => {
-      changeLoading(true)
-      const gastosDB = await obtenerGastosDB()
+    changeLoading(true)
+    obtenerGastosDB((querySnapshot) => {
+      const gastosDB = []
 
-      const data = gastosDB.docs.map((doc) => {
-        return {
-          id: doc.id,
+      querySnapshot.forEach((doc) => {
+        gastosDB.push({
+          idDB: doc.id,
           ...doc.data()
-        }
+        })
       })
 
-      obtenerGastos(data)
+      obtenerGastos(gastosDB)
       changeLoading(false)
-    }
-
-    querySnapshot()
+    })
   }, [])
 
   const value = {
