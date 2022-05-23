@@ -10,7 +10,7 @@ const updateSW = registerSW({
     toast.info('Refrescando...')
   },
   onOfflineReady() {
-    toast.info('Conectado a internet')
+    toast.info('Aplicación disponible')
   },
   onRegisterError() {
     toast.error('Hubo un error, refresque la página, e inténtelo de nuevo')

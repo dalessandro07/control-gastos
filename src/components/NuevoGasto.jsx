@@ -5,7 +5,7 @@ import usePrepGasto from '../hooks/usePrepGasto'
 import useEditGasto from '../hooks/useEditGasto'
 import useSeo from '../hooks/useSeo'
 
-const NuevoGasto = ({ mode = 'new' }) => {
+const NuevoGasto = ({ mode }) => {
   const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, setValueToForm } =
     usePrepGasto()
 
@@ -18,7 +18,8 @@ const NuevoGasto = ({ mode = 'new' }) => {
 
   useEffect(() => {
     setValueToForm(gasto, mode)
-  }, [mode])
+    cambiarEtiqueta(gasto.etiqueta)
+  }, [gasto, mode])
 
   return (
     <section className="my-8 rounded-sm pb-4">
@@ -126,12 +127,13 @@ const NuevoGasto = ({ mode = 'new' }) => {
                 }
               })}
               onChange={(e) => cambiarEtiqueta(e.target.value)}
-              value={etiqueta || 'otros'}
+              value={etiqueta ?? 'otros'}
               placeholder="Ejm: Comida">
               <option value="comida">Comida</option>
               <option value="transporte">Transporte</option>
               <option value="servicios">Servicios</option>
               <option value="salud">Salud</option>
+              <option value="oficina">Oficina</option>
               <option value="educacion">Educación</option>
               <option value="ropa">Ropa</option>
               <option value="hogar">Hogar</option>

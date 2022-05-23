@@ -82,8 +82,9 @@ const etiquetasOBJ = {
     'cable',
     'celu'
   ],
-  diversion: [
+  diversión: [
     'diversion',
+    'diversión',
     'pelicula',
     'cine',
     'teatro',
@@ -97,6 +98,17 @@ const etiquetasOBJ = {
     'gatorade',
     'sporade',
     'net'
+  ],
+  oficina: [
+    'oficina',
+    'impresora',
+    'computadora',
+    'laptop',
+    'papel de ofi',
+    'tinta',
+    'mantenimiento de pc',
+    'mantenimiento de laptop',
+    'mantenimiento de impresora'
   ]
 }
 
@@ -163,6 +175,7 @@ const useSendGasto = () => {
       setValue('monto', '')
       setValue('fecha', moment().format('YYYY-MM-DD'))
       setValue('descripcion', '')
+      setValue('etiqueta', '')
       setValue('idDB', '')
     }
   }
