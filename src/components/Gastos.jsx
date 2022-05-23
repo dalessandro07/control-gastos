@@ -1,12 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, lazy, Suspense } from 'react'
 import { SaldoContext } from './../context/SaldoContext'
 
 import { Link, Route, Routes } from 'react-router-dom'
+import Loading from '../utilities/Loading'
 
-import NuevoGasto from './NuevoGasto'
-import ListaDeGastos from './ListaDeGastos'
-import Balance from './Balance'
-import Detalle from './Detalle'
+const NuevoGasto = lazy(() => import('./NuevoGasto'))
+const ListaDeGastos = lazy(() => import('./ListaDeGastos'))
+const Balance = lazy(() => import('./Balance'))
+const Detalle = lazy(() => import('./Detalle'))
 
 const Gastos = ({ gastos }) => {
   const { moment, loading } = useContext(SaldoContext)
@@ -77,18 +78,50 @@ const Gastos = ({ gastos }) => {
             }
           />
 
-          <Route path="/" element={<Balance />} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Balance />
+              </Suspense>
+            }
+          />
 
-          <Route path="/gastos/:id" element={<Detalle gastos={gastos} />} />
+          <Route
+            path="/gastos/:id"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Detalle gastos={gastos} />
+              </Suspense>
+            }
+          />
 
           <Route
             path="/gastos"
-            element={<ListaDeGastos gastos={gastos} moment={moment} loading={loading} />}
+            element={
+              <Suspense fallback={<Loading />}>
+                <ListaDeGastos gastos={gastos} moment={moment} loading={loading} />
+              </Suspense>
+            }
           />
 
-          <Route path="/nuevo-gasto" element={<NuevoGasto mode="new" />} />
+          <Route
+            path="/nuevo-gasto"
+            element={
+              <Suspense fallback={<Loading />}>
+                <NuevoGasto mode="new" />
+              </Suspense>
+            }
+          />
 
-          <Route path="/editar-gasto/:id" element={<NuevoGasto mode="edit" />} />
+          <Route
+            path="/editar-gasto/:id"
+            element={
+              <Suspense fallback={<Loading />}>
+                <NuevoGasto mode="edit" />
+              </Suspense>
+            }
+          />
         </Routes>
       </section>
     </main>

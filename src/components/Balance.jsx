@@ -3,6 +3,7 @@ import { SaldoContext } from '../context/SaldoContext'
 import useChart from '../hooks/useChart'
 
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'
+
 import { Pie } from 'react-chartjs-2'
 import Loading from './../utilities/Loading'
 import useSeo from '../hooks/useSeo'
