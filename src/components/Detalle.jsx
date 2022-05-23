@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import Loading from '../utilities/Loading'
 import moment from 'moment'
 import Modal from './Modal'
+import useSeo from '../hooks/useSeo'
 
 const Detalle = ({ gastos }) => {
   const { loading } = useContext(SaldoContext)
@@ -15,6 +16,11 @@ const Detalle = ({ gastos }) => {
   const navigateTo = useNavigate()
 
   const detalleGasto = gastos.find((gasto) => gasto.id === Number(id)) || {}
+
+  useSeo({
+    title: 'Detalles',
+    description: `Detalle del gasto ${id} - ${detalleGasto.descripcion}`
+  })
 
   return (
     <section className="relative">

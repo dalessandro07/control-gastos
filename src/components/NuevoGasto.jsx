@@ -3,12 +3,18 @@ import moment from 'moment'
 
 import usePrepGasto from '../hooks/usePrepGasto'
 import useEditGasto from '../hooks/useEditGasto'
+import useSeo from '../hooks/useSeo'
 
 const NuevoGasto = ({ mode = 'new' }) => {
   const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, setValueToForm } =
     usePrepGasto()
 
   const { title, button, gasto } = useEditGasto(mode)
+
+  useSeo({
+    title: `${title} gasto`,
+    description: `Formulario para ${title !== 'Editar' ? 'agregar un' : 'editar un'} gasto`
+  })
 
   useEffect(() => {
     setValueToForm(gasto, mode)

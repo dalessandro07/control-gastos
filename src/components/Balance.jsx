@@ -5,6 +5,7 @@ import useChart from '../hooks/useChart'
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
 import Loading from './../utilities/Loading'
+import useSeo from '../hooks/useSeo'
 
 Chart.register(ArcElement, Tooltip, Legend)
 Chart.defaults.font.size = 16
@@ -13,6 +14,7 @@ Chart.defaults.font.weight = 'bold'
 const Balance = () => {
   const { gastos, loading, exportarGastos, importarGastos } = useContext(SaldoContext)
   const { dataPie, optionsPie, selectedTag } = useChart(gastos)
+  useSeo({ title: 'Balance', description: 'Balance de gastos' })
 
   console.log(selectedTag)
 
