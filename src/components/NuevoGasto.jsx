@@ -19,7 +19,7 @@ const NuevoGasto = ({ mode }) => {
   useEffect(() => {
     setValueToForm(gasto, mode)
     cambiarEtiqueta(gasto.etiqueta)
-  }, [gasto, mode])
+  }, [mode])
 
   return (
     <section className="my-8 rounded-sm pb-4">
