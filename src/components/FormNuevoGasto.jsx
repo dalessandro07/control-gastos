@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 const FormNuevoGasto = ({ value }) => {
   const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, moment, button } =
@@ -141,4 +141,4 @@ const FormNuevoGasto = ({ value }) => {
   )
 }
 
-export default FormNuevoGasto
+export default memo(FormNuevoGasto)

@@ -200,7 +200,7 @@ const useSendGasto = () => {
   }
 
   const setValueToForm = (gasto, mode) => {
-    if (gasto.monto && mode === 'edit') {
+    if (gasto.monto && (mode === 'edit' || mode === 'voice')) {
       setValue('monto', gasto.monto)
       setValue('fecha', gasto.fecha)
       setValue('descripcion', gasto.descripcion)
@@ -209,8 +209,7 @@ const useSendGasto = () => {
       setValue('monto', '')
       setValue('fecha', moment().format('YYYY-MM-DD'))
       setValue('descripcion', '')
-      setValue('etiqueta', '')
-      setValue('idDB', '')
+      setValue('etiqueta', 'otros')
     }
   }
 

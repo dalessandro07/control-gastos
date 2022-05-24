@@ -1,4 +1,5 @@
 import React from 'react'
+import Dictaphone from './Dictaphone'
 
 const VoiceForm = () => {
   return (
@@ -7,10 +8,8 @@ const VoiceForm = () => {
         <h2 className="text-lg font-bold">Formulario mediante voz</h2>
       </header>
 
-      <section>
-        <p className="text-center text-gray-600">
-          En desarrollo. Para agregar un gasto, hazlo mediante el formulario.
-        </p>
+      <section className="flex flex-col justify-center">
+        <Dictaphone />
       </section>
     </section>
   )

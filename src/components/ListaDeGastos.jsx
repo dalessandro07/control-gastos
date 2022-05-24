@@ -20,10 +20,10 @@ const ListaDeGastos = ({ gastos, moment, loading }) => {
       <ul>
         {gastos.length > 0 ? (
           <>
+            {loading && <GastoLoading />}
             {gastos.map((gasto) => (
               <Gasto key={gasto.id} moment={moment} gasto={gasto} />
             ))}
-            {loading && <GastoLoading />}
           </>
         ) : loading ? (
           <Loading />

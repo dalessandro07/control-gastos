@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Link, Routes, Route } from 'react-router-dom'
+import React, { useEffect, memo } from 'react'
+import { Link, Routes, Route, useSearchParams } from 'react-router-dom'
 import moment from 'moment'
 
 import usePrepGasto from '../hooks/usePrepGasto'
@@ -8,11 +8,43 @@ import useSeo from '../hooks/useSeo'
 import FormNuevoGasto from './FormNuevoGasto'
 import VoiceForm from './VoiceForm'
 
+const fechasRelativas = {
+  anteayer: moment().subtract(2, 'days').format('YYYY-MM-DD'),
+  ayer: moment().subtract(1, 'day').format('YYYY-MM-DD'),
+  hoy: moment().format('YYYY-MM-DD'),
+  'hoy día': moment().format('YYYY-MM-DD'),
+  'hoy dia': moment().format('YYYY-MM-DD'),
+  mañana: moment().add(1, 'days').format('YYYY-MM-DD'),
+  pasado: moment().add(2, 'days').format('YYYY-MM-DD')
+}
+
 const NuevoGasto = ({ mode }) => {
   const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, setValueToForm } =
     usePrepGasto()
-
   const { title, button, gasto } = useEditGasto(mode)
+
+  const [params] = useSearchParams()
+
+  useEffect(() => {
+    console.log(params.get('fecha'))
+    if (params.has('monto')) {
+      const descripcion = params.get('descripcion')
+      const monto = Number(params.get('monto'))
+      const fecha = fechasRelativas[params.get('fecha')] || fechasRelativas.hoy
+
+      const queryVoice = {
+        descripcion,
+        monto,
+        fecha
+      }
+
+      setValueToForm(queryVoice, 'voice')
+    }
+
+    return () => {
+      setValueToForm({}, 'new')
+    }
+  }, [params.has('monto')])
 
   useSeo({
     title: `${title} gasto`,
@@ -38,7 +70,7 @@ const NuevoGasto = ({ mode }) => {
   }
 
   return (
-    <section className="my-8 rounded-sm pb-4">
+    <section className="my-5 rounded-sm pb-4">
       <header>
         <h2 className="pt-4 text-center text-lg font-semibold">{title} gasto</h2>
 
@@ -74,4 +106,4 @@ const NuevoGasto = ({ mode }) => {
   )
 }
 
-export default NuevoGasto
+export default memo(NuevoGasto)
