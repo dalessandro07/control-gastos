@@ -9,7 +9,7 @@ const VoiceForm = () => {
 
       <section>
         <p className="text-center text-gray-600">
-          En desarrollo pues ma. Para agregar un gasto, hazlo mediante el formulario.
+          En desarrollo. Para agregar un gasto, hazlo mediante el formulario.
         </p>
       </section>
     </section>
