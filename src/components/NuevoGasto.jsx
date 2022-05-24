@@ -12,8 +12,8 @@ const fechasRelativas = {
   anteayer: moment().subtract(2, 'days').format('YYYY-MM-DD'),
   ayer: moment().subtract(1, 'day').format('YYYY-MM-DD'),
   hoy: moment().format('YYYY-MM-DD'),
-  'hoy día': moment().format('YYYY-MM-DD'),
-  'hoy dia': moment().format('YYYY-MM-DD'),
+  día: moment().format('YYYY-MM-DD'),
+  dia: moment().format('YYYY-MM-DD'),
   mañana: moment().add(1, 'days').format('YYYY-MM-DD'),
   pasado: moment().add(2, 'days').format('YYYY-MM-DD')
 }
@@ -26,7 +26,6 @@ const NuevoGasto = ({ mode }) => {
   const [params] = useSearchParams()
 
   useEffect(() => {
-    console.log(params.get('fecha'))
     if (params.has('monto')) {
       const descripcion = params.get('descripcion')
       const monto = Number(params.get('monto'))

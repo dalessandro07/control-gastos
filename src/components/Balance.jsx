@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import { SaldoContext } from '../context/SaldoContext'
 import useChart from '../hooks/useChart'
 
@@ -8,19 +8,21 @@ import { Pie } from 'react-chartjs-2'
 import Loading from './../utilities/Loading'
 import useSeo from '../hooks/useSeo'
 
+import ListaPorEtiqueta from './ListaPorEtiqueta'
+
 Chart.register(ArcElement, Tooltip, Legend)
 Chart.defaults.font.size = 16
 Chart.defaults.font.weight = 'bold'
 
 const Balance = () => {
   const { gastos, loading, exportarGastos, importarGastos } = useContext(SaldoContext)
-  const { dataPie, optionsPie, selectedTag } = useChart(gastos)
+
+  const { dataPie, optionsPie, selectedTag, changeSelectTag } = useChart(gastos)
+
   useSeo({ title: 'Balance', description: 'Balance de gastos' })
 
-  console.log(selectedTag)
-
   return (
-    <section className="mt-8">
+    <section className="relative mt-8">
       <header>
         <h3 className="text-center text-lg font-semibold">Balance</h3>
       </header>
@@ -28,7 +30,15 @@ const Balance = () => {
       <section className="m-8 md:w-1/2 lg:w-1/3">
         {!loading ? (
           gastos.length > 0 ? (
-            <Pie data={dataPie} options={optionsPie} />
+            selectedTag?.tag ? (
+              <ListaPorEtiqueta
+                selectedTag={selectedTag}
+                changeSelectTag={changeSelectTag}
+                gastos={gastos}
+              />
+            ) : (
+              <Pie data={dataPie} options={optionsPie} />
+            )
           ) : (
             <p className="text-center text-gray-500">No hay gastos registrados</p>
           )
@@ -82,4 +92,4 @@ const Balance = () => {
   )
 }
 
-export default Balance
+export default memo(Balance)

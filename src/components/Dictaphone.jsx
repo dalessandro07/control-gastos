@@ -19,7 +19,9 @@ const Dictaphone = () => {
 
     const monto = fields?.find((field) => field.match(/^\d+$/))
 
-    const fecha = fields?.find((field) => field.match(/^(hoy|mañana|pasado|anteayer|ayer)$/))
+    const fecha = fields?.find((field) =>
+      field.match(/^(hoy|mañana|pasado|anteayer|ayer|dia|día)$/)
+    )
 
     const descripcion = fields
       ?.filter(

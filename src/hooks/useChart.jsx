@@ -48,7 +48,7 @@ const useChart = (gastos = []) => {
     }
   }
 
-  return { dataPie, optionsPie, selectedTag }
+  return { dataPie, optionsPie, selectedTag, changeSelectTag }
 }
 
 export default useChart
