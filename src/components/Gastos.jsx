@@ -106,7 +106,7 @@ const Gastos = ({ gastos }) => {
           />
 
           <Route
-            path="/nuevo-gasto"
+            path="/nuevo-gasto/*"
             element={
               <Suspense fallback={<Loading />}>
                 <NuevoGasto mode="new" />
@@ -115,7 +115,7 @@ const Gastos = ({ gastos }) => {
           />
 
           <Route
-            path="/editar-gasto/:id"
+            path="/editar-gasto/:id/*"
             element={
               <Suspense fallback={<Loading />}>
                 <NuevoGasto mode="edit" />

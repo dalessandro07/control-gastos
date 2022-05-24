@@ -45,7 +45,7 @@ const Detalle = ({ gastos }) => {
 
         <section
           onClick={() => {
-            navigateTo(`/editar-gasto/${id}`)
+            navigateTo(`/editar-gasto/${id}/formulario`)
           }}
           className="absolute right-0 mx-4">
           <button>
@@ -74,14 +74,16 @@ const Detalle = ({ gastos }) => {
               alt=""
             />
 
-            <p className="mt-4 text-2xl text-red-500">s/ {detalleGasto?.monto?.toFixed(2)}</p>
-
-            <p className="text-gray-500">{detalleGasto?.etiqueta}</p>
+            <section className="flex items-center text-red-500">
+              <p className="text-xl">s/</p>
+              <p className="mt-4 text-3xl"> {detalleGasto?.monto?.toFixed(2)}</p>
+            </section>
 
             <p className="text-lg font-semibold">{detalleGasto?.descripcion}</p>
 
+            <p className="text-gray-500">{detalleGasto?.etiqueta}</p>
+
             <section className="flex">
-              <p className="mx-2 text-gray-700">{moment(detalleGasto?.fecha).fromNow()}</p>
               <p className="mx-2">{moment(detalleGasto?.fecha).format('DD/MM/YYYY')}</p>
             </section>
           </section>

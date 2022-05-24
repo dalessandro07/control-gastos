@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const updateSW = registerSW({
   onNeedRefresh() {
-    toast.info('Refrescando...')
+    toast.info('Actualizando...')
   },
   onOfflineReady() {
     toast.info('Aplicación disponible')

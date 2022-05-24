@@ -22,7 +22,8 @@ const frutas = [
   'mango',
   'aguacate',
   'cereza',
-  'ciruela'
+  'ciruela',
+  'palta'
 ]
 
 const verduras = [
@@ -35,6 +36,23 @@ const verduras = [
   'camote',
   'apio',
   'brocoli'
+]
+
+const abarrotes = [
+  'abarrotes',
+  'lacteos',
+  'leche',
+  'yogurt',
+  'queso',
+  'azúcar',
+  'mantequilla',
+  'harina',
+  'chocolate',
+  'cacao',
+  'miel',
+  'arroz',
+  'fideos',
+  'tallarines'
 ]
 
 const etiquetasOBJ = {
@@ -52,8 +70,24 @@ const etiquetasOBJ = {
     'wong',
     'supermercado',
     'plaza-vea',
+    'desayuno',
+    'almuerzo',
+    'cena',
+    'postre',
+    'pan',
+    'pastel',
+    'helado',
+    'tamal',
+    'pizza',
+    'hamburguesa',
+    'sandwich',
+    'kfc',
+    'mcdonalds',
+    'burger',
+    'papas-fritas',
     ...frutas,
-    ...verduras
+    ...verduras,
+    ...abarrotes
   ],
   transporte: ['transporte', 'pasaje', 'carro', 'auto', 'moto', 'taxi', 'bus', 'combi', 'autobus'],
   ropa: ['ropa', 'zapatilla', 'accesorio', 'camisa', 'pantalon', 'calzado', 'vestido', 'jean'],

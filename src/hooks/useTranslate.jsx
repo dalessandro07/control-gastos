@@ -1,4 +1,5 @@
 const APIKEY = import.meta.env.VITE_RAPIDAPI
+const HOST = import.meta.env.VITE_RAPIDAPI_HOST
 
 const useTranslate = () => {
   const fetchTranslate = async (options, lang) => {
@@ -17,7 +18,7 @@ const useTranslate = () => {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com',
+        'X-RapidAPI-Host': HOST,
         'X-RapidAPI-Key': APIKEY
       },
       body: `[{"Text":"${desc}"}]`
