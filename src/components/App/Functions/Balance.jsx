@@ -1,17 +1,17 @@
 import React, { memo, useContext } from 'react'
-import { SaldoContext } from '../context/SaldoContext'
-import useChart from '../hooks/useChart'
+import { SaldoContext } from '../../../context/SaldoContext'
+import useChart from '../../../hooks/useChart'
 
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'
 
 import { Pie } from 'react-chartjs-2'
-import Loading from './../utilities/Loading'
-import useSeo from '../hooks/useSeo'
+import Loading from '../../../utilities/Loading'
+import useSeo from '../../../hooks/useSeo'
 
 import ListaPorEtiqueta from './ListaPorEtiqueta'
 
 Chart.register(ArcElement, Tooltip, Legend)
-Chart.defaults.font.size = 16
+Chart.defaults.font.size = 17.5
 Chart.defaults.font.weight = 'bold'
 
 const Balance = () => {
@@ -27,7 +27,7 @@ const Balance = () => {
         <h3 className="text-center text-lg font-semibold">Balance</h3>
       </header>
 
-      <section className="m-8 md:w-1/2 lg:w-1/3">
+      <section className="m-2 sm:m-4 md:m-8 md:w-1/2 lg:w-1/3">
         {!loading ? (
           gastos.length > 0 ? (
             selectedTag?.tag ? (

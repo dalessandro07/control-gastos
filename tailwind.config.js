@@ -4,6 +4,9 @@ module.exports = {
     extend: {
       fontFamily: {
         dosis: ['Dosis', 'serif']
+      },
+      screens: {
+        xs: '380px'
       }
     }
   },

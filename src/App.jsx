@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import SaldoProvider from './context/SaldoContext'
+import AuthProvider from './context/AuthContext'
 import HomeIndex from './pages/HomeIndex'
 
 import { ToastContainer } from 'react-toastify'
@@ -11,14 +12,16 @@ import './firebase'
 
 const App = () => {
   return (
-    <SaldoProvider>
-      <Router>
-        <Routes>
-          <Route path="*" element={<HomeIndex />} />
-        </Routes>
-      </Router>
-      <ToastContainer />
-    </SaldoProvider>
+    <AuthProvider>
+      <SaldoProvider>
+        <Router>
+          <Routes>
+            <Route path="*" element={<HomeIndex />} />
+          </Routes>
+        </Router>
+        <ToastContainer />
+      </SaldoProvider>
+    </AuthProvider>
   )
 }
 

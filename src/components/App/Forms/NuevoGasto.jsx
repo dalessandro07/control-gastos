@@ -2,9 +2,9 @@ import React, { useEffect, memo } from 'react'
 import { Link, Routes, Route, useSearchParams } from 'react-router-dom'
 import moment from 'moment'
 
-import usePrepGasto from '../hooks/usePrepGasto'
-import useEditGasto from '../hooks/useEditGasto'
-import useSeo from '../hooks/useSeo'
+import usePrepGasto from '../../../hooks/usePrepGasto'
+import useEditGasto from '../../../hooks/useEditGasto'
+import useSeo from '../../../hooks/useSeo'
 import FormNuevoGasto from './FormNuevoGasto'
 import VoiceForm from './VoiceForm'
 
@@ -75,10 +75,10 @@ const NuevoGasto = ({ mode }) => {
 
         {mode !== 'edit' && (
           <nav className="mt-8 flex justify-around">
-            <Link to="/nuevo-gasto/formulario" className="bg-amber-300 p-2">
+            <Link to="/app/nuevo-gasto/formulario" className="bg-amber-300 p-2">
               Formulario
             </Link>
-            <Link to="/nuevo-gasto/voz" className="flex bg-indigo-300 p-2">
+            <Link to="/app/nuevo-gasto/voz" className="flex bg-indigo-300 p-2">
               <p className="mr-2">Mediante Voz</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

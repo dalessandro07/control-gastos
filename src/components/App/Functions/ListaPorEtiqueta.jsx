@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Gasto from './Gasto'
+import Gasto from '../Info/Gasto'
 import moment from 'moment'
 
 const ListaPorEtiqueta = ({ gastos, selectedTag, changeSelectTag }) => {

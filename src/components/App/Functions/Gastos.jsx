@@ -1,13 +1,15 @@
 import React, { useContext, lazy, Suspense } from 'react'
-import { SaldoContext } from './../context/SaldoContext'
-
 import { Link, Route, Routes } from 'react-router-dom'
-import Loading from '../utilities/Loading'
 
-const NuevoGasto = lazy(() => import('./NuevoGasto'))
+import { SaldoContext } from '../../../context/SaldoContext'
+
+import Loading from '../../../utilities/Loading'
+import UserSection from '../User/UserSection'
+
+const NuevoGasto = lazy(() => import('../Forms/NuevoGasto'))
 const ListaDeGastos = lazy(() => import('./ListaDeGastos'))
 const Balance = lazy(() => import('./Balance'))
-const Detalle = lazy(() => import('./Detalle'))
+const Detalle = lazy(() => import('../Info/Detalle'))
 
 const Gastos = ({ gastos }) => {
   const { moment, loading } = useContext(SaldoContext)
@@ -16,7 +18,7 @@ const Gastos = ({ gastos }) => {
     <main className="flex grow flex-col">
       <header className="mt-6 mb-2 flex items-center justify-between">
         <nav className="flex w-full justify-around">
-          <Link to="/">
+          <Link to="/app/balance">
             <button className="flex flex-col items-center justify-center rounded-md bg-gray-800 p-2 hover:bg-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +32,7 @@ const Gastos = ({ gastos }) => {
             </button>
           </Link>
 
-          <Link to="/gastos">
+          <Link to="/app/gastos">
             <button className="flex flex-col items-center justify-center rounded-md bg-gray-800 p-2 hover:bg-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +49,7 @@ const Gastos = ({ gastos }) => {
             </button>
           </Link>
 
-          <Link to="/nuevo-gasto">
+          <Link to="/app/nuevo-gasto">
             <button className="flex flex-col items-center justify-center rounded-md bg-gray-800 p-2 hover:bg-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,18 +70,10 @@ const Gastos = ({ gastos }) => {
 
       <section className="mt-4 grow rounded-t-3xl bg-gray-100 pt-2 shadow-2xl">
         <Routes>
-          <Route
-            path="*"
-            element={
-              <section className="flex h-full flex-col items-center justify-center">
-                <h2 className="text-2xl">No se encontró esta página.</h2>
-                <p className="text-4xl text-red-600">404</p>
-              </section>
-            }
-          />
+          <Route path="/" element={<UserSection />} />
 
           <Route
-            path="/"
+            path="/balance"
             element={
               <Suspense fallback={<Loading />}>
                 <Balance />

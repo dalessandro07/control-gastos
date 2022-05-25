@@ -33,9 +33,6 @@ const useChart = (gastos = []) => {
       },
       legend: {
         labels: {
-          font: {
-            size: 18
-          },
           boxHeight: 20
         }
       }

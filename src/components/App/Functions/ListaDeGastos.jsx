@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Gasto from './Gasto'
-import Loading from '../utilities/Loading'
-import GastoLoading from './../utilities/GastoLoading'
-import useSeo from '../hooks/useSeo'
+import Gasto from '../Info/Gasto'
+import Loading from '../../../utilities/Loading'
+import GastoLoading from '../../../utilities/GastoLoading'
+import useSeo from '../../../hooks/useSeo'
 
 const ListaDeGastos = ({ gastos, moment, loading }) => {
   useSeo({

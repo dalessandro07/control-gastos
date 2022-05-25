@@ -1,5 +1,5 @@
 import React from 'react'
-import Dictaphone from './Dictaphone'
+import Dictaphone from '../../../utilities/Dictaphone'
 
 const VoiceForm = () => {
   return (

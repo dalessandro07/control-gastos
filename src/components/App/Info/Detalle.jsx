@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { borrarGastoDB } from '../firebase'
+import { borrarGastoDB } from '../../../firebase'
 
-import { SaldoContext } from '../context/SaldoContext'
+import { SaldoContext } from '../../../context/SaldoContext'
 
 import { toast } from 'react-toastify'
-import Loading from '../utilities/Loading'
+import Loading from '../../../utilities/Loading'
 import moment from 'moment'
-import Modal from './Modal'
-import useSeo from '../hooks/useSeo'
+import Modal from '../../../utilities/Modal'
+import useSeo from '../../../hooks/useSeo'
 
 const Detalle = ({ gastos }) => {
   const { loading } = useContext(SaldoContext)
@@ -45,7 +45,7 @@ const Detalle = ({ gastos }) => {
 
         <section
           onClick={() => {
-            navigateTo(`/editar-gasto/${id}/formulario`)
+            navigateTo(`/app/editar-gasto/${id}/formulario`)
           }}
           className="absolute right-0 mx-4">
           <button>
