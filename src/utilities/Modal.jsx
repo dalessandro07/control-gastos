@@ -45,7 +45,7 @@ const Modal = ({ textButtonModal, titleModal, paragraphModal, callbackButtonConf
                     className="background-transparent mr-1 mb-1 px-6 py-2 text-sm font-bold uppercase text-red-500 outline-none transition-all duration-150 ease-linear hover:underline focus:outline-none"
                     type="button"
                     onClick={() => setShowModal(false)}>
-                    Cerrar
+                    Mejor, no
                   </button>
                   <button
                     className="mr-1 mb-1 rounded bg-amber-400 px-6 py-3 text-sm font-bold uppercase text-gray-800 shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none active:bg-emerald-600"
@@ -54,7 +54,7 @@ const Modal = ({ textButtonModal, titleModal, paragraphModal, callbackButtonConf
                       callbackButtonConfirm()
                       setShowModal(false)
                     }}>
-                    Confirmar
+                    Sí, estoy seguro
                   </button>
                 </div>
               </div>

@@ -7,7 +7,8 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  deleteUser
 } from 'firebase/auth'
 
 export const authContext = createContext()
@@ -35,6 +36,8 @@ const AuthProvider = ({ children }) => {
 
   const resetPassword = (email) => sendPasswordResetEmail(auth, email)
 
+  const deleteAccount = () => deleteUser(auth.currentUser)
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
@@ -51,7 +54,8 @@ const AuthProvider = ({ children }) => {
     logout,
     loading,
     loginWithGoogle,
-    resetPassword
+    resetPassword,
+    deleteAccount
   }
 
   return <authContext.Provider value={valueToExport}>{children}</authContext.Provider>

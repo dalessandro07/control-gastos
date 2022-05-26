@@ -98,8 +98,8 @@ const Detalle = ({ gastos }) => {
         {!loading && (
           <Modal
             textButtonModal="Eliminar Gasto"
-            titleModal="¿Desea eliminar este gasto?"
-            paragraphModal="Esta acción no se puede deshacer."
+            titleModal="¿Desea eliminar este gasto? ⚠️"
+            paragraphModal="Esta acción no se puede deshacer. ¿Está seguro?"
             callbackButtonConfirm={() => {
               borrarGastoDB(detalleGasto?.idDB, userUID)
               toast.info('Gasto eliminado correctamente')

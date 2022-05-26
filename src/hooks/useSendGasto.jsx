@@ -159,7 +159,7 @@ const etiquetasOBJ = {
 const useSendGasto = () => {
   const { userUID } = useAuth()
   const [etiqueta, setEtiqueta] = useState('otros')
-  const { agregarGasto } = useContext(SaldoContext)
+  const { gastos, agregarGasto } = useContext(SaldoContext)
 
   const navigateTo = useNavigate()
 
@@ -191,7 +191,13 @@ const useSendGasto = () => {
 
   const onSubmit = (data) => {
     if (data.idDB) {
-      actualizarGastoDB(data.idDB, data, userUID)
+      const dataActualizada = {
+        ...data,
+        id: gastos.find((gasto) => gasto.idDB === data.idDB).id,
+        img: gastos.find((gasto) => gasto.idDB === data.idDB).img
+      }
+
+      actualizarGastoDB(data.idDB, dataActualizada, userUID)
       navigateTo('/gastos')
       toast.success('Gasto actualizado')
     } else {

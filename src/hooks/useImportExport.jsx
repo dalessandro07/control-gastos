@@ -20,37 +20,33 @@ const useImportExport = (gastos = [], obtenerGastos = () => {}, userUID) => {
   }
 
   const importarGastos = () => {
-    if (gastos.length > 0) {
-      toast.error('Por favor, elimine todos los gastos antes de importar')
-    } else {
-      const input = document.createElement('input')
-      input.type = 'file'
-      input.accept = 'application/json'
-      input.addEventListener('change', (e) => {
-        const file = e.target.files[0]
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'application/json'
+    input.addEventListener('change', (e) => {
+      const file = e.target.files[0]
 
-        if (!file.type.includes('json')) {
-          toast.error('El archivo no es un JSON')
-          return
+      if (!file.type.includes('json')) {
+        toast.error('El archivo no es un JSON')
+        return
+      }
+
+      const reader = new FileReader()
+      reader.readAsText(file)
+      reader.onload = (e) => {
+        try {
+          const gastosJSON = JSON.parse(e.target.result)
+          obtenerGastos([...gastosJSON, ...gastos])
+
+          gastosJSON.forEach((gasto) => {
+            agregarGastoDB(gasto, userUID)
+          })
+        } catch (error) {
+          toast.error(error)
         }
-
-        const reader = new FileReader()
-        reader.readAsText(file)
-        reader.onload = (e) => {
-          try {
-            const gastosJSON = JSON.parse(e.target.result)
-            obtenerGastos(gastosJSON)
-
-            gastosJSON.forEach((gasto) => {
-              agregarGastoDB(gasto, userUID)
-            })
-          } catch (error) {
-            toast.error(error)
-          }
-        }
-      })
-      input.click()
-    }
+      }
+    })
+    input.click()
   }
 
   return { exportarGastos, importarGastos }

@@ -1,8 +1,9 @@
 import React, { useEffect, memo } from 'react'
 import { Link, Routes, Route, useSearchParams } from 'react-router-dom'
+
 import moment from 'moment'
 
-import usePrepGasto from '../../../hooks/usePrepGasto'
+import useSendGasto from '../../../hooks/useSendGasto'
 import useEditGasto from '../../../hooks/useEditGasto'
 import useSeo from '../../../hooks/useSeo'
 import FormNuevoGasto from './FormNuevoGasto'
@@ -20,7 +21,7 @@ const fechasRelativas = {
 
 const NuevoGasto = ({ mode }) => {
   const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, setValueToForm } =
-    usePrepGasto()
+    useSendGasto()
   const { title, button, gasto } = useEditGasto(mode)
 
   const [params] = useSearchParams()

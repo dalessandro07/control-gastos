@@ -2,11 +2,13 @@ import React, { useEffect, createContext } from 'react'
 import useGasto from '../hooks/useGasto'
 import useImportExport from '../hooks/useImportExport'
 
+import { useAuth } from './AuthContext'
 import { obtenerGastosDB } from '../firebase'
 
+import CryptoJS from 'crypto-js'
 import moment from 'moment'
 import 'moment/dist/locale/es'
-import { useAuth } from './AuthContext'
+
 moment.locale('es')
 
 export const SaldoContext = createContext({
@@ -26,14 +28,25 @@ const SaldoProvider = ({ children }) => {
 
   useEffect(() => {
     changeLoading(true)
+
     obtenerGastosDB((querySnapshot) => {
       const gastosDB = []
 
       querySnapshot.forEach((doc) => {
-        gastosDB.push({
-          idDB: doc.id,
-          ...doc.data()
-        })
+        if (doc.data().ciphertext) {
+          const bytes = CryptoJS.AES.decrypt(doc.data().ciphertext, userUID)
+          const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+
+          gastosDB.push({
+            idDB: doc.id,
+            ...decryptedData
+          })
+        } else {
+          gastosDB.push({
+            idDB: doc.id,
+            ...doc.data()
+          })
+        }
       })
 
       obtenerGastos(gastosDB)

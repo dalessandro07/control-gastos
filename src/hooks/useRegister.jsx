@@ -19,7 +19,7 @@ const useRegister = () => {
       await register(data.email, data.password)
 
       toast.success('Te has registrado correctamente.')
-      navigateTo('/login')
+      navigateTo('/')
 
       e.target.reset()
     } catch (error) {
