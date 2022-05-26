@@ -23,12 +23,12 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
 
-const agregarGastoDB = (gasto) => addDoc(collection(db, 'gastos'), gasto)
+const agregarGastoDB = (gasto, UID) => addDoc(collection(db, UID), gasto)
 
-const borrarGastoDB = (id) => deleteDoc(doc(db, 'gastos', id))
+const borrarGastoDB = (id, UID) => deleteDoc(doc(db, UID, id))
 
-const actualizarGastoDB = (id, gasto) => updateDoc(doc(db, 'gastos', id), gasto)
+const actualizarGastoDB = (id, gasto, UID) => updateDoc(doc(db, UID, id), gasto)
 
-const obtenerGastosDB = (callback) => onSnapshot(collection(db, 'gastos'), callback)
+const obtenerGastosDB = (callback, UID) => onSnapshot(collection(db, UID), callback)
 
 export { db, auth, agregarGastoDB, obtenerGastosDB, borrarGastoDB, actualizarGastoDB }

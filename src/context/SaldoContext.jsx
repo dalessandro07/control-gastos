@@ -6,6 +6,7 @@ import { obtenerGastosDB } from '../firebase'
 
 import moment from 'moment'
 import 'moment/dist/locale/es'
+import { useAuth } from './AuthContext'
 moment.locale('es')
 
 export const SaldoContext = createContext({
@@ -18,6 +19,7 @@ export const SaldoContext = createContext({
 })
 
 const SaldoProvider = ({ children }) => {
+  const { userUID } = useAuth()
   const { gastos, saldoTotal, agregarGasto, obtenerGastos, loading, changeLoading } = useGasto()
 
   const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos)
@@ -36,7 +38,7 @@ const SaldoProvider = ({ children }) => {
 
       obtenerGastos(gastosDB)
       changeLoading(false)
-    })
+    }, userUID)
   }, [])
 
   const value = {

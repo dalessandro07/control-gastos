@@ -6,7 +6,7 @@ const Gasto = ({ gasto, moment }) => {
 
   return (
     <li
-      onClick={() => navigateTo(`/app/gastos/${gasto.id}`)}
+      onClick={() => navigateTo(`/gastos/${gasto.id}`)}
       className="my-4 flex cursor-pointer items-center justify-between p-2 hover:bg-gray-300 hover:transition-all hover:duration-200"
       key={gasto.id}>
       <section className="flex w-1/3 grow items-center">

@@ -6,19 +6,21 @@ import { SaldoContext } from '../../../context/SaldoContext'
 import Loading from '../../../utilities/Loading'
 import UserSection from '../User/UserSection'
 
+import Page404 from '../../../utilities/Page404'
+
 const NuevoGasto = lazy(() => import('../Forms/NuevoGasto'))
 const ListaDeGastos = lazy(() => import('./ListaDeGastos'))
 const Balance = lazy(() => import('./Balance'))
 const Detalle = lazy(() => import('../Info/Detalle'))
 
-const Gastos = ({ gastos }) => {
-  const { moment, loading } = useContext(SaldoContext)
+const Gastos = () => {
+  const { gastos, moment, loading } = useContext(SaldoContext)
 
   return (
     <main className="flex grow flex-col">
       <header className="mt-6 mb-2 flex items-center justify-between">
         <nav className="flex w-full justify-around">
-          <Link to="/app/balance">
+          <Link to="/balance">
             <button className="flex flex-col items-center justify-center rounded-md bg-gray-800 p-2 hover:bg-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +34,7 @@ const Gastos = ({ gastos }) => {
             </button>
           </Link>
 
-          <Link to="/app/gastos">
+          <Link to="/gastos">
             <button className="flex flex-col items-center justify-center rounded-md bg-gray-800 p-2 hover:bg-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +51,7 @@ const Gastos = ({ gastos }) => {
             </button>
           </Link>
 
-          <Link to="/app/nuevo-gasto">
+          <Link to="/nuevo-gasto">
             <button className="flex flex-col items-center justify-center rounded-md bg-gray-800 p-2 hover:bg-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,6 +73,8 @@ const Gastos = ({ gastos }) => {
       <section className="mt-4 grow rounded-t-3xl bg-gray-100 pt-2 shadow-2xl">
         <Routes>
           <Route path="/" element={<UserSection />} />
+
+          <Route path="*" element={<Page404 />} />
 
           <Route
             path="/balance"

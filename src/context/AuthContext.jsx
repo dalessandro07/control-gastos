@@ -22,6 +22,7 @@ export const useAuth = () => {
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [userUID, setUserUID] = useState(null)
   const [loading, setLoading] = useState(true)
 
   const register = (email, password) => createUserWithEmailAndPassword(auth, email, password)
@@ -37,11 +38,21 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
+      setUserUID(currentUser.uid)
       setLoading(false)
     })
   }, [])
 
-  const valueToExport = { register, login, user, logout, loading, loginWithGoogle, resetPassword }
+  const valueToExport = {
+    register,
+    login,
+    user,
+    userUID,
+    logout,
+    loading,
+    loginWithGoogle,
+    resetPassword
+  }
 
   return <authContext.Provider value={valueToExport}>{children}</authContext.Provider>
 }

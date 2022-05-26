@@ -8,6 +8,7 @@ import { SaldoContext } from '../context/SaldoContext'
 import { toast } from 'react-toastify'
 
 import moment from 'moment'
+import { useAuth } from '../context/AuthContext'
 
 const frutas = [
   'manzana',
@@ -147,6 +148,7 @@ const etiquetasOBJ = {
 }
 
 const useSendGasto = () => {
+  const { userUID } = useAuth()
   const [etiqueta, setEtiqueta] = useState('otros')
   const { agregarGasto } = useContext(SaldoContext)
 
@@ -180,7 +182,7 @@ const useSendGasto = () => {
 
   const onSubmit = (data) => {
     if (data.idDB) {
-      actualizarGastoDB(data.idDB, data)
+      actualizarGastoDB(data.idDB, data, userUID)
       navigateTo('/gastos')
       toast.success('Gasto actualizado')
     } else {

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { SaldoContext } from '../../../context/SaldoContext'
 
-const Saldo = ({ saldoTotal }) => {
-  const { loading } = useContext(SaldoContext)
+const Saldo = () => {
+  const { saldoTotal, loading } = useContext(SaldoContext)
 
   return (
     <header className="mt-8 flex flex-col items-center">

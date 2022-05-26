@@ -9,8 +9,10 @@ import Loading from '../../../utilities/Loading'
 import moment from 'moment'
 import Modal from '../../../utilities/Modal'
 import useSeo from '../../../hooks/useSeo'
+import { useAuth } from '../../../context/AuthContext'
 
 const Detalle = ({ gastos }) => {
+  const { userUID } = useAuth()
   const { loading } = useContext(SaldoContext)
   const { id } = useParams()
   const navigateTo = useNavigate()
@@ -45,7 +47,7 @@ const Detalle = ({ gastos }) => {
 
         <section
           onClick={() => {
-            navigateTo(`/app/editar-gasto/${id}/formulario`)
+            navigateTo(`/editar-gasto/${id}/formulario`)
           }}
           className="absolute right-0 mx-4">
           <button>
@@ -99,7 +101,7 @@ const Detalle = ({ gastos }) => {
             titleModal="¿Desea eliminar este gasto?"
             paragraphModal="Esta acción no se puede deshacer."
             callbackButtonConfirm={() => {
-              borrarGastoDB(detalleGasto?.idDB)
+              borrarGastoDB(detalleGasto?.idDB, userUID)
               toast.info('Gasto eliminado correctamente')
               navigateTo('/gastos')
             }}

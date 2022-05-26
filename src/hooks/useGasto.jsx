@@ -6,9 +6,11 @@ import { agregarGastoDB } from '../firebase'
 
 import moment from 'moment'
 import 'moment/dist/locale/es'
+import { useAuth } from '../context/AuthContext'
 moment.locale('es')
 
 const useGasto = () => {
+  const { userUID } = useAuth()
   const [gastos, setGastos] = useState([])
   const [saldoTotal, setSaldoTotal] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -39,8 +41,7 @@ const useGasto = () => {
     setSaldoTotal(saldoTotal + monto)
 
     setLoading(false)
-
-    agregarGastoDB(gastoFinalAgregado)
+    agregarGastoDB(gastoFinalAgregado, userUID)
   }
 
   const obtenerGastos = (data) => {

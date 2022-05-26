@@ -22,7 +22,7 @@ const useLogin = () => {
       await login(data.email, data.password)
 
       toast.success(`¡Bienvenido ${data.email.split('@')[0]}!`)
-      navigateTo('/app')
+      navigateTo('/')
 
       e.target.reset()
     } catch (error) {
@@ -34,7 +34,7 @@ const useLogin = () => {
     try {
       await loginWithGoogle()
 
-      navigateTo('/app')
+      navigateTo('/')
     } catch (error) {
       console.log(error)
       toast.error(firebaseAuthErrors[error.code] || 'Se ha producido un error, inténtalo de nuevo.')

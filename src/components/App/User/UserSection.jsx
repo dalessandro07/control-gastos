@@ -13,12 +13,12 @@ const UserSection = () => {
     navigateTo('/login')
   }
 
-  console.log(user)
-
   return (
     <section>
       <header className="flex flex-col items-center">
-        <h1 className="text-2xl font-bold">¡Bienvenido!</h1>
+        <h1 className="text-2xl font-bold">{`Bienvenid${
+          user?.displayName?.at(-1) === 'a' ? 'a' : 'o'
+        }`}</h1>
 
         <img
           className="mt-4 h-12 w-12 rounded-full object-cover"
