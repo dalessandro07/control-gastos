@@ -29,7 +29,7 @@ const HomeIndex = () => {
           <h1
             onClick={() => navigateTo('/')}
             className="relative my-6 cursor-pointer text-center font-dosis text-2xl font-bold">
-            Costify App
+            Allexpenses App
           </h1>
         </div>
 
@@ -74,7 +74,7 @@ const HomeIndex = () => {
             : 'flex items-center justify-center bg-gray-100'
         }>
         <p className="mt-5 mb-2 text-center text-gray-500">
-          &copy; {new Date().getFullYear()} Costify App
+          &copy; {new Date().getFullYear()} Allexpenses App
         </p>
       </footer>
     </div>

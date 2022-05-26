@@ -11,7 +11,7 @@ const useImportExport = (gastos = [], obtenerGastos = () => {}, userUID) => {
 
     const link = document.createElement('a')
     link.href = url
-    link.download = 'gastos_costify_app.json'
+    link.download = 'gastos_allexpenses_app.json'
     link.click()
   }
 
