@@ -59,6 +59,7 @@ const abarrotes = [
 const etiquetasOBJ = {
   comida: [
     'comida',
+    'snack',
     'fruta',
     'verdura',
     'carne',
@@ -86,6 +87,14 @@ const etiquetasOBJ = {
     'mcdonalds',
     'burger',
     'papas-fritas',
+    'coca-cola',
+    'fanta',
+    'sprite',
+    'pepsi',
+    'agua',
+    'inca-kola',
+    'gaseosa',
+    'galletas',
     ...frutas,
     ...verduras,
     ...abarrotes

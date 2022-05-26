@@ -4,15 +4,19 @@ import { toast } from 'react-toastify'
 
 const useImportExport = (gastos = [], obtenerGastos = () => {}, userUID) => {
   const exportarGastos = () => {
-    const gastosJSON = JSON.stringify(gastos)
+    if (gastos.length === 0) {
+      toast.error('No hay gastos para exportar')
+    } else {
+      const gastosJSON = JSON.stringify(gastos)
 
-    const blob = new Blob([gastosJSON], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
+      const blob = new Blob([gastosJSON], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
 
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'gastos_allexpenses_app.json'
-    link.click()
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'gastos_allexpenses_app.json'
+      link.click()
+    }
   }
 
   const importarGastos = () => {

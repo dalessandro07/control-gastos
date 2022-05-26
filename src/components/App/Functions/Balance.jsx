@@ -15,9 +15,12 @@ Chart.defaults.font.size = 17.5
 Chart.defaults.font.weight = 'bold'
 
 const Balance = () => {
-  const { gastos, loading, exportarGastos, importarGastos } = useContext(SaldoContext)
+  const { gastos, saldoTotal, loading, exportarGastos, importarGastos } = useContext(SaldoContext)
 
-  const { dataPie, optionsPie, selectedTag, changeSelectTag } = useChart(gastos)
+  const { dataPie, optionsPie, selectedTag, changeSelectTag, porcentajes } = useChart(
+    gastos,
+    saldoTotal
+  )
 
   useSeo({ title: 'Balance', description: 'Balance de gastos' })
 
@@ -35,9 +38,29 @@ const Balance = () => {
                 selectedTag={selectedTag}
                 changeSelectTag={changeSelectTag}
                 gastos={gastos}
+                porcentajes={porcentajes}
               />
             ) : (
-              <Pie data={dataPie} options={optionsPie} />
+              <section className="my-6 mx-3 flex flex-col">
+                <Pie data={dataPie} options={optionsPie} />
+                <ul className="mx-auto mt-8 flex w-3/4 flex-col gap-1 rounded-sm border-2 border-amber-400 p-3">
+                  <p className="my-2 text-center text-sm underline">
+                    Porcentaje de gastos por categoría
+                  </p>
+                  {porcentajes.length > 0 &&
+                    porcentajes?.map((porcentaje) => (
+                      <li
+                        className="flex items-center justify-between gap-6 py-2"
+                        key={porcentaje.etiqueta}>
+                        <span className="font-bold">
+                          {porcentaje.etiqueta.charAt(0).toUpperCase() +
+                            porcentaje.etiqueta.slice(1)}
+                        </span>
+                        <span className="text-xl">{porcentaje.porcentaje.toFixed(1)}%</span>
+                      </li>
+                    ))}
+                </ul>
+              </section>
             )
           ) : (
             <p className="text-center text-gray-500">No hay gastos registrados</p>

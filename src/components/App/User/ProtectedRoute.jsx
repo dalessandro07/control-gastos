@@ -7,7 +7,11 @@ const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
 
   if (loading) {
-    return <Loading />
+    return (
+      <section className="my-8">
+        <Loading />
+      </section>
+    )
   }
 
   if (!user) {

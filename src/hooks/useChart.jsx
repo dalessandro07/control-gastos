@@ -1,6 +1,6 @@
 import useEtiquetas from './useEtiquetas'
 
-const useChart = (gastos = []) => {
+const useChart = (gastos = [], saldoTotal) => {
   const { etiquetas, etiquetasCapitalized, changeSelectTag, selectedTag } = useEtiquetas(gastos)
 
   const dataPie = {
@@ -45,7 +45,21 @@ const useChart = (gastos = []) => {
     }
   }
 
-  return { dataPie, optionsPie, selectedTag, changeSelectTag }
+  const porcentajes = etiquetas.map((etiqueta) => {
+    const gastosEtiqueta = gastos.filter((gasto) => gasto.etiqueta === etiqueta)
+    const montoTotal = gastosEtiqueta.reduce((acc, gasto) => acc + gasto.monto, 0)
+    const porcentaje = (montoTotal / saldoTotal) * 100
+
+    return {
+      etiqueta,
+      montoTotal,
+      porcentaje
+    }
+  })
+
+  porcentajes.sort((a, b) => b.porcentaje - a.porcentaje)
+
+  return { dataPie, optionsPie, selectedTag, changeSelectTag, porcentajes }
 }
 
 export default useChart

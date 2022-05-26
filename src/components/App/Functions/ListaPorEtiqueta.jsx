@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Gasto from '../Info/Gasto'
 import moment from 'moment'
 
-const ListaPorEtiqueta = ({ gastos, selectedTag, changeSelectTag }) => {
+const ListaPorEtiqueta = ({ gastos, selectedTag, changeSelectTag, porcentajes }) => {
   const [gastosPorEtiqueta, setGastosPorEtiqueta] = useState([])
 
   const [montoTotal, setMontoTotal] = useState(0)
@@ -38,9 +38,22 @@ const ListaPorEtiqueta = ({ gastos, selectedTag, changeSelectTag }) => {
 
       <section className="flex flex-col items-center justify-center">
         <p className="text-sm font-semibold">Monto total:</p>
+
         <article className="flex font-bold text-red-500">
           <p>s/</p>
           <p className="text-3xl">{montoTotal}</p>
+        </article>
+
+        <article>
+          {porcentajes.length > 0 && (
+            <p className="ml-2 text-sm text-red-500">
+              (
+              {porcentajes
+                .find((porcentaje) => porcentaje.etiqueta === selectedTag?.tag?.toLowerCase())
+                ?.porcentaje.toFixed(1)}
+              % del total)
+            </p>
+          )}
         </article>
       </section>
 

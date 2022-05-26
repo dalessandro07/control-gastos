@@ -7,10 +7,10 @@ import { toast } from 'react-toastify'
 
 const updateSW = registerSW({
   onNeedRefresh() {
-    toast.info('Actualizando, cierre y vuelva a abrir la aplicación')
+    toast.info('Actualizando a una nueva versión, reinicie la aplicación')
   },
   onOfflineReady() {
-    toast.info('Aplicación disponible')
+    toast.success('Aplicación disponible')
   },
   onRegisterError() {
     toast.error('Hubo un error, refresque la página, e inténtelo de nuevo')
