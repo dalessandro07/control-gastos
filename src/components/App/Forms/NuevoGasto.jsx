@@ -102,6 +102,14 @@ const NuevoGasto = ({ mode }) => {
 
         <Route path="/voz" element={<VoiceForm />} />
       </Routes>
+
+      <footer className="mx-auto mt-8 mb-[-15px] w-3/4">
+        <p className="text-sm text-gray-600">
+          * Los datos ingresados serán <span className="font-bold">encriptados</span> y almacenados
+          en nuestra base de datos. <span className="font-bold">Sólo usted</span> podrá ver los
+          datos que ingrese.
+        </p>
+      </footer>
     </section>
   )
 }
