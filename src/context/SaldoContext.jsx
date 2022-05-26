@@ -22,7 +22,7 @@ const SaldoProvider = ({ children }) => {
   const { userUID } = useAuth()
   const { gastos, saldoTotal, agregarGasto, obtenerGastos, loading, changeLoading } = useGasto()
 
-  const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos)
+  const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos, userUID)
 
   useEffect(() => {
     changeLoading(true)

@@ -2,7 +2,7 @@ import { agregarGastoDB } from '../firebase'
 
 import { toast } from 'react-toastify'
 
-const useImportExport = (gastos = [], obtenerGastos = () => {}) => {
+const useImportExport = (gastos = [], obtenerGastos = () => {}, userUID) => {
   const exportarGastos = () => {
     const gastosJSON = JSON.stringify(gastos)
 
@@ -11,7 +11,7 @@ const useImportExport = (gastos = [], obtenerGastos = () => {}) => {
 
     const link = document.createElement('a')
     link.href = url
-    link.download = 'gastos.json'
+    link.download = 'gastos_costify_app.json'
     link.click()
   }
 
@@ -38,7 +38,7 @@ const useImportExport = (gastos = [], obtenerGastos = () => {}) => {
             obtenerGastos(gastosJSON)
 
             gastosJSON.forEach((gasto) => {
-              agregarGastoDB(gasto)
+              agregarGastoDB(gasto, userUID)
             })
           } catch (error) {
             toast.error(error)
