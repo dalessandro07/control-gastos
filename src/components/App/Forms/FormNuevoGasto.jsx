@@ -5,14 +5,14 @@ const FormNuevoGasto = ({ value }) => {
     value
 
   return (
-    <form className="mx-auto mt-6 flex w-3/4 flex-col" onSubmit={handleSubmit(onSubmit)}>
+    <form className="mx-auto mt-8 flex w-3/4 flex-col" onSubmit={handleSubmit(onSubmit)}>
       <section className="mb-6">
         <label className="flex items-center justify-center">
           <p className={errors?.monto ? 'text-3xl text-red-500' : 'text-2xl text-black'}>S/</p>
           <input
             className={`${
               errors.monto ? 'border-red-500 text-red-500 placeholder:text-red-300' : ''
-            } w-60 rounded-sm bg-gray-100 text-center text-6xl`}
+            } w-60 rounded-sm bg-gray-100 text-center text-7xl`}
             placeholder="25.50"
             type="number"
             step={0.01}

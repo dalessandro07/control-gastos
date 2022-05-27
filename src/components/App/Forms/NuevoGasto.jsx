@@ -8,6 +8,7 @@ import useEditGasto from '../../../hooks/useEditGasto'
 import useSeo from '../../../hooks/useSeo'
 import FormNuevoGasto from './FormNuevoGasto'
 import VoiceForm from './VoiceForm'
+import Calculadora from '../Functions/Calculadora'
 
 const fechasRelativas = {
   anteayer: moment().subtract(2, 'days').format('YYYY-MM-DD'),
@@ -31,14 +32,16 @@ const NuevoGasto = ({ mode }) => {
       const descripcion = params.get('descripcion') || ''
       const monto = Number(params.get('monto')) || 0
       const fecha = fechasRelativas[params.get('fecha')] || fechasRelativas.hoy
+      const etiqueta = params.get('etiqueta') || 'otros'
 
-      const queryVoice = {
+      const queryURL = {
         descripcion,
         monto,
-        fecha
+        fecha,
+        etiqueta
       }
 
-      setValueToForm(queryVoice, 'voice')
+      setValueToForm(queryURL, 'voice')
     }
 
     return () => {
@@ -75,7 +78,7 @@ const NuevoGasto = ({ mode }) => {
         <h2 className="pt-4 text-center text-lg font-semibold">{title} gasto</h2>
 
         {mode !== 'edit' && (
-          <nav className="mt-8 flex justify-around">
+          <nav className="mt-8 flex flex-col items-center gap-4 xs:flex-row xs:justify-around xs:gap-2">
             <Link to="/nuevo-gasto/formulario" className="bg-amber-300 p-2">
               Formulario
             </Link>
@@ -93,6 +96,22 @@ const NuevoGasto = ({ mode }) => {
                 />
               </svg>
             </Link>
+            <Link to="/nuevo-gasto/calculadora">
+              <button className="flex bg-indigo-300 p-2">
+                <p className="mr-2">Calculadora</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 000 2h.01a1 1 0 000-2H7z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </Link>
           </nav>
         )}
       </header>
@@ -101,6 +120,8 @@ const NuevoGasto = ({ mode }) => {
         <Route path="/formulario" element={<FormNuevoGasto value={valueToForm} />} />
 
         <Route path="/voz" element={<VoiceForm />} />
+
+        <Route path="/calculadora" element={<Calculadora />} />
       </Routes>
 
       <footer className="mx-auto mt-8 mb-[-15px] w-3/4">

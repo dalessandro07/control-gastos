@@ -213,6 +213,7 @@ const useSendGasto = () => {
       }
 
       navigateTo('/gastos')
+      toast.success('¡Gasto agregado con éxito!')
     }
   }
 
