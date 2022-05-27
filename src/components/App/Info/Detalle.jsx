@@ -40,7 +40,7 @@ const Detalle = ({ gastos }) => {
 
     navigator.clipboard.writeText(URL)
 
-    toast.success('URL copiada al portapapeles, puedes compartirla')
+    toast.success('¡Link copiado al portapapeles, puedes compartirlo!')
   }
 
   return (
