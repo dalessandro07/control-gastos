@@ -49,8 +49,6 @@ const SaldoProvider = ({ children }) => {
         }
       })
 
-      console.log(gastosDB)
-
       obtenerGastos(gastosDB)
       changeLoading(false)
     }, userUID)

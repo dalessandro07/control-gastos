@@ -15,7 +15,7 @@ const FormNuevoGasto = ({ value }) => {
             } w-60 rounded-sm bg-gray-100 text-center text-6xl`}
             placeholder="25.50"
             type="number"
-            step={0.1}
+            step={0.01}
             {...register('monto', {
               required: {
                 value: true,

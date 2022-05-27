@@ -29,8 +29,6 @@ const Dictaphone = () => {
       )
       .join(' ')
 
-    console.log(monto, fecha, descripcion)
-
     return { descripcion, monto, fecha }
   }
 

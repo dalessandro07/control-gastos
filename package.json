@@ -12,6 +12,7 @@
     "chart.js": "^3.7.1",
     "crypto-js": "4.1.1",
     "firebase": "^9.8.1",
+    "mathjs": "^10.6.0",
     "moment": "2.29.3",
     "react": "18.0.0",
     "react-chartjs-2": "^4.1.0",

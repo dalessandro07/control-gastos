@@ -28,8 +28,8 @@ const NuevoGasto = ({ mode }) => {
 
   useEffect(() => {
     if (params.has('monto')) {
-      const descripcion = params.get('descripcion')
-      const monto = Number(params.get('monto'))
+      const descripcion = params.get('descripcion') || ''
+      const monto = Number(params.get('monto')) || 0
       const fecha = fechasRelativas[params.get('fecha')] || fechasRelativas.hoy
 
       const queryVoice = {

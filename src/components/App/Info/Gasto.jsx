@@ -28,7 +28,7 @@ const Gasto = ({ gasto, moment }) => {
 
       <section className="flex w-1/4 items-center justify-end text-red-500">
         <p className="text-sm">- S/</p>
-        <p className="text-xl font-bold">{gasto.monto}</p>
+        <p className="text-xl font-bold">{gasto.monto.toFixed(2)}</p>
       </section>
     </li>
   )

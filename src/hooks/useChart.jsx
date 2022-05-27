@@ -18,7 +18,11 @@ const useChart = (gastos = [], saldoTotal) => {
           'rgb(255, 205, 86)',
           'rgb(75, 192, 192)',
           'rgb(153, 102, 255)',
-          'rgb(255, 159, 64)'
+          'rgb(255, 159, 64)',
+          '#92B4EC',
+          '#6D8B74',
+          '#C6D57E',
+          '#A45D5D'
         ],
         hoverOffset: 4
       }
