@@ -7,7 +7,7 @@ const Boton = ({ operacion, value, setOperacion, setResultado }) => {
   const { translateWord } = useTranslate()
 
   const handleClick = () => {
-    if (operacion.length < 12) {
+    if (operacion.length < 9) {
       if (value !== '=') {
         if (operacion !== '0') {
           setOperacion(operacion + value)

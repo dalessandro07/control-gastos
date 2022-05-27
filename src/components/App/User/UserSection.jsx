@@ -61,7 +61,9 @@ const UserSection = () => {
               />
             </svg>
           </button>
-          <p className="mb-4 font-bold">Cerrar sesión</p>
+          <p onClick={handleLogout} className="mb-4 cursor-pointer font-bold">
+            Cerrar sesión
+          </p>
         </article>
 
         <button
