@@ -38,16 +38,18 @@ const SaldoProvider = ({ children }) => {
           const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
 
           gastosDB.push({
-            idDB: doc.id,
-            ...decryptedData
+            ...decryptedData,
+            idDB: doc.id
           })
         } else {
           gastosDB.push({
-            idDB: doc.id,
-            ...doc.data()
+            ...doc.data(),
+            idDB: doc.id
           })
         }
       })
+
+      console.log(gastosDB)
 
       obtenerGastos(gastosDB)
       changeLoading(false)

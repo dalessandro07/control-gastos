@@ -34,7 +34,7 @@ const agregarGastoDB = (gasto, UID) => {
 const borrarGastoDB = (id, UID) => deleteDoc(doc(db, UID, id))
 
 const actualizarGastoDB = (id, gasto, UID) => {
-  console.log(gasto)
+  console.log(id)
 
   const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(gasto), UID).toString()
 
