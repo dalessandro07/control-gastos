@@ -49,9 +49,9 @@ const Detalle = ({ gastos }) => {
       const URLBASE = 'https://wa.me/'
 
       const query = new URLSearchParams({
-        text: `Realicé este gasto: \n *${
+        text: `Realicé este gasto, el día *${moment(fecha).format('DD - MM - YYYY')}* \n \n*${
           descripcion.charAt(0).toUpperCase() + descripcion.slice(1)
-        }* - S/ *${monto.toFixed(2)}*. \n El día *${fecha}*. \n Etiqueta: *${etiqueta}*`
+        } - S/ ${monto.toFixed(2)}* \n \n️Etiqueta: *${etiqueta}*`
       })
 
       const URL = `${URLBASE}?${query}`
@@ -199,6 +199,7 @@ const Detalle = ({ gastos }) => {
                   </button>
                 </section>
               }
+              css="p-3 px-6"
             />
 
             <Modal

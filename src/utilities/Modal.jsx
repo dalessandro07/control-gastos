@@ -8,7 +8,8 @@ const Modal = ({
   icon,
   bgc,
   textButtonConfirm,
-  moreElements
+  moreElements,
+  css
 }) => {
   const [showModal, setShowModal] = useState(false)
 
@@ -17,7 +18,7 @@ const Modal = ({
       <button
         className={`${
           bgc ?? 'bg-red-500 hover:bg-red-700'
-        } flex items-center rounded-sm p-2 text-sm font-bold text-white `}
+        } flex items-center rounded-sm text-sm font-bold text-white ${css ?? 'p-2'}`}
         type="button"
         onClick={() => setShowModal(true)}>
         {textButtonModal}
