@@ -72,6 +72,12 @@ const NuevoGasto = ({ mode }) => {
     button
   }
 
+  const scrollDown = () =>
+    window.scrollTo({
+      top: document.body.scrollHeight - 600,
+      behavior: 'smooth'
+    })
+
   return (
     <section className="my-5 rounded-sm pb-4">
       <header>
@@ -79,10 +85,11 @@ const NuevoGasto = ({ mode }) => {
 
         {mode !== 'edit' && (
           <nav className="mt-8 flex flex-col items-center gap-4 xs:flex-row xs:justify-around xs:gap-2">
-            <Link to="/nuevo-gasto/formulario" className="bg-amber-300 p-2">
+            <Link onClick={scrollDown} to="/nuevo-gasto/formulario" className="bg-amber-300 p-2">
               Formulario
             </Link>
-            <Link to="/nuevo-gasto/voz" className="flex bg-indigo-300 p-2">
+
+            <Link onClick={scrollDown} to="/nuevo-gasto/voz" className="flex bg-indigo-300 p-2">
               <p className="mr-2">Mediante Voz</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +103,8 @@ const NuevoGasto = ({ mode }) => {
                 />
               </svg>
             </Link>
-            <Link to="/nuevo-gasto/calculadora">
+
+            <Link onClick={scrollDown} to="/nuevo-gasto/calculadora">
               <button className="flex bg-indigo-300 p-2">
                 <p className="mr-2">Calculadora</p>
                 <svg

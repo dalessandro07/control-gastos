@@ -8,7 +8,7 @@ const VoiceForm = () => {
         <h2 className="text-lg font-bold">Formulario mediante voz</h2>
       </header>
 
-      <section className="flex flex-col justify-center">
+      <section id="voice-form" className="flex flex-col justify-center">
         <Dictaphone />
       </section>
     </section>

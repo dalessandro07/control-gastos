@@ -5,7 +5,10 @@ const FormNuevoGasto = ({ value }) => {
     value
 
   return (
-    <form className="mx-auto mt-8 flex w-3/4 flex-col" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      id="form-nuevo-gasto"
+      className="mx-auto mt-8 flex w-3/4 flex-col"
+      onSubmit={handleSubmit(onSubmit)}>
       <section className="mb-6">
         <label className="flex items-center justify-center">
           <p className={errors?.monto ? 'text-3xl text-red-500' : 'text-2xl text-black'}>S/</p>

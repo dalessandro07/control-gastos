@@ -19,14 +19,16 @@ const Gasto = ({ gasto, moment }) => {
           alt=""
         />
 
-        <p className="grow overflow-hidden text-ellipsis whitespace-nowrap font-bold">
+        <p className="mr-4 grow overflow-hidden text-ellipsis whitespace-nowrap font-bold xs:mr-0">
           {gasto.descripcion}
         </p>
       </section>
 
-      <p className="w-1/3 text-right text-sm">{moment(gasto.fecha).format('DD MMMM YYYY')}</p>
+      <p className="hidden w-1/3 text-right text-sm xs:block">
+        {moment(gasto.fecha).format('DD MMMM YYYY')}
+      </p>
 
-      <section className="flex w-1/4 items-center justify-end text-red-500">
+      <section className="mx-2 flex w-1/3 items-center justify-end text-red-500 xs:w-1/4">
         <p className="text-sm">- S/</p>
         <p className="text-xl font-bold">{gasto.monto.toFixed(2)}</p>
       </section>

@@ -68,15 +68,17 @@ const Login = () => {
         <form
           className="flex flex-col items-center justify-center"
           onSubmit={handleSubmit(onSubmit)}>
-          <label className="flex flex-col items-center">
-            <p>E-mail:</p>
-            <Input register={register} name="email" watch={watch} errors={errors} />
-          </label>
+          <section className="mb-4 rounded-md bg-amber-300 py-6 shadow-md">
+            <label className="flex flex-col items-center">
+              <p>E-mail:</p>
+              <Input register={register} name="email" watch={watch} errors={errors} />
+            </label>
 
-          <label className="flex flex-col items-center">
-            <p>Contraseña:</p>
-            <Input register={register} name="password" watch={watch} errors={errors} />
-          </label>
+            <label className="flex flex-col items-center">
+              <p>Contraseña:</p>
+              <Input register={register} name="password" watch={watch} errors={errors} />
+            </label>
+          </section>
 
           <section className="flex flex-col">
             <FormError errors={errors} />

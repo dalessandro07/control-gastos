@@ -25,23 +25,25 @@ const Register = () => {
       </h1>
 
       <form className="flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
-        <section className="flex w-full flex-col sm:flex-row">
-          <label className="flex flex-col items-center">
-            <p>Correo electrónico:</p>
-            <Input register={register} name="email" watch={watch} errors={errors} />
-          </label>
-        </section>
+        <section className="mb-4 rounded-md bg-amber-300 py-6 shadow-md">
+          <section className="flex w-full flex-col sm:flex-row">
+            <label className="flex flex-col items-center">
+              <p>Correo electrónico:</p>
+              <Input register={register} name="email" watch={watch} errors={errors} />
+            </label>
+          </section>
 
-        <section className="flex w-full flex-col sm:flex-row">
-          <label className="flex flex-col items-center">
-            <p>Contraseña:</p>
-            <Input register={register} name="password" watch={watch} errors={errors} />
-          </label>
+          <section className="flex w-full flex-col sm:flex-row">
+            <label className="flex flex-col items-center">
+              <p>Contraseña:</p>
+              <Input register={register} name="password" watch={watch} errors={errors} />
+            </label>
 
-          <label className="flex flex-col items-center">
-            <p>Confirmar contraseña:</p>
-            <Input register={register} name="confirmPassword" watch={watch} errors={errors} />
-          </label>
+            <label className="flex flex-col items-center">
+              <p>Confirmar contraseña:</p>
+              <Input register={register} name="confirmPassword" watch={watch} errors={errors} />
+            </label>
+          </section>
         </section>
 
         <section className="flex flex-col">

@@ -1,11 +1,8 @@
 import React from 'react'
 import { evaluate } from 'mathjs'
 import { toast } from 'react-toastify'
-import useTranslate from '../../../hooks/useTranslate'
 
 const Boton = ({ operacion, value, setOperacion, setResultado }) => {
-  const { translateWord } = useTranslate()
-
   const handleClick = () => {
     if (operacion.length < 9) {
       if (value !== '=') {
@@ -18,16 +15,7 @@ const Boton = ({ operacion, value, setOperacion, setResultado }) => {
         try {
           setResultado(evaluate(operacion))
         } catch (error) {
-          toast.promise(translateWord(error.message, 'es'), {
-            pending: 'Error detectado...',
-            success: {
-              render({ data }) {
-                return `${data}`
-              },
-              type: 'error'
-            },
-            error: 'Verifique los datos ingresados e intente nuevamente.'
-          })
+          toast.error('Error en la operación - ' + error.message)
         }
       }
     } else if (value === '=') {

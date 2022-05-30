@@ -95,9 +95,7 @@ const HomeIndex = () => {
               alt=""
             />
 
-            <h1
-              onClick={() => navigateTo('/')}
-              className="relative my-6 cursor-pointer text-center font-dosis text-2xl font-bold">
+            <h1 className="relative my-6 cursor-pointer text-center font-dosis text-2xl font-bold">
               Allexpenses App
             </h1>
           </div>
