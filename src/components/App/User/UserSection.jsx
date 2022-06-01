@@ -31,8 +31,9 @@ const UserSection = () => {
         <img
           className="mt-4 h-12 w-12 rounded-full object-cover"
           src={
-            user.photoURL ??
-            'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+            user?.photoURL ??
+            'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png' ??
+            'http://cdn.onlinewebfonts.com/svg/img_173956.png'
           }
           alt=""
         />

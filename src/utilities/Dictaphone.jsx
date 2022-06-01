@@ -17,17 +17,17 @@ const Dictaphone = () => {
   const recoverFieldsFromTranscript = () => {
     const fields = transcript?.split(' ')
 
-    const monto = fields?.find((field) => field.match(/^[0-9]+(\.[0-9]{1,2})?$/))
+    const monto = fields?.find((field) => field.match(/^[0-9]+(\.[0-9]{1,2})?$/)) || ''
 
-    const fecha = fields?.find((field) =>
-      field.match(/^(hoy|mañana|pasado|anteayer|ayer|dia|día)$/)
-    )
+    const fecha =
+      fields?.find((field) => field.match(/^(hoy|mañana|pasado|anteayer|ayer|dia|día)$/)) || ''
 
-    const descripcion = fields
-      ?.filter(
-        (field) => field !== monto && field !== fecha && field !== 'soles' && field.length > 1
-      )
-      .join(' ')
+    const descripcion =
+      fields
+        ?.filter(
+          (field) => field !== monto && field !== fecha && field !== 'soles' && field.length > 1
+        )
+        .join(' ') || ''
 
     return { descripcion, monto, fecha }
   }

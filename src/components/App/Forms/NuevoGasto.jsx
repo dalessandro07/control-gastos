@@ -28,7 +28,7 @@ const NuevoGasto = ({ mode }) => {
   const [params] = useSearchParams()
 
   useEffect(() => {
-    if (params.has('monto')) {
+    if (params.get('descripcion')?.length >= 1) {
       const descripcion = params.get('descripcion') || ''
       const monto = Number(params.get('monto')) || 0
       const fecha = fechasRelativas[params.get('fecha')] || fechasRelativas.hoy
@@ -47,7 +47,7 @@ const NuevoGasto = ({ mode }) => {
     return () => {
       setValueToForm({}, 'new')
     }
-  }, [params.has('monto')])
+  }, [params.has('descripcion')])
 
   useSeo({
     title: `${title} gasto`,

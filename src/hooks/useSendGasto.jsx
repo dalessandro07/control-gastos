@@ -95,6 +95,12 @@ const etiquetasOBJ = {
     'inca-kola',
     'gaseosa',
     'galletas',
+    'pollo',
+    'chicharron',
+    'tortilla',
+    'tostada',
+    'carne',
+    'pescado',
     ...frutas,
     ...verduras,
     ...abarrotes
@@ -218,7 +224,7 @@ const useSendGasto = () => {
   }
 
   const setValueToForm = (gasto, mode) => {
-    if (gasto.monto && (mode === 'edit' || mode === 'voice')) {
+    if (gasto.descripcion && (mode === 'edit' || mode === 'voice')) {
       setValue('monto', gasto.monto)
       setValue('fecha', gasto.fecha)
       setValue('descripcion', gasto.descripcion)

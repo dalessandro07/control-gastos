@@ -25,8 +25,8 @@ const FormNuevoGasto = ({ value }) => {
                 message: 'El monto es requerido'
               },
               min: {
-                value: 1,
-                message: 'El monto debe ser mayor o igual a 1'
+                value: 0.1,
+                message: 'El monto debe ser mayor o igual a 0.10 o 10 céntimos'
               },
               max: {
                 value: 10000,

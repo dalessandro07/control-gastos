@@ -1,6 +1,6 @@
 const API_KEY = import.meta.env.VITE_PEXELS_API_KEY
 
-const useAssignImg = (gastos = []) => {
+const useAssignImg = () => {
   const fetchPhotosFromApi = async (desc) => {
     const res = await fetch(`https://api.pexels.com/v1/search?query=${desc}&per_page=1`, {
       method: 'GET',
