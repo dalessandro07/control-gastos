@@ -25,22 +25,22 @@ const Register = () => {
       </h1>
 
       <form className="flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
-        <section className="mb-4 rounded-md bg-amber-300 py-6 shadow-md">
+        <section className="mb-4 rounded-md bg-blue-300 py-6 shadow-md">
           <section className="flex w-full flex-col sm:flex-row">
             <label className="flex flex-col items-center">
-              <p>Correo electrónico:</p>
+              <p className="font-bold">Correo electrónico:</p>
               <Input register={register} name="email" watch={watch} errors={errors} />
             </label>
           </section>
 
           <section className="flex w-full flex-col sm:flex-row">
             <label className="flex flex-col items-center">
-              <p>Contraseña:</p>
+              <p className="font-bold">Contraseña:</p>
               <Input register={register} name="password" watch={watch} errors={errors} />
             </label>
 
             <label className="flex flex-col items-center">
-              <p>Confirmar contraseña:</p>
+              <p className="font-bold">Confirmar contraseña:</p>
               <Input register={register} name="confirmPassword" watch={watch} errors={errors} />
             </label>
           </section>
@@ -49,7 +49,7 @@ const Register = () => {
         <section className="flex flex-col">
           <FormError errors={errors} />
 
-          <Link className="my-3 text-center text-sm text-sky-600 underline" to="/login">
+          <Link className="my-3 text-center text-blue-600 underline" to="/login">
             Ya tengo una cuenta
           </Link>
 
@@ -57,9 +57,9 @@ const Register = () => {
             type="submit"
             className={`${
               errors.nombre || errors.email || errors.password || errors.confirmPassword
-                ? 'cursor-not-allowed border-gray-200 bg-gray-300 text-gray-400'
-                : 'border-gray-600'
-            } my-4 mx-auto w-max rounded-sm border-2 p-1`}>
+                ? 'cursor-not-allowed border-2 border-gray-200 bg-gray-300 text-gray-400'
+                : 'bg-amber-300 shadow-sm transition-colors duration-150 hover:bg-amber-400'
+            } my-4 mx-auto w-max rounded-sm p-2`}>
             Registrarme
           </button>
         </section>

@@ -2,18 +2,19 @@ import { useAuth } from '../context/AuthContext'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
-const firebaseAuthErrors = {
-  'auth/email-already-in-use': 'El correo electrónico ya está en uso.',
-  'auth/invalid-email': 'El correo electrónico no es válido.',
-  'auth/weak-password': 'La contraseña es muy débil.',
-  'auth/wrong-password': 'La contraseña no es correcta.',
-  'auth/user-not-found': 'El usuario no existe.',
-  'auth/user-disabled': 'El usuario está deshabilitado.',
-  'auth/too-many-requests': 'Has hecho demasiadas peticiones, inténtalo de nuevo más tarde.'
-}
-
 const useLogin = () => {
-  const { login, loginWithGoogle } = useAuth()
+  const { login, loginWithGoogle, AuthErrorCodes, loginWithPhoneNumber, RecaptchaVerifier } =
+    useAuth()
+
+  const firebaseAuthErrors = {
+    'auth/email-already-in-use': 'El correo electrónico ya está en uso.',
+    'auth/invalid-email': 'El correo electrónico no es válido.',
+    'auth/weak-password': 'La contraseña es muy débil.',
+    'auth/wrong-password': 'La contraseña no es correcta.',
+    'auth/user-not-found': 'El usuario no existe.',
+    'auth/user-disabled': 'El usuario está deshabilitado.',
+    'auth/too-many-requests': 'Has hecho demasiadas peticiones, inténtalo de nuevo más tarde.'
+  }
 
   const navigateTo = useNavigate()
 
@@ -26,7 +27,12 @@ const useLogin = () => {
 
       e.target.reset()
     } catch (error) {
-      toast.error(firebaseAuthErrors[error.code] || 'Se ha producido un error, inténtalo de nuevo.')
+      const errorCode = Object.values(AuthErrorCodes).find((code) => code === error.code)
+
+      toast.error(
+        `Error: ${firebaseAuthErrors[errorCode] || errorCode}` ||
+          'Se ha producido un error, inténtalo de nuevo.'
+      )
     }
   }
 
@@ -36,12 +42,43 @@ const useLogin = () => {
 
       navigateTo('/')
     } catch (error) {
-      console.log(error)
-      toast.error(firebaseAuthErrors[error.code] || 'Se ha producido un error, inténtalo de nuevo.')
+      const errorCode = Object.values(AuthErrorCodes).find((code) => code === error.code)
+
+      toast.error(
+        `Error: ${firebaseAuthErrors[errorCode] || errorCode}` ||
+          'Se ha producido un error, inténtalo de nuevo.'
+      )
     }
   }
 
-  return { onSubmit, handleGoogleLogin }
+  const handlePhoneNumberLogin = async (phoneNumber, appVerifier) => {
+    try {
+      loginWithPhoneNumber(phoneNumber, appVerifier).then((confirmationResult) => {
+        window.confirmationResult = confirmationResult
+        toast.success(
+          `El código de verificación fue enviado a ${
+            phoneNumber.split('+51')[1]
+          }, por favor ingréselo.`
+        )
+      })
+    } catch (error) {
+      const errorCode = Object.values(AuthErrorCodes).find((code) => code === error.code)
+
+      toast.error(
+        `Error: ${firebaseAuthErrors[errorCode] || errorCode}` ||
+          'Se ha producido un error, inténtalo de nuevo.'
+      )
+    }
+  }
+
+  return {
+    onSubmit,
+    handleGoogleLogin,
+    handlePhoneNumberLogin,
+    RecaptchaVerifier,
+    firebaseAuthErrors,
+    AuthErrorCodes
+  }
 }
 
 export default useLogin

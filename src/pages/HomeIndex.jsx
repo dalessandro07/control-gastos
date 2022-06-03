@@ -10,6 +10,7 @@ import Login from '../components/Home/Login'
 import Register from '../components/Home/Register'
 import ProtectedRoute from '../components/App/User/ProtectedRoute'
 import ForgotPassword from '../components/Home/ForgotPassword'
+import PhoneNumberLogin from '../components/Home/PhoneNumberLogin'
 
 const HomeIndex = () => {
   const navigateTo = useNavigate()
@@ -76,6 +77,8 @@ const HomeIndex = () => {
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
             <Route path="/register" element={<Register />} />
+
+            <Route path="/phone-number" element={<PhoneNumberLogin />} />
           </Routes>
 
           <footer

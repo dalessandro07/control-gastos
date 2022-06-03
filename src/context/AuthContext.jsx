@@ -8,7 +8,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
-  deleteUser
+  deleteUser,
+  AuthErrorCodes,
+  signInWithPhoneNumber,
+  RecaptchaVerifier
 } from 'firebase/auth'
 
 export const authContext = createContext()
@@ -31,6 +34,9 @@ const AuthProvider = ({ children }) => {
   const login = (email, password) => signInWithEmailAndPassword(auth, email, password)
 
   const loginWithGoogle = () => signInWithPopup(auth, new GoogleAuthProvider())
+
+  const loginWithPhoneNumber = (phoneNumber, appVerifier) =>
+    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
 
   const logout = () => signOut(auth)
 
@@ -55,7 +61,10 @@ const AuthProvider = ({ children }) => {
     loading,
     loginWithGoogle,
     resetPassword,
-    deleteAccount
+    deleteAccount,
+    AuthErrorCodes,
+    loginWithPhoneNumber,
+    RecaptchaVerifier
   }
 
   return <authContext.Provider value={valueToExport}>{children}</authContext.Provider>

@@ -39,7 +39,8 @@ const UserSection = () => {
         />
 
         <p className="mt-2 flex text-xl font-bold text-sky-600">
-          {user.displayName ?? user.email.split('@')[0]}
+          {user?.displayName ?? user?.email?.split('@')[0] ?? 'Usuario'}
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -51,6 +52,11 @@ const UserSection = () => {
               clipRule="evenodd"
             />
           </svg>
+        </p>
+
+        <p className="font-semibold text-gray-600">
+          {user?.phoneNumber?.length > 0 &&
+            user?.phoneNumber?.replace('+', '').replace(/\d(?=\d{4})/g, '*')}
         </p>
       </header>
 
