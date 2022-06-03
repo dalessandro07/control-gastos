@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom'
 
 import SaldoProvider from '../context/SaldoContext'
@@ -20,7 +20,10 @@ const HomeIndex = () => {
 
   const handleResize = () => setWidth(window.innerWidth)
 
-  window.addEventListener('resize', handleResize)
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <>

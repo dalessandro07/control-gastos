@@ -7,6 +7,7 @@ const Saldo = () => {
   return (
     <header className="mt-8 flex flex-col items-center">
       <h2 className="font-semibold text-gray-600">Total gastado:</h2>
+      <p className="text-sm text-gray-600">De todos los meses</p>
       <section className="flex w-full justify-center bg-amber-300 py-3">
         <article className="mx-2 flex">
           <p className="text-gray-800">S/</p>

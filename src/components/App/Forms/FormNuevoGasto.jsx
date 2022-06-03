@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
 
-const FormNuevoGasto = ({ value }) => {
+const FormNuevoGasto = ({ valueSendGasto }) => {
   const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, moment, button } =
-    value
+    valueSendGasto
 
   return (
     <form
@@ -110,7 +110,7 @@ const FormNuevoGasto = ({ value }) => {
               }
             })}
             onChange={(e) => cambiarEtiqueta(e.target.value)}
-            value={etiqueta ?? 'otros'}
+            value={etiqueta || 'otros'}
             placeholder="Ejm: Comida">
             <option value="comida">Comida</option>
             <option value="transporte">Transporte</option>

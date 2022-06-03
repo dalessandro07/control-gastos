@@ -162,7 +162,7 @@ const etiquetasOBJ = {
   ]
 }
 
-const useSendGasto = () => {
+const useSendGasto = (mode = 'new') => {
   const { userUID } = useAuth()
   const [etiqueta, setEtiqueta] = useState('otros')
   const { gastos, agregarGasto } = useContext(SaldoContext)
@@ -180,15 +180,17 @@ const useSendGasto = () => {
   })
 
   useEffect(() => {
-    const subscription = watch((value) => {
-      const etiqueta = Object.keys(etiquetasOBJ).find((etiqueta) =>
-        etiquetasOBJ[etiqueta].some((cadaEtiqueta) =>
-          value.descripcion.toLowerCase().includes(cadaEtiqueta)
+    if (mode !== 'edit') {
+      const subscription = watch((value) => {
+        const etiqueta = Object.keys(etiquetasOBJ).find((etiqueta) =>
+          etiquetasOBJ[etiqueta].some((cadaEtiqueta) =>
+            value.descripcion.toLowerCase().includes(cadaEtiqueta)
+          )
         )
-      )
-      setEtiqueta(etiqueta)
-    })
-    return () => subscription.unsubscribe()
+        setEtiqueta(etiqueta)
+      })
+      return () => subscription.unsubscribe()
+    }
   }, [watch])
 
   const cambiarEtiqueta = (value) => {
@@ -229,6 +231,7 @@ const useSendGasto = () => {
       setValue('fecha', gasto.fecha)
       setValue('descripcion', gasto.descripcion)
       setValue('idDB', gasto.idDB)
+      setValue('etiqueta', gasto.etiqueta)
     } else {
       setValue('monto', '')
       setValue('fecha', moment().format('YYYY-MM-DD'))

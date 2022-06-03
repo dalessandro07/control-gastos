@@ -1,4 +1,4 @@
-import React, { useContext, lazy, Suspense } from 'react'
+import React, { useContext, lazy, Suspense, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 
 import { SaldoContext } from '../../../context/SaldoContext'
@@ -15,6 +15,26 @@ const Detalle = lazy(() => import('../Info/Detalle'))
 
 const Gastos = () => {
   const { gastos, moment, loading } = useContext(SaldoContext)
+
+  const [gastosAMostrar, setGastosAMostrar] = useState(null)
+
+  const buscarGastoPorParametro = (e) => {
+    const { value } = e.target
+
+    const gastosFiltrados = gastos.filter((gasto) => {
+      return (
+        gasto.descripcion.toLowerCase().includes(value.toLowerCase()) ||
+        moment(gasto.fecha).format('DD [de] MMMM [de] YYYY').includes(value.toLowerCase()) ||
+        gasto.monto.toFixed(2).toString().includes(value)
+      )
+    })
+
+    if (gastosFiltrados && gastosFiltrados.length > 0) {
+      setGastosAMostrar(gastosFiltrados)
+    } else {
+      setGastosAMostrar(gastos)
+    }
+  }
 
   return (
     <main className="flex grow flex-col">
@@ -89,7 +109,7 @@ const Gastos = () => {
             path="/gastos/:id"
             element={
               <Suspense fallback={<Loading />}>
-                <Detalle gastos={gastos} />
+                <Detalle gastos={gastosAMostrar ?? gastos} />
               </Suspense>
             }
           />
@@ -98,7 +118,38 @@ const Gastos = () => {
             path="/gastos"
             element={
               <Suspense fallback={<Loading />}>
-                <ListaDeGastos gastos={gastos} moment={moment} loading={loading} />
+                <>
+                  <section className="mt-5 mb-3 flex p-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+
+                    <input
+                      className="mx-4 grow border-b-2 border-black bg-transparent px-2 placeholder:text-gray-600"
+                      type="text"
+                      placeholder="Buscar gasto por descripción, fecha o monto"
+                      name="barraBusqueda"
+                      id="buscarGasto"
+                      onChange={buscarGastoPorParametro}
+                    />
+                  </section>
+
+                  <ListaDeGastos
+                    gastos={gastosAMostrar ?? gastos}
+                    moment={moment}
+                    loading={loading}
+                  />
+                </>
               </Suspense>
             }
           />

@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Gasto = ({ gasto, moment }) => {
   const navigateTo = useNavigate()
+
+  const [width, setWidth] = useState(window.innerWidth)
+
+  const handleResize = () => setWidth(window.innerWidth)
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <li
@@ -19,16 +28,22 @@ const Gasto = ({ gasto, moment }) => {
           alt=""
         />
 
-        <p className="mr-4 grow overflow-hidden text-ellipsis whitespace-nowrap font-bold xs:mr-0">
+        <p className="mr-4 grow overflow-hidden text-ellipsis whitespace-nowrap font-bold">
           {gasto.descripcion}
         </p>
       </section>
 
-      <p className="hidden w-1/3 text-right text-sm xs:block">
-        {moment(gasto.fecha).format('DD MMMM YYYY')}
-      </p>
+      {width > 480 ? (
+        <p className="w-1/3 text-right text-sm">
+          {moment(gasto.fecha).format('DD [de] MMMM [de] YYYY')}
+        </p>
+      ) : (
+        <p className="mx-2 w-max text-right text-xs font-medium">
+          {moment(gasto.fecha).format('DD-MM-YY')}
+        </p>
+      )}
 
-      <section className="mx-2 flex w-1/3 items-center justify-end text-red-500 xs:w-1/4">
+      <section className="ml-4 flex items-center justify-end text-red-500">
         <p className="text-sm">- S/</p>
         <p className="text-xl font-bold">{gasto.monto.toFixed(2)}</p>
       </section>

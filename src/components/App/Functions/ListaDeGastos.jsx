@@ -15,6 +15,9 @@ const ListaDeGastos = ({ gastos, moment, loading }) => {
     <section className="mx-3 mt-8">
       <header className="flex flex-col items-center justify-center">
         <h3 className="text-lg font-bold">Historial de gastos</h3>
+        <p className="text-sm text-gray-600">
+          Total de gastos: <span className="font-bold">{gastos.length}</span>
+        </p>
       </header>
 
       <ul>

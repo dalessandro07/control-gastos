@@ -35,7 +35,7 @@ const Calculadora = () => {
   }
 
   return (
-    <section className="m-8 mt-12">
+    <section id="calculadora" className="m-8 mt-12">
       <header className="my-4">
         <h3 className="text-center text-lg font-semibold">Calculadora</h3>
       </header>

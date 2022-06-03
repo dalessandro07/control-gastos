@@ -37,8 +37,6 @@ const ListaPorEtiqueta = ({ gastos, selectedTag, changeSelectTag, porcentajes })
       </section>
 
       <section className="flex flex-col items-center justify-center">
-        <p className="text-sm font-semibold">Monto total:</p>
-
         <article className="flex font-bold text-red-500">
           <p>s/</p>
           <p className="text-3xl">{montoTotal}</p>
@@ -55,6 +53,10 @@ const ListaPorEtiqueta = ({ gastos, selectedTag, changeSelectTag, porcentajes })
             </p>
           )}
         </article>
+
+        <p className="my-2 text-sm text-gray-600">
+          Total de gastos: <span className="font-bold">{gastosPorEtiqueta.length}</span>
+        </p>
       </section>
 
       {gastosPorEtiqueta?.map((gasto) => (

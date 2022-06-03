@@ -15,7 +15,7 @@ const Boton = ({ operacion, value, setOperacion, setResultado }) => {
         try {
           setResultado(evaluate(operacion))
         } catch (error) {
-          toast.error('Error en la operación - ' + error.message)
+          toast.error('Operación inválida - ' + error.message)
         }
       }
     } else if (value === '=') {
