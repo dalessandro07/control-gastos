@@ -1,8 +1,17 @@
 import { agregarGastoDB } from '../firebase'
-
+import { useAuth } from '../context/AuthContext'
 import { toast } from 'react-toastify'
+import moment from 'moment'
 
 const useImportExport = (gastos = [], obtenerGastos = () => {}, userUID) => {
+  const { user } = useAuth()
+
+  const userName =
+    (user?.displayName?.split(' ') || [])[0].toLowerCase() ||
+    user?.email?.split('@')[0] ||
+    userUID.slice(0, 5) ||
+    ''
+
   const exportarGastos = () => {
     if (gastos.length === 0) {
       toast.error('No hay gastos para exportar')
@@ -14,7 +23,7 @@ const useImportExport = (gastos = [], obtenerGastos = () => {}, userUID) => {
 
       const link = document.createElement('a')
       link.href = url
-      link.download = 'gastos_allexpenses_app.json'
+      link.download = `DataBackup_${userName}-${moment().format('DD-MM-YYYY')}-allexpenses.json`
       link.click()
     }
   }
