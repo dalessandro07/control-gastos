@@ -6,6 +6,8 @@ import GastoLoading from '../../../utilities/GastoLoading'
 import useSeo from '../../../hooks/useSeo'
 
 const ListaDeGastos = ({ gastos, moment, loading }) => {
+  gastos?.sort((a, b) => (moment(a.fecha).isBefore(b.fecha) ? 1 : -1))
+
   useSeo({
     title: 'Lista de gastos',
     description: 'Lista de todos los gastos registrados'
@@ -41,7 +43,9 @@ const ListaDeGastos = ({ gastos, moment, loading }) => {
             Fotos de{' '}
             <a
               className="border-b-2 border-amber-300 font-bold"
-              href="https://www.pexels.com/es-es/">
+              href="https://www.pexels.com/es-es/"
+              target="_blank"
+              rel="noopener noreferrer">
               Pexels
             </a>
           </h2>

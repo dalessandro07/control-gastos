@@ -1,16 +1,20 @@
-import React, { memo, useContext, useRef } from 'react'
+import React, { memo, useContext, useEffect, useRef, useState } from 'react'
 import { SaldoContext } from '../../../context/SaldoContext'
+
 import useChart from '../../../hooks/useChart'
+import useSeo from '../../../hooks/useSeo'
 
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'
 
 import { Pie } from 'react-chartjs-2'
 import Loading from '../../../utilities/Loading'
-import useSeo from '../../../hooks/useSeo'
 
 import ImportExport from './ImportExport'
 import ListaPorEtiqueta from './ListaPorEtiqueta'
 import useFiltrarGastosPorMes from '../../../hooks/useFiltrarGastosPorMes'
+
+import { toast } from 'react-toastify'
+import moment from 'moment'
 
 Chart.register(ArcElement, Tooltip, Legend)
 Chart.defaults.font.size = 17.5
@@ -18,6 +22,7 @@ Chart.defaults.font.weight = 'bold'
 
 const Balance = () => {
   const { gastos, saldoTotal, loading, exportarGastos, importarGastos } = useContext(SaldoContext)
+  const [valueInput, setValueInput] = useState('')
 
   const inputRef = useRef(null)
 
@@ -33,6 +38,22 @@ const Balance = () => {
 
   useSeo({ title: 'Balance', description: 'Balance de gastos' })
 
+  useEffect(() => {
+    const mesElegido = moment(valueInput).format('MMMM yyyy').toUpperCase() || 'TODOS'
+
+    if (valueInput !== '') {
+      if (!gastosPorMes || gastosPorMes?.gastos?.length === 0) {
+        toast.error(`
+          No se encontraron gastos en ${mesElegido}
+        `)
+      } else {
+        toast.success(`
+          Se encontraron ${gastosPorMes?.gastos?.length} gastos en ${mesElegido}
+        `)
+      }
+    }
+  }, [valueInput, gastosPorMes])
+
   return (
     <section className="relative mt-8">
       <header>
@@ -46,14 +67,14 @@ const Balance = () => {
               <ListaPorEtiqueta
                 selectedTag={selectedTag}
                 changeSelectTag={changeSelectTag}
-                gastos={gastos}
+                gastos={gastosPorMes?.gastos ?? gastos}
                 porcentajes={porcentajes}
               />
             ) : (
               <section className="my-6 mx-3 flex flex-col">
                 <section className="mt-3 flex flex-col items-center gap-2">
                   <p className="">Viendo el balance de gastos de</p>
-                  <h3 className="text-xl font-bold">
+                  <h3 className="text-2xl font-bold">
                     {gastosPorMes?.fecha?.toUpperCase() ?? 'Todos los meses'}
                   </h3>
                 </section>
@@ -63,9 +84,13 @@ const Balance = () => {
                     ref={inputRef}
                     className="border-b-2 border-sky-500 bg-transparent pb-2"
                     type="month"
+                    placeholder="Selecciona un mes"
                     name="filtroMes"
                     id="filtro"
-                    onChange={(e) => handleChangeMonth(e)}
+                    onChange={(e) => {
+                      handleChangeMonth(e)
+                      setValueInput(e.target.value)
+                    }}
                   />
                   <button
                     onClick={limpiarFiltroDeMeses}

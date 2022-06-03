@@ -1,5 +1,6 @@
-import moment from 'moment'
 import { useState } from 'react'
+
+import moment from 'moment'
 moment.locale('es')
 
 const useFiltrarGastosPorMes = (gastos, inputRef) => {
@@ -7,15 +8,12 @@ const useFiltrarGastosPorMes = (gastos, inputRef) => {
 
   const filtrarGastosPorMes = (gastos) => {
     const gastosFiltrados = gastos.reduce((acumulador, gasto) => {
-      const mes = new Date(gasto.fecha).getMonth()
-      const anio = new Date(gasto.fecha).getFullYear()
-
-      const fecha = moment(new Date(anio, mes)).format('MMMM yyyy')
+      const fecha = moment(gasto.fecha).format('MMMM yyyy')
 
       if (!acumulador[fecha]) {
         acumulador[fecha] = {
           fecha,
-          fechaInput: moment(new Date(anio, mes)).format('YYYY-MM'),
+          fechaInput: moment(fecha, 'MMMM yyyy').format('YYYY-MM'),
           gastos: [gasto],
           total: gasto.monto
         }
@@ -23,6 +21,7 @@ const useFiltrarGastosPorMes = (gastos, inputRef) => {
         acumulador[fecha].gastos.push(gasto)
         acumulador[fecha].total += gasto.monto
       }
+
       return acumulador
     }, {})
 

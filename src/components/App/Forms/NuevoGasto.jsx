@@ -86,6 +86,7 @@ const NuevoGasto = ({ mode }) => {
         {mode !== 'edit' && (
           <nav className="mx-16 mt-8 flex justify-around gap-4">
             <Link
+              onClick={scrollDown}
               to="/nuevo-gasto/formulario"
               className="flex items-center justify-center rounded-md bg-blue-300 p-3 transition-colors duration-150 hover:bg-blue-500 hover:text-gray-100"
               title="Formulario">
@@ -117,6 +118,7 @@ const NuevoGasto = ({ mode }) => {
             </Link>
 
             <Link
+              onClick={scrollDown}
               className="flex items-center justify-center rounded-md bg-blue-300 p-3 transition-colors duration-150 hover:bg-blue-500 hover:text-gray-100"
               title="Calculadora"
               to="/nuevo-gasto/calculadora">

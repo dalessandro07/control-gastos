@@ -119,7 +119,7 @@ const Gastos = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <>
-                  <section className="mt-5 mb-3 flex p-3">
+                  <section className="mx-5 mt-5 flex w-full gap-4 p-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
@@ -135,14 +135,18 @@ const Gastos = () => {
                     </svg>
 
                     <input
-                      className="mx-4 grow border-b-2 border-black bg-transparent px-2 placeholder:text-gray-600"
+                      className="mr-5 grow border-b-2 border-black bg-transparent px-2 placeholder:text-gray-600"
                       type="text"
-                      placeholder="Buscar gasto por descripción, fecha o monto"
+                      placeholder="Buscar gasto..."
                       name="barraBusqueda"
                       id="buscarGasto"
                       onChange={buscarGastoPorParametro}
                     />
                   </section>
+
+                  <p className="mb-3 text-center text-xs text-gray-600">
+                    Puedes buscar por descripción, fecha o monto.
+                  </p>
 
                   <ListaDeGastos
                     gastos={gastosAMostrar ?? gastos}
