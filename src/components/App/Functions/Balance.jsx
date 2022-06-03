@@ -72,14 +72,9 @@ const Balance = () => {
               />
             ) : (
               <section className="my-6 mx-3 flex flex-col">
-                <section className="mt-3 flex flex-col items-center gap-2">
-                  <p className="">Viendo el balance de gastos de</p>
-                  <h3 className="text-2xl font-bold">
-                    {gastosPorMes?.fecha?.toUpperCase() ?? 'Todos los meses'}
-                  </h3>
-                </section>
+                <section className="mb-12 mt-4 flex flex-col items-center justify-center gap-4 overflow-x-auto">
+                  <p className="text-gray-800">Escoge un mes</p>
 
-                <section className="my-14 flex flex-col items-center justify-center gap-4 overflow-x-auto">
                   <input
                     ref={inputRef}
                     className="border-b-2 border-sky-500 bg-transparent pb-2"
@@ -92,6 +87,7 @@ const Balance = () => {
                       setValueInput(e.target.value)
                     }}
                   />
+
                   <button
                     onClick={limpiarFiltroDeMeses}
                     className="flex items-center gap-2 rounded-sm bg-red-500 p-2 text-gray-100">
@@ -108,6 +104,13 @@ const Balance = () => {
                       />
                     </svg>
                   </button>
+                </section>
+
+                <section className="mb-12 flex flex-col items-center gap-2">
+                  <p className="">Viendo el balance de gastos de</p>
+                  <h3 className="text-2xl font-bold">
+                    {gastosPorMes?.fecha?.toUpperCase() ?? 'Todos los meses'}
+                  </h3>
                 </section>
 
                 <Pie data={dataPie} options={optionsPie} />
