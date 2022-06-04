@@ -7,7 +7,7 @@ const useImportExport = (gastos = [], obtenerGastos = () => {}, userUID) => {
   const { user } = useAuth()
 
   const userName =
-    (user?.displayName?.split(' ') || [])[0].toLowerCase() ||
+    (user?.displayName?.split(' ') || [])[0]?.toLowerCase() ||
     user?.email?.split('@')[0] ||
     userUID.slice(0, 5) ||
     ''

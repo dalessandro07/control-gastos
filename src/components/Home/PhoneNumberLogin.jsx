@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { auth } from '../../firebase'
 import useLogin from '../../hooks/useLogin'
+import Loading from '../../utilities/Loading'
 
 const countryCode = {
   AR: '+54',
@@ -16,8 +17,14 @@ const countryCode = {
 }
 
 const PhoneNumberLogin = () => {
-  const { handlePhoneNumberLogin, RecaptchaVerifier, AuthErrorCodes, firebaseAuthErrors } =
-    useLogin()
+  const {
+    handlePhoneNumberLogin,
+    RecaptchaVerifier,
+    AuthErrorCodes,
+    firebaseAuthErrors,
+    loading,
+    changeLoading
+  } = useLogin()
 
   const [number, setNumber] = useState('')
   const [showInputVerification, setShowInputVerification] = useState(false)
@@ -41,7 +48,6 @@ const PhoneNumberLogin = () => {
 
   const handleSend = (phoneNumber) => {
     const numberToSend = `${countryCode.PE}${phoneNumber}`
-
     generateRecaptcha()
 
     const appVerifier = window.recaptchaVerifier
@@ -60,16 +66,19 @@ const PhoneNumberLogin = () => {
 
   const verifyCode = (verificationCode) => {
     if (verificationCode.length === 6) {
-      try {
-        const confirmationResult = window.confirmationResult
+      changeLoading(true)
+      const confirmationResult = window.confirmationResult
 
+      try {
         confirmationResult.confirm(verificationCode).then((result) => {
           if (result.user) {
+            changeLoading(false)
             toast.success('Registro exitoso ¡bienvenido!')
             navigateTo('/')
           }
         })
       } catch (error) {
+        changeLoading(false)
         toast.error('Ocurrió un error, inténtalo de nuevo.')
       }
     }
@@ -85,22 +94,28 @@ const PhoneNumberLogin = () => {
         Enviaremos un código de verificación a tu número de teléfono.
       </p>
 
-      {!showInputVerification && (
-        <input
-          onChange={(e) => setNumber(e.target.value)}
-          className="my-6 mt-8 w-full border-b-2 border-blue-400 text-center text-2xl font-bold placeholder:text-base placeholder:font-normal"
-          type="number"
-          placeholder="Ingrese el nro de teléfono"
-        />
-      )}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {!showInputVerification && (
+            <input
+              onChange={(e) => setNumber(e.target.value)}
+              className="my-6 mt-8 w-full border-b-2 border-blue-400 text-center text-2xl font-bold placeholder:text-base placeholder:font-normal"
+              type="number"
+              placeholder="Ingrese el nro de teléfono"
+            />
+          )}
 
-      {showInputVerification && (
-        <input
-          onChange={(e) => verifyCode(e.target.value)}
-          className="my-6 mt-8 w-full border-b-2 border-amber-400 text-center text-2xl font-bold placeholder:text-base placeholder:font-normal"
-          type="number"
-          placeholder="Ingrese el código de verificación"
-        />
+          {showInputVerification && (
+            <input
+              onChange={(e) => verifyCode(e.target.value)}
+              className="my-6 mt-8 w-full border-b-2 border-amber-400 text-center text-2xl font-bold placeholder:text-base placeholder:font-normal"
+              type="number"
+              placeholder="Ingrese el código de verificación"
+            />
+          )}
+        </>
       )}
 
       {!showInputVerification && (
@@ -113,7 +128,7 @@ const PhoneNumberLogin = () => {
           }
           className="my-8 cursor-pointer bg-amber-300 p-2 font-bold hover:bg-amber-400"
           type="submit">
-          Enviar
+          {loading ? 'Enviando...' : 'Enviar'}
         </button>
       )}
     </section>

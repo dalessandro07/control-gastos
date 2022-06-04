@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
 const useLogin = () => {
+  const [loading, setLoading] = useState(false)
+
   const { login, loginWithGoogle, AuthErrorCodes, loginWithPhoneNumber, RecaptchaVerifier } =
     useAuth()
 
@@ -17,6 +20,8 @@ const useLogin = () => {
   }
 
   const navigateTo = useNavigate()
+
+  const changeLoading = (value) => setLoading(value)
 
   const onSubmit = async (data, e) => {
     try {
@@ -52,9 +57,11 @@ const useLogin = () => {
   }
 
   const handlePhoneNumberLogin = async (phoneNumber, appVerifier) => {
+    setLoading(true)
     try {
       loginWithPhoneNumber(phoneNumber, appVerifier).then((confirmationResult) => {
         window.confirmationResult = confirmationResult
+        setLoading(false)
         toast.success(
           `El código de verificación fue enviado a ${
             phoneNumber.split('+51')[1]
@@ -64,6 +71,7 @@ const useLogin = () => {
     } catch (error) {
       const errorCode = Object.values(AuthErrorCodes).find((code) => code === error.code)
 
+      setLoading(false)
       toast.error(
         `Error: ${firebaseAuthErrors[errorCode] || errorCode}` ||
           'Se ha producido un error, inténtalo de nuevo.'
@@ -77,7 +85,9 @@ const useLogin = () => {
     handlePhoneNumberLogin,
     RecaptchaVerifier,
     firebaseAuthErrors,
-    AuthErrorCodes
+    AuthErrorCodes,
+    loading,
+    changeLoading
   }
 }
 

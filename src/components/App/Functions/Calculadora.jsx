@@ -30,7 +30,7 @@ const Calculadora = () => {
 
   const handleSubmitMonto = () => {
     if (resultado !== 0) {
-      navigateTo(`/nuevo-gasto/formulario?monto=${resultado}`)
+      navigateTo(`/nuevo-gasto/formulario?monto=${resultado}&descripcion=mercado`)
     }
   }
 

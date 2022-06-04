@@ -119,10 +119,18 @@ const Gastos = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <>
-                  <section className="mx-5 mt-5 flex w-full flex-col gap-4 p-3">
+                  <section className="mt-5 flex w-full flex-col gap-4 p-3 px-10">
                     <h2 className="mb-3 font-bold">Busca un gasto:</h2>
 
-                    <div className="mr-5 flex gap-4">
+                    <div className="flex justify-around gap-4 xs:justify-center">
+                      <input
+                        className="border-b-2 border-black bg-transparent px-2 placeholder:text-gray-600 xs:grow"
+                        type="text"
+                        placeholder="Buscar gasto..."
+                        name="barraBusqueda"
+                        id="buscarGasto"
+                        onChange={buscarGastoPorParametro}
+                      />
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
@@ -136,15 +144,6 @@ const Gastos = () => {
                           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                         />
                       </svg>
-
-                      <input
-                        className="mr-5 grow border-b-2 border-black bg-transparent px-2 placeholder:text-gray-600"
-                        type="text"
-                        placeholder="Buscar gasto..."
-                        name="barraBusqueda"
-                        id="buscarGasto"
-                        onChange={buscarGastoPorParametro}
-                      />
                     </div>
                   </section>
 
