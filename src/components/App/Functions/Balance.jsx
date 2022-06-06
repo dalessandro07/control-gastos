@@ -15,6 +15,7 @@ import useFiltrarGastosPorMes from '../../../hooks/useFiltrarGastosPorMes'
 
 import { toast } from 'react-toastify'
 import moment from 'moment'
+import { useAuth } from '../../../context/AuthContext'
 
 Chart.register(ArcElement, Tooltip, Legend)
 Chart.defaults.font.size = 17.5
@@ -22,6 +23,7 @@ Chart.defaults.font.weight = 'bold'
 
 const Balance = () => {
   const { gastos, saldoTotal, loading, exportarGastos, importarGastos } = useContext(SaldoContext)
+  const { user } = useAuth()
   const [valueInput, setValueInput] = useState('')
 
   const inputRef = useRef(null)
@@ -41,12 +43,12 @@ const Balance = () => {
   useEffect(() => {
     const mesElegido = moment(valueInput).format('MMMM yyyy').toUpperCase() || 'TODOS'
 
-    if (valueInput !== '') {
+    if (valueInput && valueInput !== '') {
       if (!gastosPorMes || gastosPorMes?.gastos?.length === 0) {
         toast.error(`
           No se encontraron gastos en ${mesElegido}
         `)
-      } else {
+      } else if (gastosPorMes?.gastos?.length > 0) {
         toast.success(`
           Se encontraron ${gastosPorMes?.gastos?.length} gastos en ${mesElegido}
         `)
@@ -72,25 +74,32 @@ const Balance = () => {
               />
             ) : (
               <section className="my-6 mx-3 flex flex-col">
-                <section className="mb-12 mt-4 flex flex-col items-center justify-center gap-4 overflow-x-auto">
-                  <p className="text-gray-800">Escoge un mes</p>
+                <section className="mb-12 flex flex-col items-center gap-2">
+                  <p className="">Viendo el balance de gastos de</p>
 
-                  <input
-                    ref={inputRef}
-                    className="border-b-2 border-sky-500 bg-transparent pb-2"
-                    type="month"
-                    placeholder="Selecciona un mes"
-                    name="filtroMes"
-                    id="filtro"
-                    onChange={(e) => {
-                      handleChangeMonth(e)
-                      setValueInput(e.target.value)
-                    }}
-                  />
+                  <label className="flex items-center gap-2 text-blue-800" htmlFor="filtro">
+                    <h3 className="text-2xl font-bold">
+                      {gastosPorMes?.fecha?.toUpperCase() ?? 'Todos los meses'}
+                    </h3>
+
+                    <input
+                      ref={inputRef}
+                      min={moment(user?.metadata?.creationTime).format('YYYY-MM')}
+                      max={moment().format('YYYY-MM')}
+                      className="w-5 cursor-pointer bg-transparent"
+                      type="month"
+                      placeholder="Selecciona un mes"
+                      name="filtroMes"
+                      onChange={(e) => {
+                        handleChangeMonth(e)
+                        setValueInput(e.target.value)
+                      }}
+                    />
+                  </label>
 
                   <button
                     onClick={limpiarFiltroDeMeses}
-                    className="flex items-center gap-2 rounded-sm bg-red-500 p-2 text-gray-100">
+                    className="mt-4 flex items-center gap-2 rounded-sm bg-red-500 p-2 text-gray-100 transition-all duration-150 hover:bg-red-600">
                     <p className="text-sm">Limpiar</p>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -104,13 +113,6 @@ const Balance = () => {
                       />
                     </svg>
                   </button>
-                </section>
-
-                <section className="mb-12 flex flex-col items-center gap-2">
-                  <p className="">Viendo el balance de gastos de</p>
-                  <h3 className="text-2xl font-bold">
-                    {gastosPorMes?.fecha?.toUpperCase() ?? 'Todos los meses'}
-                  </h3>
                 </section>
 
                 <Pie data={dataPie} options={optionsPie} />

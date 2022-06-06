@@ -21,7 +21,7 @@ const UserSection = () => {
       .required('El nombre es requerido')
       .min(3, 'El nombre debe tener al menos 3 caracteres')
       .max(20, 'El nombre debe tener como máximo 20 caracteres')
-      .matches(/^[a-zA-Z\s]*$/, 'El nombre solo puede contener letras y espacios')
+      .matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s ]+$/, 'El nombre solo puede contener letras')
   })
 
   const {
