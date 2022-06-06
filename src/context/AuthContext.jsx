@@ -11,7 +11,8 @@ import {
   deleteUser,
   AuthErrorCodes,
   signInWithPhoneNumber,
-  RecaptchaVerifier
+  RecaptchaVerifier,
+  updateProfile
 } from 'firebase/auth'
 
 export const authContext = createContext()
@@ -40,6 +41,8 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => signOut(auth)
 
+  const updateUser = (user) => updateProfile(auth?.currentUser, user)
+
   const resetPassword = (email) => sendPasswordResetEmail(auth, email)
 
   const deleteAccount = () => deleteUser(auth.currentUser)
@@ -64,7 +67,8 @@ const AuthProvider = ({ children }) => {
     deleteAccount,
     AuthErrorCodes,
     loginWithPhoneNumber,
-    RecaptchaVerifier
+    RecaptchaVerifier,
+    updateUser
   }
 
   return <authContext.Provider value={valueToExport}>{children}</authContext.Provider>

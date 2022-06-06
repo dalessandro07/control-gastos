@@ -47,14 +47,17 @@ const HomeIndex = () => {
 
             {user && (
               <Link to="/">
-                <img
-                  className="mx-4 h-10 w-10 rounded-full object-cover"
-                  src={
-                    user?.photoURL ??
-                    'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
-                  }
-                  alt=""
-                />
+                {user?.photoURL ? (
+                  <img
+                    className="mx-4 h-9 w-9 rounded-full object-cover"
+                    src={user?.photoURL}
+                    alt=""
+                  />
+                ) : (
+                  <div className="mx-4 flex h-9 w-9 items-center justify-center rounded-full bg-blue-600">
+                    <p className="text-2xl text-white">{user?.displayName?.at(0) ?? 'U'}</p>
+                  </div>
+                )}
               </Link>
             )}
           </header>

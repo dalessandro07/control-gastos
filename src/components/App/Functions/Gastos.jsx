@@ -16,10 +16,12 @@ const Detalle = lazy(() => import('../Info/Detalle'))
 const Gastos = () => {
   const { gastos, moment, loading } = useContext(SaldoContext)
 
+  const [busqueda, setBusqueda] = useState('')
   const [gastosAMostrar, setGastosAMostrar] = useState(null)
 
   const buscarGastoPorParametro = (e) => {
     const { value } = e.target
+    setBusqueda(value)
 
     const gastosFiltrados = gastos.filter((gasto) => {
       return (
@@ -148,8 +150,19 @@ const Gastos = () => {
                   </section>
 
                   <p className="mb-3 text-center text-xs text-gray-600">
-                    Puedes buscar por descripción, fecha o monto.
+                    Puedes buscar por fecha, descripción o monto.
                   </p>
+
+                  {busqueda && gastosAMostrar && gastosAMostrar?.length !== gastos?.length ? (
+                    <p className="my-4 text-center">
+                      Mostrando <strong className="pr-2">{gastosAMostrar?.length}</strong>
+                      de <strong className="pr-2">{gastos?.length}</strong>
+                      <span className="mr-2">{gastos.length === 1 ? 'gasto' : 'gastos'}</span>
+                      para: <strong>{busqueda}</strong>
+                    </p>
+                  ) : (
+                    <p className="mt-5 text-center">Mostrando todos los gastos</p>
+                  )}
 
                   <ListaDeGastos
                     gastos={gastosAMostrar ?? gastos}

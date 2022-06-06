@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.0",
     "@uiball/loaders": "1.2.6",
     "chart.js": "^3.7.1",
     "crypto-js": "4.1.1",
