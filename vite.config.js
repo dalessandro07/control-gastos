@@ -40,10 +40,10 @@ export default defineConfig({
       },
       includeAssets: ['favicon-32x32.png', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'App Control de Gastos',
-        short_name: 'Allexpenses',
-        description: 'App para controlar los gastos con gran facilidad',
-        theme_color: '#ffffff',
+        name: 'AllExpenses App Control de Gastos',
+        short_name: 'AllExpenses',
+        description: 'Aplicación para controlar tus gastos de manera eficiente.',
+        theme_color: '#fd0',
         icons: [
           {
             src: 'pwa-192x192.png',

@@ -8,7 +8,7 @@ const useSeo = ({ description, title }) => {
     const previousTitle = prevTitle.current
 
     if (title) {
-      document.title = `${title} | Allexpenses`
+      document.title = `${title} | AllExpenses`
     }
 
     return () => (document.title = previousTitle)

@@ -74,7 +74,7 @@ const Balance = () => {
               />
             ) : (
               <section className="my-6 mx-3 flex flex-col">
-                <section className="mb-12 flex flex-col items-center gap-2">
+                <section className="mb-10 flex flex-col items-center gap-2">
                   <p className="">Viendo el balance de gastos de</p>
 
                   <label className="flex items-center gap-2 text-blue-800" htmlFor="filtro">
@@ -117,20 +117,22 @@ const Balance = () => {
 
                 <Pie data={dataPie} options={optionsPie} />
 
-                <ul className="mx-auto mt-8 flex w-3/4 flex-col gap-1 rounded-sm border-2 border-amber-400 p-3">
-                  <p className="my-2 text-center text-sm underline">
+                <ul className="mx-auto mt-8 flex w-3/4 flex-col gap-1 rounded-sm border-4 border-amber-400 p-3 shadow-lg">
+                  <p className="my-2 text-center text-sm font-semibold underline">
                     Porcentaje de gastos por categoría
                   </p>
                   <p className="text-center">
                     Total: s/
-                    <strong>{gastosPorMes?.total?.toFixed(2) ?? saldoTotal.toFixed(2)}</strong>
+                    <strong className="text-xl">
+                      {gastosPorMes?.total?.toFixed(2) ?? saldoTotal.toFixed(2)}
+                    </strong>
                   </p>
                   {porcentajes.length > 0 &&
                     porcentajes?.map((porcentaje) => (
                       <li
                         className="flex items-center justify-between gap-6 py-2"
                         key={porcentaje.etiqueta}>
-                        <span className="font-bold">
+                        <span className="font-semibold">
                           {porcentaje.etiqueta.charAt(0).toUpperCase() +
                             porcentaje.etiqueta.slice(1)}
                         </span>
