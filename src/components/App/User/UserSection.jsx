@@ -52,7 +52,12 @@ const UserSection = () => {
       toast.info('¡No se han detectado cambios!')
     } else {
       try {
-        await updateUser(data)
+        const dataToUpdate = {
+          displayName: data?.displayName.trim()
+        }
+
+        await updateUser(dataToUpdate)
+
         toast.success('¡Datos actualizados correctamente!')
         setShowUpdateUser(false)
       } catch (error) {
