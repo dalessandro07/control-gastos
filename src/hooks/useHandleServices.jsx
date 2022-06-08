@@ -21,6 +21,10 @@ const useHandleServices = () => {
   const [servicioABorrar, setServicioABorrar] = useState('')
   const [existeServicioABorrar, setExisteServicioABorrar] = useState(false)
 
+  const [fechaDefault, setFechaDefault] = useState(moment().format('YYYY-MM-DD'))
+
+  const cambiarFecha = (fecha) => setFechaDefault(fecha)
+
   useEffect(() => {
     const existeServicio = servicios.find(
       (servicio) => servicio.nombre.toLowerCase() === servicioABorrar.toLowerCase()
@@ -88,7 +92,9 @@ const useHandleServices = () => {
     setShowFormDeleteService,
     servicioABorrar,
     setServicioABorrar,
-    existeServicioABorrar
+    existeServicioABorrar,
+    fechaDefault,
+    cambiarFecha
   }
 }
 

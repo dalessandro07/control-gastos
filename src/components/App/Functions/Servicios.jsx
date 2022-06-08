@@ -32,48 +32,50 @@ const Servicios = () => {
     servicioABorrar,
     existeServicioABorrar,
     showFormDeleteService,
-    showFormNewService
+    showFormNewService,
+    cambiarFecha,
+    fechaDefault
   } = useHandleServices()
 
   const dictionarieColors = {
     luz: {
       bg100: 'bg-amber-100',
       bg300: 'bg-amber-200',
-      bg500: 'bg-amber-500',
+      bg500: 'hover:bg-amber-500',
       border: 'border-amber-400',
-      text100: 'text-amber-100',
+      text100: 'hover:text-amber-100',
       text500: 'text-amber-500'
     },
     agua: {
       bg100: 'bg-blue-100',
       bg300: 'bg-blue-200',
-      bg500: 'bg-blue-500',
+      bg500: 'hover:bg-blue-500',
       border: 'border-blue-400',
-      text100: 'text-blue-100',
+      text100: 'hover:text-blue-100',
       text500: 'text-blue-500'
     },
     inter: {
       bg100: 'bg-green-100',
       bg300: 'bg-green-200',
-      bg500: 'bg-green-500',
+      bg500: 'hover:bg-green-500',
       border: 'border-green-400',
-      text100: 'text-green-100',
+      text100: 'hover:text-green-100',
       text500: 'text-green-500'
     },
     gas: {
       bg100: 'bg-orange-100',
       bg300: 'bg-orange-200',
-      bg500: 'bg-orange-500',
+      bg500: 'hover:bg-orange-500',
       border: 'border-orange-400',
-      text100: 'text-orange-100',
+      text100: 'hover:text-orange-100',
       text500: 'text-orange-500'
     },
     tel: {
       bg100: 'bg-purple-100',
       bg300: 'bg-purple-200',
-      bg500: 'bg-purple-500',
+      bg500: 'hover:bg-purple-500',
       border: 'border-purple-400',
-      text100: 'text-purple-100',
+      text100: 'hover:text-purple-100',
       text500: 'text-purple-500'
     },
     default: 'gray'
@@ -124,7 +126,7 @@ const Servicios = () => {
 
                     <button
                       onClick={() => agregarServicioComoGasto(servicio)}
-                      className={`${serviceColor.bg300} p-2 font-semibold transition-all duration-150 hover:${serviceColor.bg500} hover:${serviceColor.text100}`}>
+                      className={`${serviceColor.bg300} p-2 font-semibold transition-all duration-150 ${serviceColor.bg500} ${serviceColor.text100}`}>
                       Agregar servicio
                     </button>
                   </li>
@@ -165,7 +167,8 @@ const Servicios = () => {
               <input
                 className="rounded-sm border-2 p-2"
                 {...register('fecha')}
-                value={moment().format('YYYY-MM-DD')}
+                value={fechaDefault}
+                onChange={(e) => cambiarFecha(e.target.value)}
                 type="date"
               />
             </div>
