@@ -15,7 +15,6 @@ import useFiltrarGastosPorMes from '../../../hooks/useFiltrarGastosPorMes'
 
 import { toast } from 'react-toastify'
 import moment from 'moment'
-import { useAuth } from '../../../context/AuthContext'
 
 Chart.register(ArcElement, Tooltip, Legend)
 Chart.defaults.font.size = 17.5
@@ -23,7 +22,6 @@ Chart.defaults.font.weight = 'bold'
 
 const Balance = () => {
   const { gastos, saldoTotal, loading, exportarGastos, importarGastos } = useContext(SaldoContext)
-  const { user } = useAuth()
   const [valueInput, setValueInput] = useState('')
 
   const inputRef = useRef(null)
@@ -55,8 +53,6 @@ const Balance = () => {
       }
     }
   }, [valueInput, gastosPorMes])
-
-  console.log(user)
 
   return (
     <section className="relative mt-8">

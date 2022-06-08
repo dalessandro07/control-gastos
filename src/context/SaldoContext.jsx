@@ -8,6 +8,7 @@ import { obtenerGastosDB } from '../firebase'
 import CryptoJS from 'crypto-js'
 import moment from 'moment'
 import 'moment/dist/locale/es'
+import useObtenerServicios from '../hooks/useServicios'
 
 moment.locale('es')
 
@@ -23,6 +24,7 @@ export const SaldoContext = createContext({
 const SaldoProvider = ({ children }) => {
   const { userUID } = useAuth()
   const { gastos, saldoTotal, agregarGasto, obtenerGastos, loading, changeLoading } = useGasto()
+  const { servicios, obtenerServicios } = useObtenerServicios()
 
   const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos, userUID)
 
@@ -31,16 +33,24 @@ const SaldoProvider = ({ children }) => {
 
     obtenerGastosDB((querySnapshot) => {
       const gastosDB = []
+      const serviciosDB = []
 
       querySnapshot.forEach((doc) => {
         if (doc.data().ciphertext) {
           const bytes = CryptoJS.AES.decrypt(doc.data().ciphertext, userUID)
           const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
 
-          gastosDB.push({
-            ...decryptedData,
-            idDB: doc.id
-          })
+          if (decryptedData.nombre) {
+            serviciosDB.push({
+              ...decryptedData,
+              idDB: doc.id
+            })
+          } else {
+            gastosDB.push({
+              ...decryptedData,
+              idDB: doc.id
+            })
+          }
         } else {
           gastosDB.push({
             ...doc.data(),
@@ -50,6 +60,7 @@ const SaldoProvider = ({ children }) => {
       })
 
       obtenerGastos(gastosDB)
+      obtenerServicios(serviciosDB)
       changeLoading(false)
     }, userUID)
   }, [])
@@ -58,6 +69,7 @@ const SaldoProvider = ({ children }) => {
     saldoTotal,
     agregarGasto,
     gastos,
+    servicios,
     loading,
     moment,
     exportarGastos,

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 
 const FormNuevoGasto = ({ valueSendGasto }) => {
-  const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, moment, button } =
+  const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, button } =
     valueSendGasto
 
   return (
@@ -19,21 +19,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
             placeholder="25.50"
             type="number"
             step={0.01}
-            {...register('monto', {
-              required: {
-                value: true,
-                message: 'El monto es requerido'
-              },
-              min: {
-                value: 0.1,
-                message: 'El monto debe ser mayor o igual a 0.10 o 10 céntimos'
-              },
-              max: {
-                value: 10000,
-                message: 'El monto debe ser menor o igual a 10,000'
-              },
-              valueAsNumber: true
-            })}
+            {...register('monto')}
           />
         </label>
 
@@ -48,13 +34,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
               errors.fecha ? 'border-red-500 text-red-500' : 'border-sky-600'
             } rounded-sm border-2 p-1`}
             type="date"
-            {...register('fecha', {
-              required: {
-                value: true,
-                message: 'La fecha es obligatoria'
-              },
-              value: moment().format('YYYY-MM-DD')
-            })}
+            {...register('fecha')}
           />
         </label>
       </section>
@@ -71,24 +51,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
             } mt-4 max-h-60 min-h-[120px] resize-y border-2 p-2`}
             placeholder="Ingrese la descripción"
             type="text"
-            {...register('descripcion', {
-              required: {
-                value: true,
-                message: 'La descripción es requerida'
-              },
-              minLength: {
-                value: 3,
-                message: 'La descripción debe tener al menos 3 caracteres'
-              },
-              maxLength: {
-                value: 250,
-                message: 'La descripción debe tener máximo 250 caracteres'
-              },
-              pattern: {
-                value: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ, .-]+$/,
-                message: 'La descripción debe contener solo letras y números'
-              }
-            })}
+            {...register('descripcion')}
           />
         </label>
 
@@ -103,14 +66,9 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
             className={`${
               errors.etiqueta ? 'border-red-500 text-red-500' : 'border-sky-600'
             } cursor-pointer rounded-sm border-b-2 bg-gray-100 p-1`}
-            {...register('etiqueta', {
-              required: {
-                value: true,
-                message: 'La etiqueta es obligatoria'
-              }
-            })}
+            {...register('etiqueta')}
             onChange={(e) => cambiarEtiqueta(e.target.value)}
-            value={etiqueta || 'otros'}
+            value={etiqueta}
             placeholder="Ejm: Comida">
             <option value="comida">Comida</option>
             <option value="transporte">Transporte</option>
@@ -132,12 +90,12 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
       </section>
 
       <input
+        type="submit"
         className={`${
           errors.monto || errors.descripcion || errors.fecha
             ? 'cursor-not-allowed bg-gray-400 opacity-70'
             : 'bg-amber-300'
         } mt-6 flex cursor-pointer justify-center rounded-sm p-2 font-semibold`}
-        type="submit"
         value={button}
       />
     </form>

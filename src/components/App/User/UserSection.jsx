@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../../../context/AuthContext'
 import Modal from '../../../utilities/Modal'
+import { validationSchemaUser } from '../../../utilities/ValidationSchema'
 
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 const UserSection = () => {
@@ -15,22 +15,13 @@ const UserSection = () => {
   const [showDeleteAccount, setShowDeleteAccount] = useState(false)
   const [showUpdateUser, setShowUpdateUser] = useState(false)
 
-  const validationSchema = yup.object({
-    displayName: yup
-      .string()
-      .required('El nombre es requerido')
-      .min(3, 'El nombre debe tener al menos 3 caracteres')
-      .max(20, 'El nombre debe tener como máximo 20 caracteres')
-      .matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s ]+$/, 'El nombre solo puede contener letras')
-  })
-
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting, isValid, isDirty }
   } = useForm({
     mode: 'onChange',
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchemaUser)
   })
 
   const navigateTo = useNavigate()

@@ -1,166 +1,18 @@
 import { useState, useEffect, useContext } from 'react'
-import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import { useAuth } from '../context/AuthContext'
+import { SaldoContext } from '../context/SaldoContext'
 import { actualizarGastoDB } from '../firebase'
 
-import { SaldoContext } from '../context/SaldoContext'
-import { toast } from 'react-toastify'
+import { useForm } from 'react-hook-form'
+import { validationSchemaGasto } from '../utilities/ValidationSchema'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import moment from 'moment'
-import { useAuth } from '../context/AuthContext'
+import { toast } from 'react-toastify'
 
-const frutas = [
-  'manzana',
-  'pera',
-  'piña',
-  'naranja',
-  'sandia',
-  'fresa',
-  'ciruela',
-  'limon',
-  'uva',
-  'mango',
-  'aguacate',
-  'cereza',
-  'ciruela',
-  'palta'
-]
-
-const verduras = [
-  'tomate',
-  'cebolla',
-  'pimiento',
-  'espinaca',
-  'zanahoria',
-  'papa',
-  'camote',
-  'apio',
-  'brocoli'
-]
-
-const abarrotes = [
-  'abarrotes',
-  'lacteos',
-  'leche',
-  'yogurt',
-  'queso',
-  'azúcar',
-  'mantequilla',
-  'harina',
-  'chocolate',
-  'cacao',
-  'miel',
-  'arroz',
-  'fideos',
-  'tallarines'
-]
-
-const etiquetasOBJ = {
-  comida: [
-    'comida',
-    'snack',
-    'fruta',
-    'verdura',
-    'carne',
-    'pescado',
-    'cereal',
-    'lacteos',
-    'bebidas',
-    'mercado',
-    'metro',
-    'wong',
-    'supermercado',
-    'plaza-vea',
-    'desayuno',
-    'almuerzo',
-    'cena',
-    'postre',
-    'pan',
-    'pastel',
-    'helado',
-    'tamal',
-    'pizza',
-    'hamburguesa',
-    'sandwich',
-    'kfc',
-    'mcdonalds',
-    'burger',
-    'papas-fritas',
-    'coca-cola',
-    'fanta',
-    'sprite',
-    'pepsi',
-    'agua',
-    'inca-kola',
-    'gaseosa',
-    'galletas',
-    'pollo',
-    'chicharron',
-    'tortilla',
-    'tostada',
-    'carne',
-    'pescado',
-    ...frutas,
-    ...verduras,
-    ...abarrotes
-  ],
-  transporte: ['transporte', 'pasaje', 'carro', 'auto', 'moto', 'taxi', 'bus', 'combi', 'autobus'],
-  ropa: ['ropa', 'zapatilla', 'accesorio', 'camisa', 'pantalon', 'calzado', 'vestido', 'jean'],
-  hogar: ['hogar', 'casa', 'limpieza', 'tocador', 'baño'],
-  salud: ['salud', 'medicamento', 'medicina', 'pastilla', 'shampoo', 'hospital', 'consulta'],
-  aseo: ['aseo', 'cama', 'baño', 'cocina', 'lavanderia', 'cuidado', 'cepillo', 'corte', 'cabello'],
-  educacion: [
-    'educacion',
-    'escuela',
-    'libro',
-    'curso',
-    'universidad',
-    'colegio',
-    'estudio',
-    'útiles',
-    'utiles'
-  ],
-  servicios: [
-    'servicios',
-    'servicio',
-    'luz',
-    'agua',
-    'telefono',
-    'internet',
-    'teléfono',
-    'cable',
-    'celu'
-  ],
-  diversión: [
-    'diversion',
-    'diversión',
-    'pelicula',
-    'cine',
-    'teatro',
-    'juego',
-    'juegos',
-    'peliculas',
-    'deporte',
-    'cine',
-    'futbol',
-    'pelota',
-    'gatorade',
-    'sporade',
-    'net'
-  ],
-  oficina: [
-    'oficina',
-    'impresora',
-    'computadora',
-    'laptop',
-    'papel de ofi',
-    'tinta',
-    'mantenimiento de pc',
-    'mantenimiento de laptop',
-    'mantenimiento de impresora'
-  ]
-}
+import etiquetasOBJ from '../utilities/dataEtiquetas'
 
 const useSendGasto = (mode = 'new') => {
   const { userUID } = useAuth()
@@ -176,7 +28,8 @@ const useSendGasto = (mode = 'new') => {
     formState: { errors },
     setValue
   } = useForm({
-    mode: 'onChange'
+    mode: 'onChange',
+    resolver: yupResolver(validationSchemaGasto)
   })
 
   useEffect(() => {
