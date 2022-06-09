@@ -38,13 +38,18 @@ const useHandleServices = () => {
     const actualMonth = moment().format('MM')
     const actualYear = moment().format('YYYY')
 
-    const fecha = moment(`${actualYear}-${actualMonth}-${fechaDefault}`)
-      .add(1, 'month')
+    const fecha = moment(`${actualYear}-${actualMonth}-${fechaDefault}`, 'YYYY-MM-DD')
+      .add(1, 'monts')
       .format('YYYY-MM-DD')
+
+    const descripcion = `${data.descripcion.toLowerCase().charAt(0).toUpperCase()}${data.descripcion
+      .toLowerCase()
+      .slice(1)} - ${moment(fecha).format('MMMM [de] YYYY')}`
 
     const dataToSend = {
       ...data,
-      fecha
+      fecha,
+      descripcion
     }
 
     try {
@@ -59,9 +64,7 @@ const useHandleServices = () => {
   const agregarServicioComoGasto = (servicio) => {
     const { nombre, fecha, monto, descripcion } = servicio
 
-    const nuevaDescrip = `${descripcion} - ${moment(fecha).format('MMMM [de] YYYY')}`
-
-    const url = `/nuevo-gasto/formulario?monto=${monto}&descripcion=${nuevaDescrip}&nombre=${nombre}&fecha=${fecha}&etiqueta=servicios`
+    const url = `/nuevo-gasto/formulario?monto=${monto}&descripcion=${descripcion}&nombre=${nombre}&fecha=${fecha}&etiqueta=servicios`
 
     navigateTo(url)
   }

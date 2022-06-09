@@ -1,17 +1,18 @@
-import React, { useContext, memo, useEffect, useState } from 'react'
+import React, { useContext, memo } from 'react'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { SaldoContext } from '../../../context/SaldoContext'
 
+import ContainerServices from './ContainerServices'
+
 import FormError from '../../../utilities/FormError'
 import Loading from '../../../utilities/Loading'
 import Modal from '../../../utilities/Modal'
+
 import { validationSchemaServices } from '../../../utilities/ValidationSchema'
 import useHandleServices from '../../../hooks/useHandleServices'
-
-import moment from 'moment'
 
 const Servicios = () => {
   const {
@@ -19,8 +20,6 @@ const Servicios = () => {
     formState: { errors },
     handleSubmit
   } = useForm({ mode: 'onChange', resolver: yupResolver(validationSchemaServices) })
-
-  const [servicesAboutToExpire, setServicesAboutToExpire] = useState([])
 
   const { servicios, loading } = useContext(SaldoContext)
 
@@ -39,69 +38,6 @@ const Servicios = () => {
     fechaDefault
   } = useHandleServices()
 
-  const dictionarieColors = {
-    luz: {
-      bg100: 'bg-amber-100',
-      bg300: 'bg-amber-200',
-      bg500: 'hover:bg-amber-500',
-      border: 'border-amber-400',
-      text100: 'hover:text-amber-100',
-      text500: 'text-amber-500'
-    },
-    agua: {
-      bg100: 'bg-blue-100',
-      bg300: 'bg-blue-200',
-      bg500: 'hover:bg-blue-500',
-      border: 'border-blue-400',
-      text100: 'hover:text-blue-100',
-      text500: 'text-blue-500'
-    },
-    inter: {
-      bg100: 'bg-green-100',
-      bg300: 'bg-green-200',
-      bg500: 'hover:bg-green-500',
-      border: 'border-green-400',
-      text100: 'hover:text-green-100',
-      text500: 'text-green-500'
-    },
-    gas: {
-      bg100: 'bg-orange-100',
-      bg300: 'bg-orange-200',
-      bg500: 'hover:bg-orange-500',
-      border: 'border-orange-400',
-      text100: 'hover:text-orange-100',
-      text500: 'text-orange-500'
-    },
-    tel: {
-      bg100: 'bg-purple-100',
-      bg300: 'bg-purple-200',
-      bg500: 'hover:bg-purple-500',
-      border: 'border-purple-400',
-      text100: 'hover:text-purple-100',
-      text500: 'text-purple-500'
-    },
-    default: {
-      bg100: 'bg-slate-100',
-      bg300: 'bg-slate-200',
-      bg500: 'hover:bg-slate-500',
-      border: 'border-slate-400',
-      text100: 'hover:text-slate-100',
-      text500: 'text-slate-500'
-    }
-  }
-
-  useEffect(() => {
-    const aboutToExpire = servicios.filter(
-      (servicio) =>
-        moment(servicio.fecha).diff(moment(), 'days') <= 5 &&
-        moment(servicio.fecha).diff(moment(), 'days') >= 0
-    )
-
-    if (aboutToExpire) {
-      setServicesAboutToExpire(aboutToExpire)
-    }
-  }, [servicios])
-
   return (
     <section className="mt-8 flex flex-col">
       <header>
@@ -114,79 +50,15 @@ const Servicios = () => {
         </section>
       </header>
 
-      {servicesAboutToExpire?.length > 0 && (
-        <section className="flex flex-col items-center bg-red-100">
-          <p className="flex gap-2 p-2 text-center text-sm font-medium text-red-600">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor">
-              <path
-                fillRule="evenodd"
-                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Tienes servicios que expiran en los próximos 5 días:
-          </p>
-          <section className="flex flex-wrap items-center gap-4 pb-2">
-            {servicesAboutToExpire?.map((servicio) => (
-              <section
-                className="flex flex-col items-center rounded-sm bg-red-200 p-2 shadow-sm"
-                key={servicio.idDB}>
-                <p className="text-center text-sm font-semibold text-orange-700">
-                  {servicio.nombre}
-                </p>
-                <p className="text-center text-sm font-semibold text-orange-700">
-                  {moment(servicio.fecha).format('DD/MM/YYYY')}
-                </p>
-              </section>
-            ))}
-          </section>
-        </section>
-      )}
-
       <section>
         {loading ? (
           <Loading />
         ) : (
           servicios.length > 0 && (
-            <ul className="my-5 mx-4 flex flex-wrap justify-around gap-4">
-              {servicios.map((servicio, index) => {
-                const keys = Object.keys(dictionarieColors)
-
-                const serviceColor =
-                  dictionarieColors[
-                    keys.find(
-                      (key) =>
-                        servicio.nombre.toLowerCase().includes(key) ||
-                        servicio.descripcion.toLowerCase().includes(key)
-                    )
-                  ] || dictionarieColors.default
-
-                return (
-                  <li key={index} className="flex flex-col shadow-md">
-                    <section
-                      className={`${serviceColor.bg100} ${serviceColor.border} flex flex-col items-center rounded-t-md border-x-2 border-t-2 py-3`}>
-                      <span className="text-xl font-bold">{servicio.nombre.toUpperCase()}</span>
-
-                      <span className={`${serviceColor.text500} font-bold`}>
-                        S/{servicio.monto.toFixed(2)}
-                      </span>
-
-                      <span className="text-sm">{moment(servicio.fecha).format('DD-MM-YYYY')}</span>
-                    </section>
-
-                    <button
-                      onClick={() => agregarServicioComoGasto(servicio)}
-                      className={`${serviceColor.bg300} p-2 font-semibold transition-all duration-150 ${serviceColor.bg500} ${serviceColor.text100}`}>
-                      Agregar servicio
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
+            <ContainerServices
+              servicios={servicios}
+              agregarServicioComoGasto={agregarServicioComoGasto}
+            />
           )
         )}
       </section>

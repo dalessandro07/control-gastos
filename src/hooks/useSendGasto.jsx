@@ -17,7 +17,7 @@ import etiquetasOBJ from '../utilities/dataEtiquetas'
 const useSendGasto = (mode = 'new') => {
   const { userUID } = useAuth()
   const [etiqueta, setEtiqueta] = useState('otros')
-  const { gastos, agregarGasto } = useContext(SaldoContext)
+  const { servicios, gastos, agregarGasto } = useContext(SaldoContext)
 
   const navigateTo = useNavigate()
 
@@ -46,11 +46,9 @@ const useSendGasto = (mode = 'new') => {
     }
   }, [watch])
 
-  const cambiarEtiqueta = (value) => {
-    setEtiqueta(value)
-  }
+  const cambiarEtiqueta = (value) => setEtiqueta(value)
 
-  const onSubmit = (data) => {
+  const submitEnviarGasto = (data) => {
     if (data.idDB) {
       const dataActualizada = {
         ...data,
@@ -62,16 +60,21 @@ const useSendGasto = (mode = 'new') => {
       navigateTo('/gastos')
       toast.success('Gasto actualizado')
     } else {
-      if (!etiqueta) {
-        setEtiqueta(data.etiqueta)
-        agregarGasto(data)
-      } else {
-        const nuevaData = {
-          ...data,
-          etiqueta
+      const dataIsService = servicios.find(
+        (servicio) =>
+          Number(servicio.monto) === Number(data.monto) && servicio.descripcion === data.descripcion
+      )
+
+      if (dataIsService) {
+        const dataActualizada = {
+          ...dataIsService,
+          fecha: moment(data.fecha).add(1, 'months').format('YYYY-MM-DD')
         }
-        agregarGasto(nuevaData)
+
+        actualizarGastoDB(dataIsService.idDB, dataActualizada, userUID)
       }
+
+      agregarGasto(data)
 
       navigateTo('/gastos')
       toast.success('¡Gasto agregado con éxito!')
@@ -85,6 +88,8 @@ const useSendGasto = (mode = 'new') => {
       setValue('descripcion', gasto.descripcion)
       setValue('idDB', gasto.idDB)
       setValue('etiqueta', gasto.etiqueta)
+
+      setEtiqueta(gasto.etiqueta)
     } else {
       setValue('monto', '')
       setValue('fecha', moment().format('YYYY-MM-DD'))
@@ -96,7 +101,7 @@ const useSendGasto = (mode = 'new') => {
   return {
     register,
     handleSubmit,
-    onSubmit,
+    onSubmit: submitEnviarGasto,
     errors,
     etiqueta,
     cambiarEtiqueta,

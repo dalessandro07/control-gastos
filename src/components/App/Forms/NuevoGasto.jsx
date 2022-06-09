@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useState } from 'react'
+import React, { useEffect, memo, useState, useContext } from 'react'
 import { Link, Routes, Route, useSearchParams } from 'react-router-dom'
 
 import moment from 'moment'
@@ -9,6 +9,7 @@ import useSeo from '../../../hooks/useSeo'
 import FormNuevoGasto from './FormNuevoGasto'
 import VoiceForm from './VoiceForm'
 import Calculadora from '../Functions/Calculadora'
+import { SaldoContext } from '../../../context/SaldoContext'
 
 const fechasRelativas = {
   anteayer: moment().subtract(2, 'days').format('YYYY-MM-DD'),
@@ -21,9 +22,13 @@ const fechasRelativas = {
 }
 
 const NuevoGasto = ({ mode }) => {
+  const { servicios } = useContext(SaldoContext)
+
   const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, setValueToForm } =
     useSendGasto(mode)
   const { title, button, gasto } = useEditGasto(mode)
+
+  const [isFixedService, setIsFixedService] = useState(false)
 
   const [params] = useSearchParams()
 
@@ -46,6 +51,12 @@ const NuevoGasto = ({ mode }) => {
     }
 
     if (params.get('descripcion')?.length >= 1) {
+      const isFixed = servicios?.find(
+        (servicio) => servicio.descripcion === params.get('descripcion')
+      )
+
+      if (isFixed) setIsFixedService(true)
+
       const descripcion = params.get('descripcion') || ''
       const monto = Number(params.get('monto')) || 0
       const fecha = getDate(params.get('fecha'))
@@ -58,13 +69,14 @@ const NuevoGasto = ({ mode }) => {
         etiqueta
       }
 
+      cambiarEtiqueta(etiqueta)
       setValueToForm(queryURL, 'voice')
     }
 
     return () => {
       setValueToForm({}, 'new')
     }
-  }, [params.has('descripcion')])
+  }, [servicios, params.has('descripcion')])
 
   useSeo({
     title: `${title} gasto`,
@@ -78,6 +90,12 @@ const NuevoGasto = ({ mode }) => {
     }
   }, [mode])
 
+  const scrollDown = () =>
+    window.scrollTo({
+      top: document.body.scrollHeight - 600,
+      behavior: 'smooth'
+    })
+
   const valueToForm = {
     errors,
     etiqueta,
@@ -86,14 +104,9 @@ const NuevoGasto = ({ mode }) => {
     register,
     moment,
     cambiarEtiqueta,
-    button
+    button,
+    isFixedService
   }
-
-  const scrollDown = () =>
-    window.scrollTo({
-      top: document.body.scrollHeight - 600,
-      behavior: 'smooth'
-    })
 
   return (
     <section className="my-5 rounded-sm pb-4">

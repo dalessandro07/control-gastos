@@ -59,7 +59,7 @@ const UserSection = () => {
 
   return (
     <>
-      <header className="flex flex-col items-center">
+      <header className="mt-4 mb-10 flex flex-col items-center">
         <h1 className="text-2xl font-bold">
           ¡{`Bienvenid${user?.displayName?.at(-1) === 'a' ? 'a' : 'o'}`}!
         </h1>
@@ -96,9 +96,9 @@ const UserSection = () => {
         )}
       </header>
 
-      <section className="flex flex-col items-center gap-2">
+      <main className="flex flex-col items-center">
         {showUpdateUser && (
-          <form onSubmit={handleSubmit(handleUpdateUser)}>
+          <form className="mb-4 -mt-5" onSubmit={handleSubmit(handleUpdateUser)}>
             <div className="mt-10 mb-5 flex flex-col items-center">
               <label htmlFor="displayName" className="text-gray-600">
                 Cambiar nombre
@@ -129,60 +129,63 @@ const UserSection = () => {
           </form>
         )}
 
-        <button
-          onClick={() => {
-            setShowUpdateUser(!showUpdateUser)
-          }}
-          className="mt-8 flex flex-col items-center rounded-full bg-blue-600 p-2 font-semibold text-white">
-          {!showUpdateUser ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              viewBox="0 0 20 20"
-              fill="currentColor">
-              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor">
-              <path
-                fillRule="evenodd"
-                d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"
-                clipRule="evenodd"
-              />
-              <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-            </svg>
-          )}
-        </button>
-        <p>{!showUpdateUser ? 'Actualizar datos' : 'Ocultar'}</p>
-      </section>
+        <section className="mb-5 flex w-full items-center justify-around">
+          <article className="flex flex-col items-center gap-2">
+            <button
+              onClick={() => {
+                setShowUpdateUser(!showUpdateUser)
+              }}
+              className="flex flex-col items-center rounded-full bg-blue-600 p-2 font-semibold text-white">
+              {!showUpdateUser ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"
+                    clipRule="evenodd"
+                  />
+                  <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                </svg>
+              )}
+            </button>
+            <p>{!showUpdateUser ? 'Actualizar datos' : 'Ocultar'}</p>
+          </article>
 
-      <section className="mt-8 flex flex-col items-center justify-center">
-        <article className="flex flex-col items-center">
-          <button
-            onClick={handleLogout}
-            className="flex items-center rounded-full bg-red-600 p-2 text-sm font-bold text-gray-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-          </button>
-          <p onClick={handleLogout} className="mb-4 cursor-pointer">
-            Cerrar sesión
-          </p>
-        </article>
+          <article className="flex flex-col items-center justify-center gap-2">
+            <button
+              onClick={handleLogout}
+              className="flex items-center rounded-full bg-red-600 p-2 text-sm font-bold text-gray-100">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+            </button>
+
+            <p onClick={handleLogout} className="cursor-pointer">
+              Cerrar sesión
+            </p>
+          </article>
+        </section>
 
         <button
           onClick={() => {
@@ -193,7 +196,7 @@ const UserSection = () => {
         </button>
 
         {showDeleteAccount && (
-          <article className="mt-8">
+          <article className="my-8">
             <Modal
               titleModal="Eliminar mi cuenta ⚠️"
               paragraphModal="¿Está seguro?, esta acción no se puede deshacer, le recomendamos que exporte sus gastos antes de eliminar la cuenta."
@@ -202,7 +205,7 @@ const UserSection = () => {
             />
           </article>
         )}
-      </section>
+      </main>
     </>
   )
 }

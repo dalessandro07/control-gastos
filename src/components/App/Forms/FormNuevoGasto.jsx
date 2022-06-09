@@ -1,8 +1,16 @@
 import React, { memo } from 'react'
 
 const FormNuevoGasto = ({ valueSendGasto }) => {
-  const { errors, etiqueta, cambiarEtiqueta, handleSubmit, onSubmit, register, button } =
-    valueSendGasto
+  const {
+    errors,
+    etiqueta,
+    cambiarEtiqueta,
+    handleSubmit,
+    onSubmit,
+    register,
+    button,
+    isFixedService
+  } = valueSendGasto
 
   return (
     <form
@@ -13,6 +21,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
         <label className="flex items-center justify-center">
           <p className={errors?.monto ? 'text-3xl text-red-500' : 'text-2xl text-black'}>S/</p>
           <input
+            disabled={isFixedService}
             className={`${
               errors.monto ? 'border-red-500 text-red-500 placeholder:text-red-300' : ''
             } w-60 rounded-sm bg-gray-100 text-center text-7xl`}
@@ -44,6 +53,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
           <p>Descripción:</p>
 
           <textarea
+            disabled={isFixedService}
             className={`${
               errors.descripcion
                 ? 'border-red-500 text-red-500 placeholder:text-red-300'
