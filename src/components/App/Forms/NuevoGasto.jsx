@@ -38,10 +38,17 @@ const NuevoGasto = ({ mode }) => {
   }, [])
 
   useEffect(() => {
+    const getDate = (fecha) => {
+      if (fecha.toString().includes('-') || fechasRelativas[params.get('fecha')]) {
+        return fecha
+      }
+      return fechasRelativas.hoy
+    }
+
     if (params.get('descripcion')?.length >= 1) {
       const descripcion = params.get('descripcion') || ''
       const monto = Number(params.get('monto')) || 0
-      const fecha = fechasRelativas[params.get('fecha')] || fechasRelativas.hoy
+      const fecha = getDate(params.get('fecha'))
       const etiqueta = params.get('etiqueta') || 'otros'
 
       const queryURL = {

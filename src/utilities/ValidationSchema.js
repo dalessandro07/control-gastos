@@ -24,10 +24,12 @@ const validationSchemaServices = yup.object().shape({
     .max(100000, 'El monto no puede ser mayor a 100,000.')
     .min(0.1, 'El monto debe ser mayor a 0,10.'),
   fecha: yup
-    .date()
-    .typeError('No se ingresó una fecha válida.')
-    .required('La fecha de vencimiento es requerida.')
-    .default(moment().format('YYYY-MM-DD'))
+    .number()
+    .typeError('No se ingresó una día válido.')
+    .required('El día de recordatorio es requerido.')
+    .default(Number(moment().format('DD')))
+    .max(31, 'El día de recordatorio no puede ser mayor a 31.')
+    .min(1, 'El día de recordatorio debe ser mayor a 1.')
 })
 
 const validationSchemaGasto = yup.object().shape({

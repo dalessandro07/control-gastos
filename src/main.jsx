@@ -17,6 +17,10 @@ const updateSW = registerSW({
   }
 })
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+}
+
 updateSW()
 
 ReactDOM.createRoot(document.getElementById('root')).render(

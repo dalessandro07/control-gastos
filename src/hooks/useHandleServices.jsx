@@ -21,7 +21,7 @@ const useHandleServices = () => {
   const [servicioABorrar, setServicioABorrar] = useState('')
   const [existeServicioABorrar, setExisteServicioABorrar] = useState(false)
 
-  const [fechaDefault, setFechaDefault] = useState(moment().format('YYYY-MM-DD'))
+  const [fechaDefault, setFechaDefault] = useState(moment().format('DD'))
 
   const cambiarFecha = (fecha) => setFechaDefault(fecha)
 
@@ -34,10 +34,17 @@ const useHandleServices = () => {
     if (!existeServicio) setExisteServicioABorrar(false)
   }, [servicioABorrar])
 
-  const onAddService = (data) => {
+  const onAddService = async (data) => {
+    const actualMonth = moment().format('MM')
+    const actualYear = moment().format('YYYY')
+
+    const fecha = moment(`${actualYear}-${actualMonth}-${fechaDefault}`)
+      .add(1, 'month')
+      .format('YYYY-MM-DD')
+
     const dataToSend = {
       ...data,
-      fecha: moment(data.fecha).format('YYYY-MM-DD')
+      fecha
     }
 
     try {
@@ -45,14 +52,16 @@ const useHandleServices = () => {
       toast.success('¡Servicio agregado con éxito!')
       setShowFormNewService(false)
     } catch (error) {
-      console.log(error)
+      toast.error('Error: ' + error.message)
     }
   }
 
   const agregarServicioComoGasto = (servicio) => {
     const { nombre, fecha, monto, descripcion } = servicio
 
-    const url = `/nuevo-gasto/formulario?monto=${monto}&descripcion=${descripcion}&nombre=${nombre}&fecha=${fecha}&etiqueta=servicios`
+    const nuevaDescrip = `${descripcion} - ${moment(fecha).format('MMMM [de] YYYY')}`
+
+    const url = `/nuevo-gasto/formulario?monto=${monto}&descripcion=${nuevaDescrip}&nombre=${nombre}&fecha=${fecha}&etiqueta=servicios`
 
     navigateTo(url)
   }
