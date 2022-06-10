@@ -4,12 +4,12 @@ const ImportExport = ({ importarGastos, exportarGastos }) => (
   <>
     <section
       onClick={importarGastos}
-      className="m-4 flex w-max cursor-pointer rounded-sm bg-gray-200 p-3 hover:bg-gray-300">
-      <h4 className="mr-2 text-sm font-bold">Importar gastos</h4>
+      className="m-4 flex w-max cursor-pointer flex-col-reverse items-center justify-center gap-2 rounded-sm bg-gray-200 p-3 hover:bg-gray-300">
+      <h4 className="mr-1 text-center text-sm font-bold">Restaurar una copia de seguridad</h4>
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5"
+        className="h-6 w-6"
         viewBox="0 0 20 20"
         fill="currentColor">
         <path
@@ -22,12 +22,12 @@ const ImportExport = ({ importarGastos, exportarGastos }) => (
 
     <section
       onClick={exportarGastos}
-      className="m-4 flex w-max cursor-pointer rounded-sm bg-gray-200 p-3 hover:bg-gray-300">
-      <h4 className="mr-2 text-sm font-bold">Exportar gastos</h4>
+      className="m-4 flex w-max cursor-pointer flex-col-reverse items-center justify-center gap-2 rounded-sm bg-gray-200 p-3 hover:bg-gray-300">
+      <h4 className="text-center text-sm font-bold">Realizar copia de seguridad</h4>
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5"
+        className="h-6 w-6"
         viewBox="0 0 20 20"
         fill="currentColor">
         <path
