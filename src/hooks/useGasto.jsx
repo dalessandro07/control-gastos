@@ -26,7 +26,7 @@ const useGasto = () => {
 
     setLoading(true)
 
-    const translatedDescrip = !descripcion.toLowerCase().includes('mercado')
+    const translatedDescrip = !descripcion?.toLowerCase().includes('mercado')
       ? await translateWord(descripcion, 'en')
       : 'mercado'
 

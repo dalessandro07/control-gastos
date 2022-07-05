@@ -1,9 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { SaldoContext } from '../../../context/SaldoContext'
 import ExpiredServices from '../Functions/ExpiredServices'
 
 const Saldo = () => {
-  const { saldoTotal, servicios, loading, totalPorMes } = useContext(SaldoContext)
+  const { gastos, saldoTotal, servicios, loading, totalPorMes } = useContext(SaldoContext)
+
+  const [saldoAMostrar, setSaldoAMostrar] = useState(saldoTotal)
+
+  useEffect(() => {
+    const mes = totalPorMes?.mes
+
+    if (saldoTotal > 0) {
+      if (mes) {
+        if (totalPorMes?.monto === 0 || !totalPorMes?.monto) {
+          setSaldoAMostrar(saldoTotal.toFixed(2))
+        } else {
+          setSaldoAMostrar(totalPorMes?.monto?.toFixed(2))
+        }
+      } else {
+        setSaldoAMostrar(saldoTotal.toFixed(2))
+      }
+    }
+  }, [gastos, saldoTotal, totalPorMes])
 
   return (
     <>
@@ -17,9 +35,7 @@ const Saldo = () => {
               {loading ? (
                 <section className="animate-bounce text-2xl font-bold">...</section>
               ) : (
-                <p className="text-5xl font-bold">
-                  {totalPorMes?.monto?.toFixed(2) || saldoTotal.toFixed(2)}
-                </p>
+                <p className="text-5xl font-bold">{saldoAMostrar || saldoTotal?.toFixed(2)}</p>
               )}
             </section>
           </article>

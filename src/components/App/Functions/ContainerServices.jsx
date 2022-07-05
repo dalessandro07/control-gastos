@@ -62,8 +62,8 @@ const ContainerServices = ({ servicios, agregarServicioComoGasto }) => {
           dictionarieColors[
             keys.find(
               (key) =>
-                servicio.nombre.toLowerCase().includes(key) ||
-                servicio.descripcion.toLowerCase().includes(key)
+                servicio?.nombre?.toLowerCase().includes(key) ||
+                servicio?.descripcion?.toLowerCase().includes(key)
             )
           ] || dictionarieColors.default
 

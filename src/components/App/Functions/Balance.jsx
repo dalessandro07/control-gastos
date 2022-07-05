@@ -13,7 +13,6 @@ import ImportExport from './ImportExport'
 import ListaPorEtiqueta from './ListaPorEtiqueta'
 import useFiltrarGastosPorMes from '../../../hooks/useFiltrarGastosPorMes'
 
-import { toast } from 'react-toastify'
 import moment from 'moment'
 
 Chart.register(ArcElement, Tooltip, Legend)
@@ -42,23 +41,11 @@ const Balance = () => {
   useEffect(() => handleChangeMonth(valueInput), [gastos, valueInput])
 
   useEffect(() => {
-    const mesElegido = moment(valueInput).format('MMMM yyyy').toUpperCase() || 'TODOS'
-
     changeTotalPorMes({
       mes: gastosPorMes?.fecha?.toUpperCase() || 'De todos los meses',
       monto: gastosPorMes?.total ?? saldoTotal
     })
-
-    if (gastos.length > 0) {
-      if (valueInput && valueInput !== '') {
-        if (!gastosPorMes || gastosPorMes?.gastos?.length === 0) {
-          toast.error(`
-            No se encontraron gastos en ${mesElegido}
-          `)
-        }
-      }
-    }
-  }, [valueInput, gastosPorMes])
+  }, [valueInput, gastosPorMes, saldoTotal])
 
   return (
     <section className="relative mt-8">

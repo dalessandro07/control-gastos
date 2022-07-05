@@ -17,7 +17,7 @@ const useAssignImg = () => {
   const assignImg = async (desc) => {
     const newDescrip = desc.toLowerCase()
 
-    if (desc.toLowerCase().includes('mercado')) {
+    if (desc?.toLowerCase().includes('mercado')) {
       return 'https://plazavea.vteximg.com.br/arquivos/ids/628808-450-450/image-eb60a9a8c5e141a3a259656bcf18efb5.jpg'
     } else {
       return await fetchPhotosFromApi(newDescrip)

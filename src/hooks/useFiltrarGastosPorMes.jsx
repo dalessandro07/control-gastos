@@ -3,7 +3,7 @@ import { useState } from 'react'
 import moment from 'moment'
 moment.locale('es')
 
-const useFiltrarGastosPorMes = (gastos, inputRef) => {
+const useFiltrarGastosPorMes = (gastos, inputRef = null) => {
   const [gastosPorMes, setGastosPorMes] = useState([])
 
   const filtrarGastosPorMes = (gastos) => {

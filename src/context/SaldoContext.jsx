@@ -9,6 +9,7 @@ import CryptoJS from 'crypto-js'
 import moment from 'moment'
 import 'moment/dist/locale/es'
 import useObtenerServicios from '../hooks/useServicios'
+import useFiltrarGastosPorMes from '../hooks/useFiltrarGastosPorMes'
 
 moment.locale('es')
 
@@ -28,10 +29,25 @@ const SaldoProvider = ({ children }) => {
 
   const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos, userUID)
 
+  const { gastosPorMes, handleChangeMonth } = useFiltrarGastosPorMes(gastos)
+
   const [totalPorMes, setTotalPorMes] = useState({
-    mes: '',
-    monto: 0
+    mes: null,
+    monto: null
   })
+
+  useEffect(() => {
+    if (gastos) {
+      handleChangeMonth(moment().format('YYYY-MM'))
+    }
+  }, [gastos])
+
+  useEffect(() => {
+    changeTotalPorMes({
+      mes: gastosPorMes?.fecha?.toUpperCase() || 'De todos los meses',
+      monto: gastosPorMes?.total ?? saldoTotal
+    })
+  }, [gastosPorMes, saldoTotal])
 
   useEffect(() => {
     changeLoading(true)
@@ -82,7 +98,8 @@ const SaldoProvider = ({ children }) => {
     exportarGastos,
     importarGastos,
     totalPorMes,
-    changeTotalPorMes
+    changeTotalPorMes,
+    gastosPorMes
   }
 
   return <SaldoContext.Provider value={value}>{children}</SaldoContext.Provider>

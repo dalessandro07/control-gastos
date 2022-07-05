@@ -11,8 +11,8 @@ const BusquedaGastos = ({ gastos, gastosAMostrar, setGastosAMostrar }) => {
 
     const gastosFiltrados = gastos.filter((gasto) => {
       return (
-        gasto.descripcion.toLowerCase().includes(value.toLowerCase()) ||
-        moment(gasto.fecha).format('DD [de] MMMM [de] YYYY').includes(value.toLowerCase()) ||
+        gasto?.descripcion?.toLowerCase().includes(value?.toLowerCase()) ||
+        moment(gasto?.fecha).format('DD [de] MMMM [de] YYYY').includes(value?.toLowerCase()) ||
         gasto.monto.toFixed(2).toString().includes(value)
       )
     })

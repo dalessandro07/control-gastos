@@ -37,7 +37,7 @@ const useSendGasto = (mode = 'new') => {
       const subscription = watch((value) => {
         const etiqueta = Object.keys(etiquetasOBJ).find((etiqueta) =>
           etiquetasOBJ[etiqueta].some((cadaEtiqueta) =>
-            value.descripcion.toLowerCase().includes(cadaEtiqueta)
+            value?.descripcion?.toLowerCase().includes(cadaEtiqueta)
           )
         )
         setEtiqueta(etiqueta)

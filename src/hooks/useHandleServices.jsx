@@ -27,7 +27,7 @@ const useHandleServices = () => {
 
   useEffect(() => {
     const existeServicio = servicios.find(
-      (servicio) => servicio.nombre.toLowerCase() === servicioABorrar.toLowerCase()
+      (servicio) => servicio?.nombre?.toLowerCase() === servicioABorrar.toLowerCase()
     )
 
     if (existeServicio) setExisteServicioABorrar(true)
@@ -42,9 +42,12 @@ const useHandleServices = () => {
       .add(1, 'monts')
       .format('YYYY-MM-DD')
 
-    const descripcion = `${data.descripcion.toLowerCase().charAt(0).toUpperCase()}${data.descripcion
-      .toLowerCase()
-      .slice(1)} - ${moment(fecha).format('MMMM [de] YYYY')}`
+    const descripcion = `${data?.descripcion
+      ?.toLowerCase()
+      .charAt(0)
+      .toUpperCase()}${data.descripcion.toLowerCase().slice(1)} - ${moment(fecha).format(
+      'MMMM [de] YYYY'
+    )}`
 
     const dataToSend = {
       ...data,
@@ -71,7 +74,7 @@ const useHandleServices = () => {
 
   const handleDeleteService = (servicio) => {
     const servicioABorrar = servicios.find(
-      (servicioDB) => servicio.toLowerCase() === servicioDB.nombre.toLowerCase()
+      (servicioDB) => servicio?.toLowerCase() === servicioDB?.nombre?.toLowerCase()
     )
 
     if (servicioABorrar) {
