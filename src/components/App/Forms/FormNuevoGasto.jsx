@@ -78,7 +78,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
             } cursor-pointer rounded-sm border-b-2 bg-gray-100 p-1`}
             {...register('etiqueta')}
             onChange={(e) => cambiarEtiqueta(e.target.value)}
-            value={etiqueta}
+            value={etiqueta || 'otros'}
             placeholder="Ejm: Comida">
             <option value="comida">Comida</option>
             <option value="transporte">Transporte</option>

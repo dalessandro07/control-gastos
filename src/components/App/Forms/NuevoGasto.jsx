@@ -44,8 +44,8 @@ const NuevoGasto = ({ mode }) => {
 
   useEffect(() => {
     const getDate = (fecha) => {
-      if (fecha.toString().includes('-') || fechasRelativas[params.get('fecha')]) {
-        return fecha
+      if (fechasRelativas[fecha] || fecha?.toString().includes('-')) {
+        return fechasRelativas[fecha] || fecha
       }
       return fechasRelativas.hoy
     }

@@ -21,8 +21,9 @@ Chart.defaults.font.size = 17.5
 Chart.defaults.font.weight = 'bold'
 
 const Balance = () => {
-  const { gastos, saldoTotal, loading, exportarGastos, importarGastos } = useContext(SaldoContext)
-  const [valueInput, setValueInput] = useState('')
+  const { gastos, saldoTotal, loading, exportarGastos, importarGastos, changeTotalPorMes } =
+    useContext(SaldoContext)
+  const [valueInput, setValueInput] = useState(moment().format('YYYY-MM'))
 
   const inputRef = useRef(null)
 
@@ -38,18 +39,23 @@ const Balance = () => {
 
   useSeo({ title: 'Balance', description: 'Balance de gastos' })
 
+  useEffect(() => handleChangeMonth(valueInput), [gastos, valueInput])
+
   useEffect(() => {
     const mesElegido = moment(valueInput).format('MMMM yyyy').toUpperCase() || 'TODOS'
 
-    if (valueInput && valueInput !== '') {
-      if (!gastosPorMes || gastosPorMes?.gastos?.length === 0) {
-        toast.error(`
-          No se encontraron gastos en ${mesElegido}
-        `)
-      } else if (gastosPorMes?.gastos?.length > 0) {
-        toast.success(`
-          Se encontraron ${gastosPorMes?.gastos?.length} gastos en ${mesElegido}
-        `)
+    changeTotalPorMes({
+      mes: gastosPorMes?.fecha?.toUpperCase() || 'De todos los meses',
+      monto: gastosPorMes?.total ?? saldoTotal
+    })
+
+    if (gastos.length > 0) {
+      if (valueInput && valueInput !== '') {
+        if (!gastosPorMes || gastosPorMes?.gastos?.length === 0) {
+          toast.error(`
+            No se encontraron gastos en ${mesElegido}
+          `)
+        }
       }
     }
   }, [valueInput, gastosPorMes])
@@ -87,9 +93,9 @@ const Balance = () => {
                       placeholder="Selecciona un mes"
                       name="filtroMes"
                       onChange={(e) => {
-                        handleChangeMonth(e)
                         setValueInput(e.target.value)
                       }}
+                      value={valueInput}
                     />
                   </label>
 

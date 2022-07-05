@@ -37,9 +37,7 @@ const useFiltrarGastosPorMes = (gastos, inputRef) => {
     return gastosOrdenados
   }
 
-  const handleChangeMonth = (e) => {
-    const { value } = e.target
-
+  const handleChangeMonth = (value) => {
     const gastosPorMesFiltrados = filtrarGastosPorMes(gastos).find(
       (gasto) => gasto.fechaInput === value
     )

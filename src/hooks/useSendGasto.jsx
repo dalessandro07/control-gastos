@@ -74,7 +74,12 @@ const useSendGasto = (mode = 'new') => {
         actualizarGastoDB(dataIsService.idDB, dataActualizada, userUID)
       }
 
-      agregarGasto(data)
+      const nuevaData = {
+        ...data,
+        etiqueta
+      }
+
+      agregarGasto(nuevaData)
 
       navigateTo('/gastos')
       toast.success('¡Gasto agregado con éxito!')

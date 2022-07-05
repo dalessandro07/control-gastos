@@ -1,4 +1,4 @@
-import React, { useEffect, createContext } from 'react'
+import React, { useEffect, createContext, useState } from 'react'
 import useGasto from '../hooks/useGasto'
 import useImportExport from '../hooks/useImportExport'
 
@@ -27,6 +27,11 @@ const SaldoProvider = ({ children }) => {
   const { servicios, obtenerServicios } = useObtenerServicios()
 
   const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos, userUID)
+
+  const [totalPorMes, setTotalPorMes] = useState({
+    mes: '',
+    monto: 0
+  })
 
   useEffect(() => {
     changeLoading(true)
@@ -65,6 +70,8 @@ const SaldoProvider = ({ children }) => {
     }, userUID)
   }, [])
 
+  const changeTotalPorMes = (gastosFiltrados) => setTotalPorMes(gastosFiltrados)
+
   const value = {
     saldoTotal,
     agregarGasto,
@@ -73,7 +80,9 @@ const SaldoProvider = ({ children }) => {
     loading,
     moment,
     exportarGastos,
-    importarGastos
+    importarGastos,
+    totalPorMes,
+    changeTotalPorMes
   }
 
   return <SaldoContext.Provider value={value}>{children}</SaldoContext.Provider>
