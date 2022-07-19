@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import { useDivisas } from '../../../context/DivisasContext'
 
 const dictionarieColors = {
   luz: {
@@ -53,42 +54,48 @@ const dictionarieColors = {
 }
 
 const ContainerServices = ({ servicios, agregarServicioComoGasto }) => {
+  const { divisaActual } = useDivisas()
+
   return (
-    <ul className="my-5 mx-4 flex flex-wrap justify-around gap-4">
+    <ul className='my-5 mx-4 flex flex-wrap justify-around gap-4'>
       {servicios.map((servicio, index) => {
         const keys = Object.keys(dictionarieColors)
 
         const serviceColor =
           dictionarieColors[
             keys.find(
-              (key) =>
+              key =>
                 servicio?.nombre?.toLowerCase().includes(key) ||
                 servicio?.descripcion?.toLowerCase().includes(key)
             )
           ] || dictionarieColors.default
 
         return (
-          <li key={index} className="flex flex-col shadow-md">
+          <li key={index} className='flex flex-col shadow-md'>
             <section
-              className={`${serviceColor.bg100} ${serviceColor.border} flex flex-col items-center rounded-t-md border-x-2 border-t-2 py-3`}>
-              <span className="text-xl font-bold">{servicio.nombre.toUpperCase()}</span>
+              className={`${serviceColor.bg100} ${serviceColor.border} flex flex-col items-center rounded-t-md border-x-2 border-t-2 py-3`}
+            >
+              <span className='text-xl font-bold'>
+                {servicio.nombre.toUpperCase()}
+              </span>
 
               <span className={`${serviceColor.text500} font-bold`}>
-                S/{servicio.monto.toFixed(2)}
+                {divisaActual?.divisa}
+                {servicio.monto.toFixed(2)}
               </span>
 
               <span
-                className={`${
-                  servicio.fecha < moment().format('YYYY-MM-DD') &&
-                  'font-bold text-red-500 underline'
-                } text-sm font-semibold`}>
+                className={`${servicio.fecha < moment().format('YYYY-MM-DD') &&
+                  'font-bold text-red-500 underline'} text-sm font-semibold`}
+              >
                 {moment(servicio.fecha).format('DD-MM-YYYY')}
               </span>
             </section>
 
             <button
               onClick={() => agregarServicioComoGasto(servicio)}
-              className={`${serviceColor.bg300} p-2 font-semibold transition-all duration-150 ${serviceColor.bg500} ${serviceColor.text100}`}>
+              className={`${serviceColor.bg300} p-2 font-semibold transition-all duration-150 ${serviceColor.bg500} ${serviceColor.text100}`}
+            >
               Registrar servicio
             </button>
           </li>

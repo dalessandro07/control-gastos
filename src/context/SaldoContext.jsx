@@ -8,8 +8,9 @@ import { obtenerGastosDB } from '../firebase'
 import CryptoJS from 'crypto-js'
 import moment from 'moment'
 import 'moment/dist/locale/es'
-import useObtenerServicios from '../hooks/useServicios'
+import useObtenerServicios from '../hooks/useObtenerServicios'
 import useFiltrarGastosPorMes from '../hooks/useFiltrarGastosPorMes'
+import { useDivisas } from './DivisasContext'
 
 moment.locale('es')
 
@@ -24,10 +25,24 @@ export const SaldoContext = createContext({
 
 const SaldoProvider = ({ children }) => {
   const { userUID } = useAuth()
-  const { gastos, saldoTotal, agregarGasto, obtenerGastos, loading, changeLoading } = useGasto()
+
+  const { setDivisaActual } = useDivisas()
+
+  const {
+    gastos,
+    saldoTotal,
+    agregarGasto,
+    obtenerGastos,
+    loading,
+    changeLoading
+  } = useGasto()
   const { servicios, obtenerServicios } = useObtenerServicios()
 
-  const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos, userUID)
+  const { exportarGastos, importarGastos } = useImportExport(
+    gastos,
+    obtenerGastos,
+    userUID
+  )
 
   const { gastosPorMes, handleChangeMonth } = useFiltrarGastosPorMes(gastos)
 
@@ -52,11 +67,11 @@ const SaldoProvider = ({ children }) => {
   useEffect(() => {
     changeLoading(true)
 
-    obtenerGastosDB((querySnapshot) => {
+    obtenerGastosDB(querySnapshot => {
       const gastosDB = []
       const serviciosDB = []
 
-      querySnapshot.forEach((doc) => {
+      querySnapshot.forEach(doc => {
         if (doc.data().ciphertext) {
           const bytes = CryptoJS.AES.decrypt(doc.data().ciphertext, userUID)
           const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
@@ -72,11 +87,8 @@ const SaldoProvider = ({ children }) => {
               idDB: doc.id
             })
           }
-        } else {
-          gastosDB.push({
-            ...doc.data(),
-            idDB: doc.id
-          })
+        } else if (doc.data().divisa) {
+          setDivisaActual({ id: doc.id, divisa: doc.data().divisa })
         }
       })
 
@@ -86,7 +98,7 @@ const SaldoProvider = ({ children }) => {
     }, userUID)
   }, [])
 
-  const changeTotalPorMes = (gastosFiltrados) => setTotalPorMes(gastosFiltrados)
+  const changeTotalPorMes = gastosFiltrados => setTotalPorMes(gastosFiltrados)
 
   const value = {
     saldoTotal,

@@ -31,6 +31,11 @@ const agregarGastoDB = (gasto, UID) => {
   addDoc(collection(db, UID), { ciphertext })
 }
 
+const agregarDivisaDB = (divisa, UID) => addDoc(collection(db, UID), { divisa })
+
+const actualizarDivisaDB = (id, divisa, UID) =>
+  updateDoc(doc(db, UID, id), { divisa })
+
 const borrarGastoDB = (id, UID) => deleteDoc(doc(db, UID, id))
 
 const actualizarGastoDB = (id, gasto, UID) => {
@@ -39,6 +44,16 @@ const actualizarGastoDB = (id, gasto, UID) => {
   updateDoc(doc(db, UID, id), { ciphertext })
 }
 
-const obtenerGastosDB = (callback, UID) => onSnapshot(collection(db, UID), callback)
+const obtenerGastosDB = (callback, UID) =>
+  onSnapshot(collection(db, UID), callback)
 
-export { db, auth, agregarGastoDB, obtenerGastosDB, borrarGastoDB, actualizarGastoDB }
+export {
+  db,
+  auth,
+  agregarGastoDB,
+  obtenerGastosDB,
+  borrarGastoDB,
+  actualizarGastoDB,
+  agregarDivisaDB,
+  actualizarDivisaDB
+}

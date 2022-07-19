@@ -13,6 +13,7 @@ import Register from './Register/Register'
 import ProtectedRoute from '../components/App/User/ProtectedRoute'
 import ForgotPassword from '../components/Home/ForgotPassword'
 import PhoneNumberLogin from './Login/PhoneNumberLogin'
+import DivisasProvider from './../context/DivisasContext'
 
 const HomeIndex = () => {
   const navigateTo = useNavigate()
@@ -73,10 +74,12 @@ const HomeIndex = () => {
               path='*'
               element={
                 <ProtectedRoute>
-                  <SaldoProvider>
-                    <Saldo />
-                    <Gastos />
-                  </SaldoProvider>
+                  <DivisasProvider>
+                    <SaldoProvider>
+                      <Saldo />
+                      <Gastos />
+                    </SaldoProvider>
+                  </DivisasProvider>
                 </ProtectedRoute>
               }
             />

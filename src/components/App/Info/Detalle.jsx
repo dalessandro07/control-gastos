@@ -10,10 +10,13 @@ import moment from 'moment'
 import Modal from '../../../utilities/Modal'
 import useSeo from '../../../hooks/useSeo'
 import { useAuth } from '../../../context/AuthContext'
+import { useDivisas } from '../../../context/DivisasContext'
 
 const Detalle = ({ gastos }) => {
   const { userUID } = useAuth()
+  const { divisaActual } = useDivisas()
   const { loading } = useContext(SaldoContext)
+
   const { id } = useParams()
   const navigateTo = useNavigate()
   const [mode, setMode] = useState('copy-link')
@@ -50,13 +53,13 @@ const Detalle = ({ gastos }) => {
 
       const query = new URLSearchParams({
         text: `
-          ${moment(fecha).format(
-            'dddd, DD [de] MMMM [de] YYYY'
-          )}\n\nMonto: *S/${monto.toFixed(
-          2
-        )}*\n\nDescripción: ${descripcion.charAt(0).toUpperCase() +
-          descripcion.slice(1)} | ${etiqueta.charAt(0).toUpperCase() +
-          etiqueta.slice(1)}`.trim()
+          ${moment(fecha).format('dddd, DD [de] MMMM [de] YYYY')}\n\nMonto: *${
+          divisaActual?.divisa
+        }${monto.toFixed(2)}*\n\nDescripción: ${descripcion
+          .charAt(0)
+          .toUpperCase() + descripcion.slice(1)} | ${etiqueta
+          .charAt(0)
+          .toUpperCase() + etiqueta.slice(1)}`.trim()
       })
 
       const URL = `${URLBASE}?${query}`
@@ -126,7 +129,7 @@ const Detalle = ({ gastos }) => {
             />
 
             <section className='flex items-center text-red-500'>
-              <p className='text-xl'>s/</p>
+              <p className='text-xl'>{divisaActual?.divisa}</p>
               <p className='mt-4 text-3xl'>
                 {' '}
                 {detalleGasto?.monto?.toFixed(2)}

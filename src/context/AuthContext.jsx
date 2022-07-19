@@ -32,9 +32,11 @@ const AuthProvider = ({ children }) => {
   const [userUID, setUserUID] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const register = (email, password) => createUserWithEmailAndPassword(auth, email, password)
+  const register = (email, password) =>
+    createUserWithEmailAndPassword(auth, email, password)
 
-  const login = (email, password) => signInWithEmailAndPassword(auth, email, password)
+  const login = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password)
 
   const loginWithGoogle = () => signInWithPopup(auth, new GoogleAuthProvider())
 
@@ -43,14 +45,14 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => signOut(auth)
 
-  const updateUser = (user) => updateProfile(auth?.currentUser, user)
+  const updateUser = user => updateProfile(auth?.currentUser, user)
 
-  const resetPassword = (email) => sendPasswordResetEmail(auth, email)
+  const resetPassword = email => sendPasswordResetEmail(auth, email)
 
   const deleteAccount = () => deleteUser(auth.currentUser)
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
+    onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
       setUserUID(currentUser?.uid ?? null)
       setLoading(false)
@@ -73,7 +75,11 @@ const AuthProvider = ({ children }) => {
     updateUser
   }
 
-  return <authContext.Provider value={valueToExport}>{children}</authContext.Provider>
+  return (
+    <authContext.Provider value={valueToExport}>
+      {children}
+    </authContext.Provider>
+  )
 }
 
 export default AuthProvider
