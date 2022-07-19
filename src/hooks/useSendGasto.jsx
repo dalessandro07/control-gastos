@@ -34,9 +34,9 @@ const useSendGasto = (mode = 'new') => {
 
   useEffect(() => {
     if (mode !== 'edit') {
-      const subscription = watch((value) => {
-        const etiqueta = Object.keys(etiquetasOBJ).find((etiqueta) =>
-          etiquetasOBJ[etiqueta].some((cadaEtiqueta) =>
+      const subscription = watch(value => {
+        const etiqueta = Object.keys(etiquetasOBJ).find(etiqueta =>
+          etiquetasOBJ[etiqueta].some(cadaEtiqueta =>
             value?.descripcion?.toLowerCase().includes(cadaEtiqueta)
           )
         )
@@ -46,14 +46,14 @@ const useSendGasto = (mode = 'new') => {
     }
   }, [watch])
 
-  const cambiarEtiqueta = (value) => setEtiqueta(value)
+  const cambiarEtiqueta = value => setEtiqueta(value)
 
-  const submitEnviarGasto = (data) => {
+  const submitEnviarGasto = data => {
     if (data.idDB) {
       const dataActualizada = {
         ...data,
-        id: gastos.find((gasto) => gasto.idDB === data.idDB).id,
-        img: gastos.find((gasto) => gasto.idDB === data.idDB).img
+        id: gastos.find(gasto => gasto.idDB === data.idDB).id,
+        img: gastos.find(gasto => gasto.idDB === data.idDB).img
       }
 
       actualizarGastoDB(data.idDB, dataActualizada, userUID)
@@ -61,14 +61,17 @@ const useSendGasto = (mode = 'new') => {
       toast.success('Gasto actualizado')
     } else {
       const dataIsService = servicios.find(
-        (servicio) =>
-          Number(servicio.monto) === Number(data.monto) && servicio.descripcion === data.descripcion
+        servicio =>
+          Number(servicio.monto) === Number(data.monto) &&
+          servicio.descripcion === data.descripcion
       )
 
       if (dataIsService) {
         const dataActualizada = {
           ...dataIsService,
-          fecha: moment(data.fecha).add(1, 'months').format('YYYY-MM-DD')
+          fecha: moment(data.fecha)
+            .add(1, 'months')
+            .format('YYYY-MM-DD')
         }
 
         actualizarGastoDB(dataIsService.idDB, dataActualizada, userUID)
@@ -87,9 +90,14 @@ const useSendGasto = (mode = 'new') => {
   }
 
   const setValueToForm = (gasto, mode) => {
+
     if (gasto.descripcion && (mode === 'edit' || mode === 'voice')) {
       setValue('monto', gasto.monto)
-      setValue('fecha', gasto.fecha)
+      setValue(
+        'fecha',
+        moment(gasto.fecha).format('YYYY-MM-DD') ||
+          moment().format('YYYY-MM-DD')
+      )
       setValue('descripcion', gasto.descripcion)
       setValue('idDB', gasto.idDB)
       setValue('etiqueta', gasto.etiqueta)

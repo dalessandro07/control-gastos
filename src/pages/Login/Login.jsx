@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 import Input from '../../utilities/Input'
 import FormError from '../../utilities/FormError'
-import useLogin from '../../hooks/useLogin'
-import { Link, useNavigate } from 'react-router-dom'
+import useLogin from './hooks/useLogin'
 
 const Login = () => {
   const {

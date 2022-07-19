@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { auth } from '../../firebase'
-import useLogin from '../../hooks/useLogin'
+
+import useLogin from './hooks/useLogin'
+
 import Loading from '../../utilities/Loading'
 
 const countryCode = {

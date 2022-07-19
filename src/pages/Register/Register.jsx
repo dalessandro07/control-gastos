@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import Input from '../../utilities/Input'
 import FormError from '../../utilities/FormError'
-import useRegister from '../../hooks/useRegister'
+import useRegister from './hooks/useRegister'
 import { Link } from 'react-router-dom'
 
 const Register = () => {
