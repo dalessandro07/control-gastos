@@ -35,7 +35,7 @@
     - [:camera: Gif de presentación](#camera-gif-de-presentación)
   - [:space_invader: Tecnologías usadas](#space_invader-tecnologías-usadas)
   - [Comenzando con el proyecto.](#comenzando-con-el-proyecto)
-    - [Prerequisitos](#prerequisitos)
+    - [Requisitos](#requisitos)
     - [:running: Correr el proyecto localmente](#running-correr-el-proyecto-localmente)
       <!-- About the Project -->
 
@@ -56,21 +56,18 @@
 ## :space_invader: Tecnologías usadas
 
 - [React.js](https://reactjs.org/)
-  - React en su versión 18 es el framework de Javascript en el que está contruida esta aplicación, ya que además de ser la tecnología que aprendí en el curso, es la que personalmente, más me llama la atención.
+  - Esta aplicación está construida en ReactJS, versión 18. Es la biblioteca de JavaScript que más me gusta.
 - [React Router v6](https://reactrouter.com/)
-  - React por sí mismo no tiene un sistema de navegación por defecto, por lo que elegí React Router en su versión 6. El hecho de ser la librería más usada para navegación, me da la ventaja de poder contar con una gran documentación para facilitar el desarrollo.
-- [Create React App](https://create-react-app.dev/)
-  - Este proyecto se construyó usando Create React App.
+  - React por sí mismo, no tiene un sistema de navegación, por lo que elegí React Router en su versión 6. El hecho de ser la librería más usada para navegación, me da la ventaja de poder contar con una gran documentación para facilitar el desarrollo.
+- [ViteJS](https://vitejs.dev/)
+  - Este proyecto se construyó usando ViteJS.
 - [Firebase](https://firebase.google.com/)
-  - Firebase es una herramienta que provee Google, me permitió crear una base de datos lo suficientemente completa para alojar productos y ordenes.
+  - Firebase es una herramienta que provee Google, me permitió crear una base de datos lo suficientemente completa para alojar gastos, y otros datos del usuario, los cuales se guardan completamente encriptados.
 - [Netlify](https://www.netlify.com/)
-  - Netlify es una herramienta de hosting que me permitió hacer un deploy de mi proyecto de forma gratuita y sencilla.
-- [Tailwind CSS](https://tailwindcss.com/), [Headless UI / React](https://headlessui.dev/) y [Hero Icons / React](https://heroicons.com/)
+  - Netlify es una herramienta de hosting y servicios backend que me permitió hacer un deploy de mi proyecto de forma gratuita y sencilla.
+- [Tailwind CSS](https://tailwindcss.com/)
   - Tailwind CSS es un framework de estilos que me permitió hacer una interfaz detallada y prolija de forma rápida y sencilla, permitiéndome una maquetación óptima y estilos minimalistas en poco tiempo.
-  - Headless UI, me brindó componentes de interfaz de usuario totalmente accesibles, diseñados para integrarse perfectamente con el CSS de Tailwind.
-  - HeroIcons, me ofreció preciosos iconos SVG hechos a mano. Esta librería también está hecha por los creadores de Tailwind CSS.
-- [Framer-motion](https://www.framer.com/motion/)
-  - Framer motion es una potente biblioteca de animaciones lista para la producción de React. Además es de código abierto. Me permitió hacer animaciones complejas de en poco tiempo.
+- [MomentJS](https://momentjs.com/), [CryptoJS](https://cryptojs.gitbook.io/docs/), [ChartJS](https://www.chartjs.org/) etc.
 
 <!-- Getting Started -->
 
@@ -78,7 +75,7 @@
 
 <!-- Prerequisites -->
 
-### Prerequisitos
+### Requisitos
 
 Este proyecto usa npm para la instalación de dependencias, por lo que si no tienes instalado el paquete npm, debes instalarlo antes de continuar.
 
@@ -93,13 +90,13 @@ Este proyecto usa npm para la instalación de dependencias, por lo que si no tie
 Clonar el proyecto:
 
 ```bash
-  git clone https://github.com/dalessandro07/drcafe-rios.git
+  git clone https://github.com/dalessandro07/control-gastos.git
 ```
 
-Ir al directorio del proyuecto:
+Ir al directorio del proyecto:
 
 ```bash
-  cd drcafe-rios
+  cd control-gastos
 ```
 
 Instalar las dependencias:
