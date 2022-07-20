@@ -14,17 +14,17 @@ const Saldo = () => {
   useEffect(() => {
     const mes = totalPorMes?.mes
 
-    if (saldoTotal > 0) {
-      if (mes) {
-        if (totalPorMes?.monto === 0 || !totalPorMes?.monto) {
-          setSaldoAMostrar(saldoTotal.toFixed(2))
-        } else {
-          setSaldoAMostrar(totalPorMes?.monto?.toFixed(2))
-        }
-      } else {
+    if (mes) {
+      if (totalPorMes?.monto === 0 || !totalPorMes?.monto) {
         setSaldoAMostrar(saldoTotal.toFixed(2))
+      } else {
+        setSaldoAMostrar(totalPorMes?.monto?.toFixed(2))
       }
+    } else {
+      setSaldoAMostrar(saldoTotal.toFixed(2))
     }
+
+    console.log(saldoTotal)
   }, [gastos, saldoTotal, totalPorMes])
 
   return (
