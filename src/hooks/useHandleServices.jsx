@@ -23,31 +23,33 @@ const useHandleServices = () => {
 
   const [fechaDefault, setFechaDefault] = useState(moment().format('DD'))
 
-  const cambiarFecha = (fecha) => setFechaDefault(fecha)
+  const cambiarFecha = fecha => setFechaDefault(fecha)
 
   useEffect(() => {
     const existeServicio = servicios.find(
-      (servicio) => servicio?.nombre?.toLowerCase() === servicioABorrar.toLowerCase()
+      servicio =>
+        servicio?.nombre?.toLowerCase() === servicioABorrar.toLowerCase()
     )
 
     if (existeServicio) setExisteServicioABorrar(true)
     if (!existeServicio) setExisteServicioABorrar(false)
   }, [servicioABorrar])
 
-  const onAddService = async (data) => {
+  const onAddService = async data => {
     const actualMonth = moment().format('MM')
     const actualYear = moment().format('YYYY')
 
-    const fecha = moment(`${actualYear}-${actualMonth}-${fechaDefault}`, 'YYYY-MM-DD')
-      .add(1, 'monts')
-      .format('YYYY-MM-DD')
+    const fecha = moment(
+      `${actualYear}-${actualMonth}-${fechaDefault}`,
+      'YYYY-MM-DD'
+    ).format('YYYY-MM-DD')
 
     const descripcion = `${data?.descripcion
       ?.toLowerCase()
       .charAt(0)
-      .toUpperCase()}${data.descripcion.toLowerCase().slice(1)} - ${moment(fecha).format(
-      'MMMM [de] YYYY'
-    )}`
+      .toUpperCase()}${data.descripcion.toLowerCase().slice(1)} - ${moment(
+      fecha
+    ).format('MMMM [de] YYYY')}`
 
     const dataToSend = {
       ...data,
@@ -64,7 +66,7 @@ const useHandleServices = () => {
     }
   }
 
-  const agregarServicioComoGasto = (servicio) => {
+  const agregarServicioComoGasto = servicio => {
     const { nombre, fecha, monto, descripcion } = servicio
 
     const url = `/nuevo-gasto/formulario?monto=${monto}&descripcion=${descripcion}&nombre=${nombre}&fecha=${fecha}&etiqueta=servicios`
@@ -72,26 +74,25 @@ const useHandleServices = () => {
     navigateTo(url)
   }
 
-  const handleDeleteService = (servicio) => {
+  const handleDeleteService = servicio => {
     const servicioABorrar = servicios.find(
-      (servicioDB) => servicio?.toLowerCase() === servicioDB?.nombre?.toLowerCase()
+      servicioDB =>
+        servicio?.toLowerCase() === servicioDB?.nombre?.toLowerCase()
     )
 
     if (servicioABorrar) {
       try {
         borrarGastoDB(servicioABorrar.idDB, userUID)
         toast.info(
-          `Servicio "${
-            servicio.charAt(0).toUpperCase() + servicio.slice(1)
-          }" borrado correctamente.`
+          `Servicio "${servicio.charAt(0).toUpperCase() +
+            servicio.slice(1)}" borrado correctamente.`
         )
         setShowFormDeleteService(false)
         setServicioABorrar('')
       } catch (error) {
         toast.error(
-          `Error al borrar servicio ${servicio.charAt(0).toUpperCase() + servicio.slice(1)} | ${
-            error?.message
-          }`
+          `Error al borrar servicio ${servicio.charAt(0).toUpperCase() +
+            servicio.slice(1)} | ${error?.message}`
         )
       }
     }
