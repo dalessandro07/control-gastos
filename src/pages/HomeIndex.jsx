@@ -97,11 +97,23 @@ const HomeIndex = () => {
             className={
               pathname.includes('login') || pathname.includes('register')
                 ? 'flex items-center justify-center'
-                : 'flex items-center justify-center bg-gray-100'
+                : 'flex flex-col items-center justify-center bg-gray-100 gap-4 text-sm'
             }
           >
-            <p className='mt-5 mb-2 text-center text-gray-500'>
-              &copy; {new Date().getFullYear()} AllExpenses App
+            <p className='text-center mt-2 text-gray-500'>
+              AllExpenses &copy; {new Date().getFullYear()}
+            </p>
+
+            <p className='text-center mb-5 text-gray-500'>
+              Desarrollado por
+              <a
+                className='ml-1 underline text-blue-500'
+                href='https://www.linkedin.com/in/alessandro-rios/'
+                target='_blank'
+                rel='noreferrer'
+              >
+                Alessandro Rios
+              </a>
             </p>
           </footer>
         </div>

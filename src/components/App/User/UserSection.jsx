@@ -30,7 +30,7 @@ const UserSection = () => {
   const navigateTo = useNavigate()
 
   const handleChangeDivisa = ({ target: { value } }) => {
-    if (!divisaActual) {
+    if (!divisaActual?.divisa) {
       changeDivisa({ divisa: value }, userUID)
     } else {
       changeDivisa({ ...divisaActual, divisa: value }, userUID)
