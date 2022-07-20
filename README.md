@@ -46,8 +46,8 @@
 ### :camera: Gif de presentación
 
 <div align="center"> 
-    <a href="https://drcafe.netlify.app/">
-    <img src="./DRCAFE-APP.gif" alt="Demo" />
+    <a href="https://allexpenses.netlify.app/">
+    <img src="./control-gastos_4OEENJdD.gif" alt="Demo" />
     </a>
 </div>
 

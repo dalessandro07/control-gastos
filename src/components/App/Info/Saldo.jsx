@@ -23,8 +23,6 @@ const Saldo = () => {
     } else {
       setSaldoAMostrar(saldoTotal.toFixed(2))
     }
-
-    console.log(saldoTotal)
   }, [gastos, saldoTotal, totalPorMes])
 
   return (
