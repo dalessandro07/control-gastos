@@ -96,7 +96,7 @@ const HomeIndex = () => {
           <footer
             className={
               pathname.includes('login') || pathname.includes('register')
-                ? 'flex items-center justify-center'
+                ? 'flex flex-col items-center justify-center gap-4 text-sm'
                 : 'flex flex-col items-center justify-center bg-gray-100 gap-4 text-sm'
             }
           >
