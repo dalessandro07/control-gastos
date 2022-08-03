@@ -8,8 +8,9 @@ import useEditGasto from '../../../hooks/useEditGasto'
 import useSeo from '../../../hooks/useSeo'
 import FormNuevoGasto from './FormNuevoGasto'
 import VoiceForm from './VoiceForm'
-import Calculadora from '../Functions/Calculadora'
+import Calculadora from '../functions/Calculadora'
 import { SaldoContext } from '../../../context/SaldoContext'
+import useResizeWindow from '../../../hooks/useResizeWindow'
 
 const fechasRelativas = {
   anteayer: moment().subtract(2, 'days').format('YYYY-MM-DD'),
@@ -32,18 +33,10 @@ const NuevoGasto = ({ mode }) => {
 
   const [params] = useSearchParams()
 
-  const [width, setWidth] = useState(window.innerWidth)
-
-  const handleResize = () => setWidth(window.innerWidth)
+  const { width } = useResizeWindow()
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
-
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  useEffect(() => {
-    const getDate = (fecha) => {
+    const getDate = fecha => {
       if (fechasRelativas[fecha] || fecha?.toString().includes('-')) {
         return fechasRelativas[fecha] || fecha
       }
@@ -52,7 +45,7 @@ const NuevoGasto = ({ mode }) => {
 
     if (params.get('descripcion')?.length >= 1) {
       const isFixed = servicios?.find(
-        (servicio) => servicio.descripcion === params.get('descripcion')
+        servicio => servicio.descripcion === params.get('descripcion')
       )
 
       if (isFixed) setIsFixedService(true)
@@ -192,7 +185,7 @@ const NuevoGasto = ({ mode }) => {
       </Routes>
 
       <footer className="mx-auto mt-8 mb-[-15px] w-3/4">
-        <p className="text-sm text-gray-600">
+        <p className="text-xs text-gray-600">
           * Los datos ingresados serán{' '}
           <span className="font-bold">
             {' '}

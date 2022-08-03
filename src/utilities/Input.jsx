@@ -42,7 +42,7 @@ const Input = ({ register, name, watch, errors }) => {
         message:
           'La contraseña debe tener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial'
       },
-      validate: (value) => {
+      validate: value => {
         if (value !== watch('confirmPassword')) {
           return 'Las contraseñas no coinciden'
         }
@@ -60,7 +60,7 @@ const Input = ({ register, name, watch, errors }) => {
         message: 'La contraseña debe tener como máximo 32 caracteres'
       },
       validate: {
-        value: (val) => {
+        value: val => {
           if (val !== watch('password')) {
             return 'Las contraseñas no coinciden'
           }

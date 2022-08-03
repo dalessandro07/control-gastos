@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import AuthProvider from './context/AuthContext'
-import HomeIndex from './pages/HomeIndex'
+import Main from './components/Main'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -14,7 +14,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="*" element={<HomeIndex />} />
+          <Route path="*" element={<Main />} />
         </Routes>
       </Router>
       <ToastContainer />

@@ -78,61 +78,53 @@ const UserSection = () => {
 
   return (
     <>
-      <header className='mt-4 mb-10 flex flex-col items-center'>
-        <h1 className='text-2xl font-bold'>
+      <header className="mt-4 mb-10 flex flex-col items-center">
+        <h1 className="text-2xl font-bold">
           ¡{`Bienvenid${user?.displayName?.at(-1) === 'a' ? 'a' : 'o'}`}!
         </h1>
 
         {user?.photoURL ? (
-          <img
-            className='mt-6 h-12 w-12 rounded-full object-cover'
-            src={user?.photoURL}
-            alt=''
-          />
+          <img className="mt-6 h-12 w-12 rounded-full object-cover" src={user?.photoURL} alt="" />
         ) : (
-          <div className='mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600'>
-            <p className='text-3xl text-white'>
-              {user?.displayName?.at(0) ?? 'U'}
-            </p>
+          <div className="mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600">
+            <p className="text-3xl text-white">{user?.displayName?.at(0) ?? 'U'}</p>
           </div>
         )}
 
-        <p className='mt-2 flex text-xl font-bold text-sky-600'>
+        <p className="mt-2 flex text-xl font-bold text-sky-600">
           {user?.displayName ?? user?.email?.split('@')[0] ?? 'Usuario'}
 
           <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='h-5 w-5'
-            viewBox='0 0 20 20'
-            fill='#22c55e'
-          >
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="#22c55e">
             <path
-              fillRule='evenodd'
-              d='M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
-              clipRule='evenodd'
+              fillRule="evenodd"
+              d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
             />
           </svg>
         </p>
 
         {user?.phoneNumber && (
-          <p className='font-semibold text-gray-600'>
+          <p className="font-semibold text-gray-600">
             {user?.phoneNumber?.length > 0 &&
               user?.phoneNumber?.replace('+', '').replace(/\d(?=\d{4})/g, '*')}
           </p>
         )}
       </header>
 
-      <section className='flex flex-col items-center'>
-        <article className='mb-8 flex flex-col'>
-          <h2 className='text-lg font-semibold'>Selecciona una divisa</h2>
+      <section className="flex flex-col items-center pb-10">
+        <article className="mb-8 flex flex-col">
+          <h2 className="text-lg font-semibold">Selecciona una divisa</h2>
 
           <select
             onChange={handleChangeDivisa}
-            className='my-3 p-2 shadow-lg'
+            className="my-3 p-2 shadow-lg"
             value={divisaActual?.divisa ?? ''}
-            name='divisas'
-            id='divisas'
-          >
+            name="divisas"
+            id="divisas">
             {Object.keys(divisas).map(key => (
               <option key={key} value={key}>
                 {key} {divisas[key]}
@@ -142,101 +134,90 @@ const UserSection = () => {
         </article>
 
         {showUpdateUser && (
-          <form
-            className='mb-4 -mt-5'
-            onSubmit={handleSubmit(handleUpdateUser)}
-          >
-            <div className='mt-10 mb-5 flex flex-col items-center'>
-              <label htmlFor='displayName' className='text-gray-600'>
+          <form className="mb-4 -mt-5" onSubmit={handleSubmit(handleUpdateUser)}>
+            <div className="mt-10 mb-5 flex flex-col items-center">
+              <label htmlFor="displayName" className="text-gray-600">
                 Cambiar nombre
               </label>
 
               <input
                 {...register('displayName')}
-                type='text'
+                type="text"
                 placeholder={user?.displayName}
-                className='m-4 rounded-lg border border-gray-400 p-2 shadow-md'
+                className="m-4 rounded-lg border border-gray-400 p-2 shadow-md"
               />
 
               {errors?.displayName && (
-                <p className='text-xs text-red-600'>
-                  {errors?.displayName?.message}
-                </p>
+                <p className="text-xs text-red-600">{errors?.displayName?.message}</p>
               )}
 
               <button
-                type='submit'
+                type="submit"
                 className={`${
                   isSubmitting || !isValid || !isDirty
                     ? 'cursor-not-allowed opacity-50'
                     : 'cursor-pointer'
                 } m-4 rounded-lg bg-green-500 p-2 text-white`}
-                disabled={!isValid || isSubmitting || !isDirty}
-              >
+                disabled={!isValid || isSubmitting || !isDirty}>
                 Actualizar
               </button>
             </div>
           </form>
         )}
 
-        <article className='mb-5 flex w-full items-center justify-around'>
-          <div className='flex flex-col items-center gap-2'>
+        <article className="mb-5 flex w-full items-center justify-around">
+          <div className="flex flex-col items-center gap-2">
             <button
               onClick={() => {
                 setShowUpdateUser(!showUpdateUser)
               }}
-              className='flex flex-col items-center rounded-full bg-blue-600 p-2 font-semibold text-white'
-            >
+              className="flex flex-col items-center rounded-full bg-blue-600 p-2 font-semibold text-white">
               {!showUpdateUser ? (
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-6 w-6'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                >
-                  <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z' />
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                 </svg>
               ) : (
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                >
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor">
                   <path
-                    fillRule='evenodd'
-                    d='M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z'
-                    clipRule='evenodd'
+                    fillRule="evenodd"
+                    d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"
+                    clipRule="evenodd"
                   />
-                  <path d='M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z' />
+                  <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
                 </svg>
               )}
             </button>
             <p>{!showUpdateUser ? 'Actualizar datos' : 'Ocultar'}</p>
           </div>
 
-          <div className='flex flex-col items-center justify-center gap-2'>
+          <div className="flex flex-col items-center justify-center gap-2">
             <button
               onClick={handleLogout}
-              className='flex items-center rounded-full bg-red-600 p-2 text-sm font-bold text-gray-100'
-            >
+              className="flex items-center rounded-full bg-red-600 p-2 text-sm font-bold text-gray-100">
               <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-6 w-6'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth={2}
-              >
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}>
                 <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                 />
               </svg>
             </button>
 
-            <p onClick={handleLogout} className='cursor-pointer'>
+            <p onClick={handleLogout} className="cursor-pointer">
               Cerrar sesión
             </p>
           </div>
@@ -246,17 +227,33 @@ const UserSection = () => {
           onClick={() => {
             setShowDeleteAccount(!showDeleteAccount)
           }}
-          className='mt-6 text-sm text-gray-600 underline'
-        >
-          {showDeleteAccount ? 'Ocultar' : 'Deseo eliminar mi cuenta'}
+          className="mt-6 bg-rose-100 p-2 text-sm text-red-600 underline">
+          {showDeleteAccount ? 'Ocultar' : '⚠️ Deseo eliminar mi cuenta'}
         </button>
 
+        <a
+          href="mailto:drios28@outlook.es?subject=Encontr%C3%A9%20un%20error.&body=Hola%20Alessandro%2C%20mi%20nombre%20es"
+          className="mt-5 flex gap-2 bg-rose-100 p-2 text-sm text-red-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 text-red-600"
+            viewBox="0 0 20 20"
+            fill="currentColor">
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Reportar un error
+        </a>
+
         {showDeleteAccount && (
-          <article className='my-8'>
+          <article className="my-8">
             <Modal
-              titleModal='Eliminar mi cuenta ⚠️'
-              paragraphModal='¿Está seguro?, esta acción no se puede deshacer, le recomendamos que exporte sus gastos antes de eliminar la cuenta.'
-              textButtonModal='Eliminar mi cuenta'
+              titleModal="Eliminar mi cuenta ⚠️"
+              paragraphModal="¿Está seguro?, esta acción no se puede deshacer, le recomendamos que exporte sus gastos antes de eliminar la cuenta."
+              textButtonModal="Eliminar mi cuenta"
               callbackButtonConfirm={handleDeleteAccount}
             />
           </article>

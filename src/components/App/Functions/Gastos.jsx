@@ -5,14 +5,14 @@ import { SaldoContext } from '../../../context/SaldoContext'
 
 import Loading from '../../../utilities/Loading'
 import Page404 from '../../../utilities/Page404'
-import UserSection from '../User/UserSection'
+import UserSection from '../user/UserSection'
 import BusquedaGastos from './BusquedaGastos'
 import MainButton from '../../../utilities/MainButton'
 
-const NuevoGasto = lazy(() => import('../Forms/NuevoGasto'))
+const NuevoGasto = lazy(() => import('../forms/NuevoGasto'))
 const ListaDeGastos = lazy(() => import('./ListaDeGastos'))
 const Balance = lazy(() => import('./Balance'))
-const Detalle = lazy(() => import('../Info/Detalle'))
+const Detalle = lazy(() => import('../info/Detalle'))
 const Servicios = lazy(() => import('./Servicios'))
 
 const Gastos = () => {

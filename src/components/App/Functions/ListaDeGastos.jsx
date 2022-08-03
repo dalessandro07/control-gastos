@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Gasto from '../Info/Gasto'
+import Gasto from '../info/Gasto'
 import Loading from '../../../utilities/Loading'
 import GastoLoading from '../../../utilities/GastoLoading'
 import useSeo from '../../../hooks/useSeo'
@@ -26,7 +26,7 @@ const ListaDeGastos = ({ gastos, moment, loading }) => {
         {gastos.length > 0 ? (
           <>
             {loading && <GastoLoading />}
-            {gastos.map((gasto) => (
+            {gastos.map(gasto => (
               <Gasto key={gasto.id} moment={moment} gasto={gasto} />
             ))}
           </>
