@@ -4,9 +4,6 @@ import { Routes, Route } from 'react-router-dom'
 import SaldoProvider from '../context/SaldoContext'
 import DivisasProvider from '../context/DivisasContext'
 
-import Header from './app/layout/Header'
-import Footer from './app/layout/Footer'
-
 import ProtectedRoute from './app/user/ProtectedRoute'
 
 import Login from './login/Login'
@@ -16,6 +13,9 @@ import Register from './register/Register'
 
 import useResizeWindow from '../hooks/useResizeWindow'
 import ScreenSize from './error/ScreenSize'
+
+import Header from './app/layout/Header'
+import Footer from './app/layout/Footer'
 
 const Gastos = lazy(() => import('./app/gastos/Gastos'))
 const Saldo = lazy(() => import('./app/saldo/Saldo'))
