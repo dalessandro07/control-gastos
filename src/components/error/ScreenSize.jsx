@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from '../app/layout/Footer'
+import Footer from '../App/layout/Footer'
 
 const ScreenSize = () => {
   return (

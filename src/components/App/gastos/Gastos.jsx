@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 
 import { SaldoContext } from '../../../context/SaldoContext'
 
-import UserSection from '../user/UserSection'
+import UserSection from '../User/UserSection'
 import MainButtons from './buttons/MainButtons'
 import BusquedaGastos from './BusquedaGastos'
 
