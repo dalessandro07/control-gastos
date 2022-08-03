@@ -15,7 +15,7 @@
     "crypto-js": "4.1.1",
     "firebase": "^9.8.1",
     "mathjs": "^10.6.0",
-    "moment": "2.29.3",
+    "moment": "^2.29.4",
     "react": "18.0.0",
     "react-chartjs-2": "^4.1.0",
     "react-dom": "18.0.0",
@@ -26,7 +26,6 @@
     "react-speech-recognition": "^3.9.1",
     "react-toastify": "^9.0.1",
     "regenerator-runtime": "^0.13.9",
-    "vite-plugin-pwa": "^0.12.3",
     "yup": "0.32.11"
   },
   "devDependencies": {
@@ -45,6 +44,7 @@
     "prettier-plugin-tailwindcss": "0.1.10",
     "tailwindcss": "3.0.24",
     "vite": "^3.0.4",
+    "vite-plugin-pwa": "^0.12.3",
     "workbox-window": "^6.5.3"
   }
 }

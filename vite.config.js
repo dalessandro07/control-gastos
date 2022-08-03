@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      registerType: 'autoUpdate',
       workbox: {
         runtimeCaching: [
           {
@@ -36,7 +37,9 @@ export default defineConfig({
               }
             }
           }
-        ]
+        ],
+        clientsClaim: true,
+        skipWaiting: true
       },
       includeAssets: ['favicon-32x32.png', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
