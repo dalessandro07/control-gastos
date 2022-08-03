@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext'
 import { useDivisas } from '../../../context/DivisasContext'
 
-import Modal from '../../../utilities/Modal'
-import { validationSchemaUser } from '../../../utilities/ValidationSchema'
+import Modal from '../../utils/Modal'
+import { validationSchemaUser } from '../../utils/ValidationSchema'
 
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
@@ -78,7 +78,7 @@ const UserSection = () => {
 
   return (
     <>
-      <header className="mt-4 mb-10 flex flex-col items-center">
+      <header className="my-10 flex flex-col items-center">
         <h1 className="text-2xl font-bold">
           ¡{`Bienvenid${user?.displayName?.at(-1) === 'a' ? 'a' : 'o'}`}!
         </h1>
@@ -91,7 +91,7 @@ const UserSection = () => {
           </div>
         )}
 
-        <p className="mt-2 flex text-xl font-bold text-sky-600">
+        <p className="text-sky-600 mt-2 flex text-xl font-bold">
           {user?.displayName ?? user?.email?.split('@')[0] ?? 'Usuario'}
 
           <svg
@@ -115,7 +115,7 @@ const UserSection = () => {
         )}
       </header>
 
-      <section className="flex flex-col items-center pb-10">
+      <section className="mb-10 flex grow flex-col items-center">
         <article className="mb-8 flex flex-col">
           <h2 className="text-lg font-semibold">Selecciona una divisa</h2>
 
@@ -227,13 +227,13 @@ const UserSection = () => {
           onClick={() => {
             setShowDeleteAccount(!showDeleteAccount)
           }}
-          className="mt-6 bg-rose-100 p-2 text-sm text-red-600 underline">
+          className="bg-rose-100 mt-6 p-2 text-sm text-red-600 underline">
           {showDeleteAccount ? 'Ocultar' : '⚠️ Deseo eliminar mi cuenta'}
         </button>
 
         <a
           href="mailto:drios28@outlook.es?subject=Encontr%C3%A9%20un%20error.&body=Hola%20Alessandro%2C%20mi%20nombre%20es"
-          className="mt-5 flex gap-2 bg-rose-100 p-2 text-sm text-red-600">
+          className="bg-rose-100 mt-5 flex gap-2 p-2 text-sm text-red-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4 text-red-600"

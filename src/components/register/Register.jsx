@@ -1,16 +1,14 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import Input from '../../utilities/Input'
-import FormError from '../../utilities/FormError'
 import useRegister from './hooks/useRegister'
-import { Link } from 'react-router-dom'
+import CustomInput from '../utils/Input/CustomInput'
 
 const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch
   } = useForm({
     mode: 'onChange'
@@ -19,73 +17,79 @@ const Register = () => {
   const { onSubmit } = useRegister()
 
   return (
-    <section className='mt-6 flex flex-col gap-8'>
-      <h1 className='mx-auto mt-6 w-max border-b-2 border-amber-400 pb-1 text-center text-xl font-semibold'>
-        ¡Regístrate, es gratis!
-      </h1>
+    <section className="mx-6 mt-6 flex grow flex-col items-center justify-center gap-8">
+      <h1 className="mt-6 w-4/5 pb-1 text-xl font-semibold xsm:w-2/3">Crea tu cuenta</h1>
 
       <form
-        className='flex flex-col items-center'
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <section className='mb-4 rounded-md py-6 flex flex-col gap-5'>
-          <section className='flex w-full flex-col sm:flex-row'>
-            <label className='flex flex-col items-center'>
-              <p className='font-bold'>Correo electrónico:</p>
-              <Input
-                register={register}
-                name='email'
-                watch={watch}
-                errors={errors}
-              />
+        className="flex w-4/5 flex-col items-center xsm:w-2/3"
+        onSubmit={handleSubmit(onSubmit)}>
+        <section className="mb-4 flex w-full flex-col gap-8 rounded-md py-6">
+          <section className="flex w-full flex-col">
+            <label className="flex w-full flex-col items-center">
+              <CustomInput name="nombre" register={register} watch={watch} errors={errors} />
             </label>
+
+            {errors?.nombre && (
+              <article className="mt-2">
+                <p className="text-xs text-red-600">* {errors.nombre.message}</p>
+              </article>
+            )}
           </section>
 
-          <section className='flex w-full flex-col gap-5 sm:flex-row'>
-            <label className='flex flex-col items-center'>
-              <p className='font-bold'>Contraseña:</p>
-              <Input
-                register={register}
-                name='password'
-                watch={watch}
-                errors={errors}
-              />
+          <section className="flex w-full flex-col">
+            <label className="flex w-full flex-col items-center">
+              <CustomInput name="email" register={register} watch={watch} errors={errors} />
             </label>
 
-            <label className='flex flex-col items-center'>
-              <p className='font-bold'>Confirmar contraseña:</p>
-              <Input
+            {errors?.email && (
+              <article className="mt-2">
+                <p className="text-xs text-red-600">* {errors.email.message}</p>
+              </article>
+            )}
+          </section>
+
+          <section className="flex w-full flex-col gap-8">
+            <article className="flex flex-col items-center">
+              <CustomInput name="password" register={register} watch={watch} errors={errors} />
+
+              {errors?.password && (
+                <article className="mt-2">
+                  <p className="text-xs text-red-600">* {errors.password.message}</p>
+                </article>
+              )}
+            </article>
+
+            <article className="flex flex-col items-center">
+              <CustomInput
+                name="confirmPassword"
                 register={register}
-                name='confirmPassword'
                 watch={watch}
                 errors={errors}
               />
-            </label>
+
+              {errors?.confirmPassword && (
+                <article className="mt-2">
+                  <p className="text-xs text-red-600">* {errors.confirmPassword.message}</p>
+                </article>
+              )}
+            </article>
           </section>
         </section>
 
-        <section className='flex flex-col'>
-          <FormError errors={errors} />
-
-          <Link
-            className='mb-6 text-center text-blue-600 underline'
-            to='/login'
-          >
-            Ya tengo una cuenta
-          </Link>
-
+        <section className="flex flex-col">
           <button
-            type='submit'
+            type="submit"
+            disabled={isSubmitting}
             className={`${
               errors.nombre ||
               errors.email ||
               errors.password ||
-              errors.confirmPassword
+              errors.confirmPassword ||
+              isSubmitting
                 ? 'cursor-not-allowed border-2 border-gray-200 bg-gray-300 text-gray-400'
-                : 'bg-amber-300 shadow-sm transition-colors duration-150 hover:bg-amber-400 font-semibold text-lg'
-            } my-4 mx-auto w-max rounded-sm p-2`}
-          >
-            Registrarme
+                : 'bg-amber-300 text-lg font-semibold shadow-sm transition-colors duration-150 hover:bg-amber-400'
+            } my-4 mx-auto w-max rounded-full p-2 px-6`}>
+            {isSubmitting ? 'Registrándote...' : 'Registrarme'}
           </button>
         </section>
       </form>

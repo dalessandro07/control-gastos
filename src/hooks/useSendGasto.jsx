@@ -6,13 +6,13 @@ import { SaldoContext } from '../context/SaldoContext'
 import { actualizarGastoDB } from '../firebase'
 
 import { useForm } from 'react-hook-form'
-import { validationSchemaGasto } from '../utilities/ValidationSchema'
+import { validationSchemaGasto } from '../components/utils/ValidationSchema'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import moment from 'moment'
 import { toast } from 'react-toastify'
 
-import etiquetasOBJ from '../utilities/dataEtiquetas'
+import etiquetasOBJ from '../components/utils/dataEtiquetas'
 
 const useSendGasto = (mode = 'new') => {
   const { userUID } = useAuth()
@@ -62,16 +62,13 @@ const useSendGasto = (mode = 'new') => {
     } else {
       const dataIsService = servicios.find(
         servicio =>
-          Number(servicio.monto) === Number(data.monto) &&
-          servicio.descripcion === data.descripcion
+          Number(servicio.monto) === Number(data.monto) && servicio.descripcion === data.descripcion
       )
 
       if (dataIsService) {
         const dataActualizada = {
           ...dataIsService,
-          fecha: moment(data.fecha)
-            .add(1, 'months')
-            .format('YYYY-MM-DD')
+          fecha: moment(data.fecha).add(1, 'months').format('YYYY-MM-DD')
         }
 
         actualizarGastoDB(dataIsService.idDB, dataActualizada, userUID)
@@ -90,14 +87,9 @@ const useSendGasto = (mode = 'new') => {
   }
 
   const setValueToForm = (gasto, mode) => {
-
     if (gasto.descripcion && (mode === 'edit' || mode === 'voice')) {
       setValue('monto', gasto.monto)
-      setValue(
-        'fecha',
-        moment(gasto.fecha).format('YYYY-MM-DD') ||
-          moment().format('YYYY-MM-DD')
-      )
+      setValue('fecha', moment(gasto.fecha).format('YYYY-MM-DD') || moment().format('YYYY-MM-DD'))
       setValue('descripcion', gasto.descripcion)
       setValue('idDB', gasto.idDB)
       setValue('etiqueta', gasto.etiqueta)

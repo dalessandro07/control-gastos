@@ -10,16 +10,26 @@ const firebaseAuthErrors = {
 }
 
 const useRegister = () => {
-  const { register } = useAuth()
-
+  const { register, updateUser } = useAuth()
   const navigateTo = useNavigate()
 
   const onSubmit = async (data, e) => {
-    try {
-      await register(data.email, data.password)
+    const capturedData = {
+      nombre: data.nombre.trim(),
+      email: data.email.trim(),
+      password: data.password.trim(),
+      confirmPassword: data.confirmPassword.trim()
+    }
 
-      toast.success('Te has registrado correctamente.')
+    try {
+      await register(capturedData.email, capturedData.password)
+
+      await updateUser({
+        displayName: capturedData?.nombre
+      })
+
       navigateTo('/')
+      toast.success(`¡Bienvenido ${capturedData?.nombre}!`)
 
       e.target.reset()
     } catch (error) {
