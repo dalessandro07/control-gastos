@@ -18,6 +18,8 @@ const useServiceWorker = () => {
     navigator.serviceWorker.register('/service-worker.js')
   }
 
+  updateSW()
+
   return {
     updateSW
   }

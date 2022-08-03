@@ -5,12 +5,13 @@ import { borrarGastoDB } from '../../../../firebase'
 import { SaldoContext } from '../../../../context/SaldoContext'
 
 import { toast } from 'react-toastify'
-import Loading from '../../../../utilities/Loading'
-import moment from 'moment'
-import Modal from '../../../../utilities/Modal'
+import Loading from '../../../utils/Loading'
+import Modal from '../../../utils/Modal'
 import useSeo from '../../../../hooks/useSeo'
 import { useAuth } from '../../../../context/AuthContext'
 import { useDivisas } from '../../../../context/DivisasContext'
+
+import moment from 'moment'
 
 const Detalle = ({ gastos }) => {
   const { userUID } = useAuth()

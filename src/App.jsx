@@ -13,11 +13,8 @@ import './firebase'
 import { ThemeProvider } from '@material-tailwind/react'
 
 const App = () => {
-  useEffect(() => {
-    const { updateSW } = useServiceWorker()
-
-    updateSW()
-  }, [])
+  const { updateSW } = useServiceWorker()
+  useEffect(() => updateSW(), [])
 
   return (
     <AuthProvider>
