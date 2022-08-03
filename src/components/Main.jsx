@@ -1,6 +1,8 @@
 import React, { lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
+import ProtectedRoute from './app/user/ProtectedRoute'
+
 import SaldoProvider from '../context/SaldoContext'
 import DivisasProvider from '../context/DivisasContext'
 
@@ -12,9 +14,8 @@ import Register from './register/Register'
 import useResizeWindow from '../hooks/useResizeWindow'
 import ScreenSize from './error/ScreenSize'
 
-const Header = lazy(() => import('./app/layout/Header'))
-const Footer = lazy(() => import('./app/layout/Footer'))
-const ProtectedRoute = lazy(() => import('./app/user/ProtectedRoute'))
+import Header from './app/layout/Header'
+import Footer from './app/layout/Footer'
 
 const Gastos = lazy(() => import('./app/gastos/Gastos'))
 const Saldo = lazy(() => import('./app/saldo/Saldo'))
