@@ -8,7 +8,7 @@ import { useAuth } from '../../../context/AuthContext'
 const useLogin = () => {
   const [loading, setLoading] = useState(false)
 
-  const { login, loginWithGoogle, AuthErrorCodes, loginWithPhoneNumber, RecaptchaVerifier } =
+  const { login, loginWithGoogle, user, AuthErrorCodes, loginWithPhoneNumber, RecaptchaVerifier } =
     useAuth()
 
   const firebaseAuthErrors = {
@@ -23,23 +23,20 @@ const useLogin = () => {
 
   const navigateTo = useNavigate()
 
-  const changeLoading = (value) => setLoading(value)
+  const changeLoading = value => setLoading(value)
 
   const onSubmit = async (data, e) => {
     try {
       await login(data.email, data.password)
 
-      toast.success(`¡Bienvenido ${data.email.split('@')[0]}!`)
       navigateTo('/')
+      toast.success(`¡Bienvenido ${user?.displayName || data.email.split('@')[0]}!`)
 
       e.target.reset()
     } catch (error) {
-      const errorCode = Object.values(AuthErrorCodes).find((code) => code === error.code)
+      const errorCode = Object.values(AuthErrorCodes).find(code => code === error.code)
 
-      toast.error(
-        `Error: ${firebaseAuthErrors[errorCode] || errorCode}` ||
-          'Se ha producido un error, inténtalo de nuevo.'
-      )
+      toast.error(`Error: ${firebaseAuthErrors[errorCode] || error.message}`)
     }
   }
 
@@ -49,7 +46,7 @@ const useLogin = () => {
 
       navigateTo('/')
     } catch (error) {
-      const errorCode = Object.values(AuthErrorCodes).find((code) => code === error.code)
+      const errorCode = Object.values(AuthErrorCodes).find(code => code === error.code)
 
       toast.error(
         `Error: ${firebaseAuthErrors[errorCode] || errorCode}` ||
@@ -61,7 +58,7 @@ const useLogin = () => {
   const handlePhoneNumberLogin = async (phoneNumber, appVerifier) => {
     setLoading(true)
     try {
-      loginWithPhoneNumber(phoneNumber, appVerifier).then((confirmationResult) => {
+      loginWithPhoneNumber(phoneNumber, appVerifier).then(confirmationResult => {
         window.confirmationResult = confirmationResult
         setLoading(false)
         toast.success(
@@ -71,7 +68,8 @@ const useLogin = () => {
         )
       })
     } catch (error) {
-      const errorCode = Object.values(AuthErrorCodes).find((code) => code === error.code)
+      const errorCode =
+        Object.values(AuthErrorCodes).find(code => code === error.code) || error.message
 
       setLoading(false)
       toast.error(

@@ -20,7 +20,7 @@ const MainButtonsLogin = ({ showEmailLogin, setShowEmailLogin }) => {
         <div className="h-1 w-full border-t border-black" />
       </div>
 
-      <Link to="/register">
+      <Link className="mx-auto w-max" to="/register">
         <button
           onClick={() => setShowEmailLogin(!showEmailLogin)}
           className="m-auto my-6 flex w-max items-center rounded-full bg-amber-400 p-2 px-6">
@@ -28,7 +28,7 @@ const MainButtonsLogin = ({ showEmailLogin, setShowEmailLogin }) => {
         </button>
       </Link>
 
-      <footer className="flex flex-col items-start gap-1 xs:flex-row">
+      <footer className="mt-5 flex flex-col items-start gap-2 xs:flex-row">
         <p className="text-sm">¿Ya tienes una cuenta?</p>
         <button
           onClick={() => setShowEmailLogin(!showEmailLogin)}

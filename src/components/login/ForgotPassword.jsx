@@ -22,37 +22,15 @@ const ForgotPassword = () => {
 
   return (
     <section className="flex grow flex-col justify-center gap-10">
-      <h1 className="mx-auto w-max border-b-2 border-red-400 pb-1 text-center text-xl font-semibold">
-        Restablece tu contraseña
+      <h1 className="pb-1 text-center text-2xl font-semibold leading-9">
+        Reestablece tu contraseña.
       </h1>
 
       <form
         className="mx-auto flex w-3/4 flex-col items-center justify-center xsm:w-2/3"
         onSubmit={handleSubmit(onSubmit)}>
         <label className="my-6 flex w-full flex-col items-center">
-          <CustomInput
-            icon={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-            }
-            register={register}
-            name="email"
-            type="email"
-            label="Correo electrónico"
-            watch={watch}
-            errors={errors}
-          />
+          <CustomInput register={register} name="email" watch={watch} errors={errors} />
 
           {errors?.email && (
             <article className="mt-2">

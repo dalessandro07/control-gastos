@@ -32,11 +32,9 @@ const AuthProvider = ({ children }) => {
   const [userUID, setUserUID] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const register = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password)
+  const register = (email, password) => createUserWithEmailAndPassword(auth, email, password)
 
-  const login = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password)
+  const login = (email, password) => signInWithEmailAndPassword(auth, email, password)
 
   const loginWithGoogle = () => signInWithPopup(auth, new GoogleAuthProvider())
 
@@ -75,11 +73,7 @@ const AuthProvider = ({ children }) => {
     updateUser
   }
 
-  return (
-    <authContext.Provider value={valueToExport}>
-      {children}
-    </authContext.Provider>
-  )
+  return <authContext.Provider value={valueToExport}>{children}</authContext.Provider>
 }
 
 export default AuthProvider

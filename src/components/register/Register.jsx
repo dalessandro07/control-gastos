@@ -87,7 +87,7 @@ const Register = () => {
               errors.confirmPassword ||
               isSubmitting
                 ? 'cursor-not-allowed border-2 border-gray-200 bg-gray-300 text-gray-400'
-                : 'bg-amber-300 text-lg font-semibold shadow-sm transition-colors duration-150 hover:bg-amber-400'
+                : 'bg-amber-300 font-semibold shadow-sm transition-colors duration-150 hover:bg-amber-400'
             } my-4 mx-auto w-max rounded-full p-2 px-6`}>
             {isSubmitting ? 'Registrándote...' : 'Registrarme'}
           </button>
