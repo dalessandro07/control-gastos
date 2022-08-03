@@ -4,12 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AuthProvider from './context/AuthContext'
 import Main from './components/Main'
 
+import { ThemeProvider } from '@material-tailwind/react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import './firebase'
-
-import { ThemeProvider } from '@material-tailwind/react'
 
 const App = () => {
   return (
