@@ -45,7 +45,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
           <p>Fecha:</p>
           <input
             className={`${
-              errors.fecha ? 'border-red-500 text-red-500' : 'border-sky-600'
+              errors.fecha ? 'border-red-500 text-red-500' : 'border-blue-600'
             } rounded-sm border-2 p-1`}
             type="date"
             {...register('fecha')}
@@ -62,7 +62,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
             className={`${
               errors.descripcion
                 ? 'border-red-500 text-red-500 placeholder:text-red-300'
-                : 'border-sky-600'
+                : 'border-blue-600'
             } mt-4 max-h-60 min-h-[120px] resize-y border-2 p-2`}
             placeholder="Ingrese la descripción"
             type="text"
@@ -79,7 +79,7 @@ const FormNuevoGasto = ({ valueSendGasto }) => {
 
           <select
             className={`${
-              errors.etiqueta ? 'border-red-500 text-red-500' : 'border-sky-600'
+              errors.etiqueta ? 'border-red-500 text-red-500' : 'border-blue-600'
             } cursor-pointer rounded-sm border-b-2 bg-gray-100 p-1`}
             {...register('etiqueta')}
             onChange={e => cambiarEtiqueta(e.target.value)}

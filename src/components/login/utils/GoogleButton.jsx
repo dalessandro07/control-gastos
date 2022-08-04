@@ -4,7 +4,7 @@ const GoogleButton = ({ handleGoogleLogin }) => {
   return (
     <button
       onClick={handleGoogleLogin}
-      className="m-auto flex w-full items-center rounded-full border border-amber-400 p-2 px-6">
+      className="m-auto flex w-full items-center rounded-full border border-amber-400 p-2 px-6 transition-all duration-100 ease-linear hover:bg-gradient-to-l hover:from-amber-400 hover:to-amber-100">
       <svg
         className="mr-4"
         width={19}

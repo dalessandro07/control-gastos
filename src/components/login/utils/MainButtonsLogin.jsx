@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import useLogin from '../hooks/useLogin'
 import GoogleButton from './GoogleButton'
 import PhoneButton from './PhoneButton'
+import AmberButton from './../../utils/Button/AmberButton'
 
 const MainButtonsLogin = ({ showEmailLogin, setShowEmailLogin }) => {
   const { handleGoogleLogin } = useLogin()
@@ -21,11 +22,9 @@ const MainButtonsLogin = ({ showEmailLogin, setShowEmailLogin }) => {
       </div>
 
       <Link className="mx-auto w-max" to="/register">
-        <button
-          onClick={() => setShowEmailLogin(!showEmailLogin)}
-          className="m-auto my-6 flex w-max items-center rounded-full bg-amber-400 p-2 px-6">
-          <p className="text-sm font-semibold xsm:text-base">Crear cuenta</p>
-        </button>
+        <AmberButton handleClick={() => setShowEmailLogin(!showEmailLogin)}>
+          Crear cuenta
+        </AmberButton>
       </Link>
 
       <footer className="mt-5 flex flex-col items-start gap-2 xs:flex-row">

@@ -10,7 +10,9 @@ const useResizeWindow = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  return { width }
+  const isMobile = width < 680
+
+  return { width, isMobile }
 }
 
 export default useResizeWindow

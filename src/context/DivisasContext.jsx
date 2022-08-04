@@ -27,9 +27,7 @@ const DivisasProvider = ({ children }) => {
   }
 
   return (
-    <divisasContext.Provider
-      value={{ divisaActual, changeDivisa, setDivisaActual }}
-    >
+    <divisasContext.Provider value={{ divisaActual, changeDivisa, setDivisaActual }}>
       {children}
     </divisasContext.Provider>
   )

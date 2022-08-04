@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAuth } from '../../../context/AuthContext'
 import { useDivisas } from '../../../context/DivisasContext'
@@ -8,8 +10,7 @@ import Modal from '../../utils/Modal'
 import { validationSchemaUser } from '../../utils/ValidationSchema'
 
 import { toast } from 'react-toastify'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import UserAvatar from './utils/UserAvatar'
 
 const UserSection = () => {
   const { user, logout, deleteAccount, updateUser, userUID } = useAuth()
@@ -79,20 +80,12 @@ const UserSection = () => {
   return (
     <>
       <header className="my-10 flex flex-col items-center">
-        <h1 className="text-2xl font-bold">
-          ¡{`Bienvenid${user?.displayName?.at(-1) === 'a' ? 'a' : 'o'}`}!
-        </h1>
+        <UserAvatar user={user} />
 
-        {user?.photoURL ? (
-          <img className="mt-6 h-12 w-12 rounded-full object-cover" src={user?.photoURL} alt="" />
-        ) : (
-          <div className="mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600">
-            <p className="text-3xl text-white">{user?.displayName?.at(0) ?? 'U'}</p>
-          </div>
-        )}
-
-        <p className="text-sky-600 mt-2 flex text-xl font-bold">
-          {user?.displayName ?? user?.email?.split('@')[0] ?? 'Usuario'}
+        <div className="mt-2 flex">
+          <p className="text-lg font-bold">
+            {user?.displayName ?? user?.email?.split('@')[0] ?? 'Usuario'}
+          </p>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +98,7 @@ const UserSection = () => {
               clipRule="evenodd"
             />
           </svg>
-        </p>
+        </div>
 
         {user?.phoneNumber && (
           <p className="font-semibold text-gray-600">
@@ -227,26 +220,9 @@ const UserSection = () => {
           onClick={() => {
             setShowDeleteAccount(!showDeleteAccount)
           }}
-          className="bg-rose-100 mt-6 p-2 text-sm text-red-600 underline">
+          className="mt-6 bg-red-100 p-2 text-sm text-red-600 underline">
           {showDeleteAccount ? 'Ocultar' : '⚠️ Deseo eliminar mi cuenta'}
         </button>
-
-        <a
-          href="mailto:drios28@outlook.es?subject=Encontr%C3%A9%20un%20error.&body=Hola%20Alessandro%2C%20mi%20nombre%20es"
-          className="bg-rose-100 mt-5 flex gap-2 p-2 text-sm text-red-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 text-red-600"
-            viewBox="0 0 20 20"
-            fill="currentColor">
-            <path
-              fillRule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-          Reportar un error
-        </a>
 
         {showDeleteAccount && (
           <article className="my-8">

@@ -3,13 +3,13 @@ import { toast } from 'react-toastify'
 
 registerSW({
   onNeedRefresh() {
-    toast.info('Actualizando a una nueva versión, reinicie la aplicación')
+    toast.info('Actualizando a una nueva versión, reinicie la aplicación.')
   },
   onOfflineReady() {
-    toast.success('Aplicación disponible')
+    toast.success('Aplicación disponible.')
   },
   onRegisterError() {
-    toast.error('Hubo un error, refresque la página, e inténtelo de nuevo')
+    toast.error('Hubo un error, refresque la página, e inténtelo de nuevo.')
   }
 })
 

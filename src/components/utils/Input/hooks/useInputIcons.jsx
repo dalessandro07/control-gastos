@@ -1,6 +1,11 @@
 import React from 'react'
 
-const useInput = (viewPassword, viewConfirmPassword, setViewPassword, setViewConfirmPassword) => {
+const useInputIcons = (
+  viewPassword,
+  viewConfirmPassword,
+  setViewPassword,
+  setViewConfirmPassword
+) => {
   const nameIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -107,4 +112,4 @@ const useInput = (viewPassword, viewConfirmPassword, setViewPassword, setViewCon
   }
 }
 
-export default useInput
+export default useInputIcons

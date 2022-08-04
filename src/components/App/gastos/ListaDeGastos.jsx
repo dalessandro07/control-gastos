@@ -40,7 +40,7 @@ const ListaDeGastos = ({ gastos, moment, loading }) => {
       <footer className="m-4 flex flex-col">
         <section className="flex justify-end">
           <h2 className="text-center font-dosis text-sm">
-            Fotos de{' '}
+            Imágenes de{' '}
             <a
               className="border-b-2 border-amber-300 font-bold"
               href="https://www.pexels.com/es-es/"

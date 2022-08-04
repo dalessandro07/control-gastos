@@ -1,30 +1,28 @@
 import { useState, useEffect, useContext } from 'react'
 import { SaldoContext } from '../../../../context/SaldoContext'
 
+import moment from 'moment'
+
 const useShowSaldo = () => {
   const { gastos, saldoTotal, servicios, loading, totalPorMes } = useContext(SaldoContext)
-  const [saldoAMostrar, setSaldoAMostrar] = useState(saldoTotal)
+  const [saldoAMostrar, setSaldoAMostrar] = useState(saldoTotal?.toFixed(2))
+  const mesActual = moment().format('MMMM')
 
   useEffect(() => {
-    const mes = totalPorMes?.mes
+    if (totalPorMes) {
+      const { monto } = totalPorMes
 
-    if (mes) {
-      if (totalPorMes?.monto === 0 || !totalPorMes?.monto) {
-        setSaldoAMostrar(saldoTotal.toFixed(2))
-      } else {
-        setSaldoAMostrar(totalPorMes?.monto?.toFixed(2))
-      }
-    } else {
-      setSaldoAMostrar(saldoTotal.toFixed(2))
+      if (monto > 0) setSaldoAMostrar(monto?.toFixed(2))
     }
   }, [gastos, saldoTotal, totalPorMes])
 
   return {
     saldoAMostrar,
-    loading,
     servicios,
+    loading,
     totalPorMes,
-    saldoTotal
+    saldoTotal,
+    mesActual
   }
 }
 

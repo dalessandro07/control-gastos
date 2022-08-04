@@ -1,30 +1,42 @@
 import React from 'react'
+
 import { useDivisas } from '../../../context/DivisasContext'
-import ExpiredServices from '../servicios/ExpiredServices'
+
 import useShowSaldo from './hooks/useShowSaldo'
+import ExpiredServices from '../servicios/ExpiredServices'
+
+import { Ring } from '@uiball/loaders'
 
 const Saldo = () => {
   const { divisaActual } = useDivisas()
-  const { saldoAMostrar, loading, servicios, totalPorMes, saldoTotal } = useShowSaldo()
+  const { mesActual, saldoAMostrar, loading, servicios, totalPorMes, saldoTotal } = useShowSaldo()
 
   return (
     <>
-      <header className="mt-8 flex flex-col items-center">
-        <h2 className="font-semibold text-gray-600">Total gastado:</h2>
-        <p className="text-sm text-gray-600">{totalPorMes?.mes || 'De todos los meses'}</p>
-        <section className="flex w-full justify-center bg-amber-300 py-3">
-          <article className="mx-2 flex">
-            <p className="text-gray-800">{divisaActual?.divisa}</p>
-            <section className="">
-              {loading ? (
-                <section className="animate-bounce text-2xl font-bold">...</section>
-              ) : (
-                <p className="text-5xl font-bold">{saldoAMostrar || saldoTotal?.toFixed(2)}</p>
-              )}
-            </section>
+      <div className="mt-8 flex flex-col items-start">
+        <header className="p-2 px-6">
+          <p className="flex gap-1 text-sm">
+            Total gastado,
+            <span className="font-bold lowercase">
+              {mesActual === totalPorMes.mes ? 'Este mes' : totalPorMes.mes}.
+            </span>
+          </p>
+        </header>
+
+        <section className="flex w-full justify-start py-2 px-4">
+          <article className="mx-2 flex items-center gap-2">
+            <p className="text-2xl text-gray-800">{divisaActual?.divisa}</p>
+
+            {loading ? (
+              <Ring size={30} lineWeight={5} speed={2} color="black" />
+            ) : (
+              <p className="text-5xl font-bold xsm:text-6xl">
+                {saldoAMostrar || saldoTotal?.toFixed(2)}
+              </p>
+            )}
           </article>
         </section>
-      </header>
+      </div>
 
       <ExpiredServices servicios={servicios} />
     </>

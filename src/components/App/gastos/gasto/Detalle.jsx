@@ -148,7 +148,7 @@ const Detalle = ({ gastos }) => {
               titleModal="Enviar gasto"
               paragraphModal="¿Por qué medio deseas compartir el gasto?"
               textButtonModal="Compartir"
-              bgc={'bg-sky-600 hover:bg-sky-700'}
+              bgc={'bg-blue-600 hover:bg-blue-700'}
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -187,8 +187,8 @@ const Detalle = ({ gastos }) => {
                   <button
                     className={`${
                       mode === 'copy-link'
-                        ? 'bg-sky-500 p-3 text-lg text-gray-100 shadow-lg'
-                        : 'bg-sky-200 text-gray-900'
+                        ? 'bg-blue-500 p-3 text-lg text-gray-100 shadow-lg'
+                        : 'bg-blue-200 text-gray-900'
                     } m-4 flex items-center gap-1 rounded-sm p-2`}
                     onClick={() => setMode('copy-link')}>
                     Copiar enlace

@@ -35,7 +35,7 @@ const MainButtons = () => {
   ]
 
   return (
-    <header className="mt-6 mb-2 flex items-center justify-between">
+    <header className="flex items-center justify-between">
       <nav className="flex w-full justify-around">
         {mainButtons.map((button, index) => (
           <MainButton

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 
 import { Input } from '@material-tailwind/react'
-import useInput from './hooks/useInput'
+import useInputIcons from './hooks/useInputIcons'
 
 const CustomInput = ({ register, watch, errors, name, type = '', label = '', icon = '' }) => {
   const [viewPassword, setViewPassword] = useState(false)
   const [viewConfirmPassword, setViewConfirmPassword] = useState(false)
 
-  const { nameIcon, emailIcon, passwordIcon, confirmPasswordIcon } = useInput(
+  const { nameIcon, emailIcon, passwordIcon, confirmPasswordIcon } = useInputIcons(
     viewPassword,
     viewConfirmPassword,
     setViewPassword,
@@ -91,6 +91,7 @@ const CustomInput = ({ register, watch, errors, name, type = '', label = '', ico
 
   return (
     <Input
+      required
       {...register(name, values[name])}
       color="amber"
       className="xs:text-lg"

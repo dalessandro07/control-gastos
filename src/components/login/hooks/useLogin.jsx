@@ -8,7 +8,7 @@ import { useAuth } from '../../../context/AuthContext'
 const useLogin = () => {
   const [loading, setLoading] = useState(false)
 
-  const { login, loginWithGoogle, user, AuthErrorCodes, loginWithPhoneNumber, RecaptchaVerifier } =
+  const { login, loginWithGoogle, AuthErrorCodes, loginWithPhoneNumber, RecaptchaVerifier } =
     useAuth()
 
   const firebaseAuthErrors = {
@@ -26,17 +26,23 @@ const useLogin = () => {
   const changeLoading = value => setLoading(value)
 
   const onSubmit = async (data, e) => {
-    try {
-      await login(data.email, data.password)
+    e.preventDefault()
 
-      navigateTo('/')
-      toast.success(`¡Bienvenido ${user?.displayName || data.email.split('@')[0]}!`)
+    if (data.email && data.password) {
+      try {
+        const userCredential = await login(data.email, data.password)
 
-      e.target.reset()
-    } catch (error) {
-      const errorCode = Object.values(AuthErrorCodes).find(code => code === error.code)
+        toast.success(
+          `¡Bienvenido ${userCredential?.user?.displayName || data.email.split('@')[0]}!`
+        )
+        navigateTo('/')
 
-      toast.error(`Error: ${firebaseAuthErrors[errorCode] || error.message}`)
+        e.target.reset()
+      } catch (error) {
+        const errorCode = Object.values(AuthErrorCodes).find(code => code === error.code)
+
+        toast.error(`Error: ${firebaseAuthErrors[errorCode] || error.message}`)
+      }
     }
   }
 
