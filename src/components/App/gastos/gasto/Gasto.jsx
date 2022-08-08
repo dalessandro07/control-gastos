@@ -1,10 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDivisas } from '../../../../context/DivisasContext'
+import { useDivisasContext } from '../../../../context/DivisasContext'
 import useResizeWindow from '../../../../hooks/useResizeWindow'
 
 const Gasto = ({ gasto, moment }) => {
-  const { divisaActual } = useDivisas()
+  const { divisaActual } = useDivisasContext()
   const navigateTo = useNavigate()
   const { width } = useResizeWindow()
 
