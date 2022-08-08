@@ -57,12 +57,72 @@ const validationSchemaGasto = yup.object().shape({
 })
 
 const validationSchemaUser = yup.object().shape({
-  displayName: yup
+  nombre: yup
     .string()
     .required('El nombre es requerido')
     .min(3, 'El nombre debe tener al menos 3 caracteres')
-    .max(20, 'El nombre debe tener como máximo 20 caracteres')
+    .max(32, 'El nombre debe tener como máximo 32 caracteres')
+    .matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s ]+$/, 'El nombre solo puede contener letras'),
+  email: yup.string().required('El email es requerido').email('El email no es válido'),
+  password: yup
+    .string()
+    .required('La contraseña es requerida')
+    .min(8, 'La contraseña debe tener al menos 8 caracteres')
+    .max(32, 'La contraseña debe tener como máximo 32 caracteres')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial'
+    ),
+  confirmPassword: yup
+    .string()
+    .required('La confirmación de la contraseña es requerida')
+    .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden')
+})
+
+const validationSchemaName = yup.object().shape({
+  nombre: yup
+    .string()
+    .required('El nombre es requerido')
+    .min(3, 'El nombre debe tener al menos 3 caracteres')
+    .max(32, 'El nombre debe tener como máximo 32 caracteres')
     .matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s ]+$/, 'El nombre solo puede contener letras')
 })
 
-export { validationSchemaServices, validationSchemaGasto, validationSchemaUser }
+const validationSchemaEmail = yup.object().shape({
+  email: yup.string().required('El email es requerido').email('El email no es válido')
+})
+
+const validationSchemaEmailLogin = yup.object().shape({
+  email: yup.string().required('El email es requerido').email('El email no es válido'),
+  password: yup
+    .string()
+    .required('La contraseña es requerida')
+    .min(8, 'La contraseña debe tener al menos 8 caracteres')
+    .max(32, 'La contraseña debe tener como máximo 32 caracteres')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial'
+    )
+})
+
+const validationSchemaPassword = yup.object().shape({
+  password: yup
+    .string()
+    .required('La contraseña es requerida')
+    .min(8, 'La contraseña debe tener al menos 8 caracteres')
+    .max(32, 'La contraseña debe tener como máximo 32 caracteres')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial'
+    )
+})
+
+export {
+  validationSchemaServices,
+  validationSchemaGasto,
+  validationSchemaUser,
+  validationSchemaName,
+  validationSchemaEmail,
+  validationSchemaEmailLogin,
+  validationSchemaPassword
+}

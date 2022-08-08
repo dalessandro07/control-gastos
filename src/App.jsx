@@ -7,6 +7,7 @@ import Main from './components/Main'
 import { ThemeProvider } from '@material-tailwind/react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import 'react-phone-number-input/style.css'
 
 import './firebase'
 

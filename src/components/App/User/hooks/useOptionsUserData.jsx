@@ -1,8 +1,8 @@
 import React from 'react'
 
-import ChangeName from '../ChangeName'
+import EditUser from '../edit/EditUser'
+import HelpCenter from '../help/HelpCenter'
 import SelectDivisa from '../SelectDivisa'
-import HelpCenter from '../HelpCenter'
 
 const useOptionsUserData = () => {
   const userOptions = [
@@ -22,7 +22,7 @@ const useOptionsUserData = () => {
           />
         </svg>
       ),
-      content: <ChangeName />
+      content: <EditUser EditUser />
     },
     {
       id: 2,

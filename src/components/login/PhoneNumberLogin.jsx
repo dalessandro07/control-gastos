@@ -3,7 +3,6 @@ import { toast } from 'react-toastify'
 
 import Loading from '../utils/Loading'
 
-import 'react-phone-number-input/style.css'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import usePhoneLogin from './hooks/usePhoneLogin'
 

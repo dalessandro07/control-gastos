@@ -2,8 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { useForm } from 'react-hook-form'
-import useForgotPassword from './hooks/useForgotPassword'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { validationSchemaEmail } from '../utils/ValidationSchema'
 
+import useForgotPassword from './hooks/useForgotPassword'
 import CustomInput from '../utils/Input/CustomInput'
 
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -12,10 +14,10 @@ const ForgotPassword = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting }
   } = useForm({
-    mode: 'onChange'
+    mode: 'onChange',
+    resolver: yupResolver(validationSchemaEmail)
   })
 
   const { onSubmit, setIsRobot } = useForgotPassword()
@@ -30,13 +32,7 @@ const ForgotPassword = () => {
         className="mx-auto flex w-3/4 flex-col items-center justify-center xsm:w-2/3"
         onSubmit={handleSubmit(onSubmit)}>
         <label className="my-6 flex w-full flex-col items-center">
-          <CustomInput register={register} name="email" watch={watch} errors={errors} />
-
-          {errors?.email && (
-            <article className="mt-2">
-              <p className="text-xs text-red-600">* {errors.email.message}</p>
-            </article>
-          )}
+          <CustomInput name="email" register={register} errors={errors} />
         </label>
 
         <div className="my-6 mb-10">

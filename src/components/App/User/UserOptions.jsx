@@ -4,7 +4,7 @@ import { Accordion, AccordionHeader, AccordionBody } from '@material-tailwind/re
 import AccordionIcon from './utils/AccordionIcon'
 import useOptionsUserData from './hooks/useOptionsUserData'
 
-export default function Example() {
+export default function UserOptions() {
   const { userOptions } = useOptionsUserData()
   const [open, setOpen] = useState(0)
 
@@ -14,7 +14,9 @@ export default function Example() {
     <section className="my-10 w-full px-8">
       {userOptions.map(({ id, title, icon, content }) => (
         <Accordion
-          className={open === id ? 'child:!h-auto' : ''}
+          className={
+            open === id ? 'child:!h-auto child:!overflow-y-auto child:!overflow-x-hidden' : ''
+          }
           icon={<AccordionIcon id={id} open={open} />}
           key={id}
           open={open === id}
@@ -27,7 +29,7 @@ export default function Example() {
               </div>
             </div>
           </AccordionHeader>
-          <AccordionBody>{content}</AccordionBody>
+          <AccordionBody onClick={e => e.stopPropagation()}>{content}</AccordionBody>
         </Accordion>
       ))}
     </section>

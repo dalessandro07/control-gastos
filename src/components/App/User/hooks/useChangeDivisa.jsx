@@ -7,7 +7,7 @@ const useChangeDivisa = () => {
   const { userUID } = useAuth()
   const { divisaActual, changeDivisa } = useDivisasContext()
 
-  const handleChangeDivisa = ({ target: { value } }) => {
+  const saveDivisaDB = value => {
     if (!divisaActual?.divisa) {
       changeDivisa({ divisa: value }, userUID)
     } else {
@@ -25,7 +25,7 @@ const useChangeDivisa = () => {
 
   return {
     divisas,
-    handleChangeDivisa,
+    saveDivisaDB,
     divisaActual
   }
 }

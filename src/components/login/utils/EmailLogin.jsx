@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { validationSchemaEmailLogin } from '../../utils/ValidationSchema'
 
 import CustomInput from '../../utils/Input/CustomInput'
 import useLogin from '../hooks/useLogin'
@@ -10,10 +12,10 @@ const EmailLogin = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting }
   } = useForm({
-    mode: 'onChange'
+    mode: 'onChange',
+    resolver: yupResolver(validationSchemaEmailLogin)
   })
 
   const { onSubmit } = useLogin()
@@ -24,23 +26,11 @@ const EmailLogin = () => {
       onSubmit={handleSubmit(onSubmit)}>
       <section className="mb-4 flex flex-col rounded-md py-5">
         <label className="my-6 flex flex-col items-center">
-          <CustomInput register={register} name="email" watch={watch} errors={errors} />
-
-          {errors?.email && (
-            <article className="mt-2">
-              <p className="text-xs text-red-600">* {errors.email.message}</p>
-            </article>
-          )}
+          <CustomInput register={register} name="email" errors={errors} />
         </label>
 
         <label className="mt-6 flex flex-col items-center">
-          <CustomInput register={register} name="password" watch={watch} errors={errors} />
-
-          {errors?.password && (
-            <article className="mt-2">
-              <p className="text-xs text-red-600">* {errors.password.message}</p>
-            </article>
-          )}
+          <CustomInput register={register} name="password" errors={errors} />
         </label>
       </section>
 

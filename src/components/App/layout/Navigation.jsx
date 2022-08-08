@@ -7,7 +7,7 @@ const Navigation = () => {
   const { colorActual } = useColor()
 
   return (
-    <nav className={`fixed bottom-0 w-full ${colorActual}`}>
+    <nav className={`fixed bottom-0 z-[999] w-full ${colorActual}`}>
       <MainButtons />
     </nav>
   )

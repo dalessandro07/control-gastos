@@ -1,5 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { validationSchemaUser } from '../utils/ValidationSchema'
 
 import useRegister from './hooks/useRegister'
 import CustomInput from '../utils/Input/CustomInput'
@@ -8,10 +10,10 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-    watch
+    formState: { errors, isSubmitting }
   } = useForm({
-    mode: 'onChange'
+    mode: 'onChange',
+    resolver: yupResolver(validationSchemaUser)
   })
 
   const { onSubmit } = useRegister()
@@ -26,52 +28,23 @@ const Register = () => {
         <section className="mb-4 flex w-full flex-col gap-8 rounded-md py-6">
           <section className="flex w-full flex-col">
             <label className="flex w-full flex-col items-center">
-              <CustomInput name="nombre" register={register} watch={watch} errors={errors} />
+              <CustomInput name="nombre" register={register} errors={errors} />
             </label>
-
-            {errors?.nombre && (
-              <article className="mt-2">
-                <p className="text-xs text-red-600">* {errors.nombre.message}</p>
-              </article>
-            )}
           </section>
 
           <section className="flex w-full flex-col">
             <label className="flex w-full flex-col items-center">
-              <CustomInput name="email" register={register} watch={watch} errors={errors} />
+              <CustomInput name="email" register={register} errors={errors} />
             </label>
-
-            {errors?.email && (
-              <article className="mt-2">
-                <p className="text-xs text-red-600">* {errors.email.message}</p>
-              </article>
-            )}
           </section>
 
           <section className="flex w-full flex-col gap-8">
             <article className="flex flex-col items-center">
-              <CustomInput name="password" register={register} watch={watch} errors={errors} />
-
-              {errors?.password && (
-                <article className="mt-2">
-                  <p className="text-xs text-red-600">* {errors.password.message}</p>
-                </article>
-              )}
+              <CustomInput name="password" register={register} errors={errors} />
             </article>
 
             <article className="flex flex-col items-center">
-              <CustomInput
-                name="confirmPassword"
-                register={register}
-                watch={watch}
-                errors={errors}
-              />
-
-              {errors?.confirmPassword && (
-                <article className="mt-2">
-                  <p className="text-xs text-red-600">* {errors.confirmPassword.message}</p>
-                </article>
-              )}
+              <CustomInput name="confirmPassword" register={register} errors={errors} />
             </article>
           </section>
         </section>

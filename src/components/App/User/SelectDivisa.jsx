@@ -1,26 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import useChangeDivisa from './hooks/useChangeDivisa'
+import { Button, Select, Option } from '@material-tailwind/react'
+import { useColor } from '../../../context/ColorContext'
 
 const SelectDivisa = () => {
-  const { divisas, handleChangeDivisa, divisaActual } = useChangeDivisa()
+  const { resumeColor } = useColor()
+  const { divisas, saveDivisaDB, divisaActual } = useChangeDivisa()
+  const [divisaSelected, setDivisaSelected] = useState(divisaActual?.divisa || '')
+
+  const handleChangeDivisa = val => setDivisaSelected(val)
+  const saveDivisa = () => saveDivisaDB(divisaSelected)
 
   return (
-    <article className="mb-8 flex flex-col">
-      <h2 className="text-lg font-semibold">Selecciona una divisa</h2>
-
-      <select
-        onChange={handleChangeDivisa}
-        className="my-3 p-2 shadow-lg"
-        value={divisaActual?.divisa ?? ''}
-        name="divisas"
-        id="divisas">
+    <article className="my-5 flex flex-col items-center justify-between gap-8">
+      <Select onChange={handleChangeDivisa} value={divisaSelected} label="Escoje una moneda">
         {Object.keys(divisas).map(key => (
-          <option key={key} value={key}>
+          <Option key={key} value={key}>
             {key} {divisas[key]}
-          </option>
+          </Option>
         ))}
-      </select>
+      </Select>
+
+      <Button onClick={saveDivisa} size="sm" color={resumeColor} variant="gradient">
+        Guardar
+      </Button>
     </article>
   )
 }
