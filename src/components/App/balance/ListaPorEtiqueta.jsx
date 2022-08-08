@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Gasto from '../gastos/gasto/Gasto'
 import moment from 'moment'
-import { useDivisas } from '../../../context/DivisasContext'
+import { useDivisasContext } from '../../../context/DivisasContext'
 
 const ListaPorEtiqueta = ({ gastos, selectedTag, changeSelectTag, porcentajes }) => {
-  const { divisaActual } = useDivisas()
+  const { divisaActual } = useDivisasContext()
 
   const [gastosPorEtiqueta, setGastosPorEtiqueta] = useState([])
 

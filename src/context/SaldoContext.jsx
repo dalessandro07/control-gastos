@@ -10,7 +10,7 @@ import moment from 'moment'
 import 'moment/dist/locale/es'
 import useObtenerServicios from '../hooks/useObtenerServicios'
 import useFiltrarGastosPorMes from '../hooks/useFiltrarGastosPorMes'
-import { useDivisas } from './DivisasContext'
+import { useDivisasContext } from './DivisasContext'
 
 moment.locale('es')
 
@@ -26,23 +26,12 @@ export const SaldoContext = createContext({
 const SaldoProvider = ({ children }) => {
   const { userUID } = useAuth()
 
-  const { setDivisaActual } = useDivisas()
+  const { setDivisaActual } = useDivisasContext()
 
-  const {
-    gastos,
-    saldoTotal,
-    agregarGasto,
-    obtenerGastos,
-    loading,
-    changeLoading
-  } = useGasto()
+  const { gastos, saldoTotal, agregarGasto, obtenerGastos, loading, changeLoading } = useGasto()
   const { servicios, obtenerServicios } = useObtenerServicios()
 
-  const { exportarGastos, importarGastos } = useImportExport(
-    gastos,
-    obtenerGastos,
-    userUID
-  )
+  const { exportarGastos, importarGastos } = useImportExport(gastos, obtenerGastos, userUID)
 
   const { gastosPorMes, handleChangeMonth } = useFiltrarGastosPorMes(gastos)
 

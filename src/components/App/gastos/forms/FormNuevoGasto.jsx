@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import { useDivisas } from '../../../../context/DivisasContext'
+import { useDivisasContext } from '../../../../context/DivisasContext'
 
 const FormNuevoGasto = ({ valueSendGasto }) => {
-  const { divisaActual } = useDivisas()
+  const { divisaActual } = useDivisasContext()
 
   const {
     errors,

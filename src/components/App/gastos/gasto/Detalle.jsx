@@ -9,13 +9,13 @@ import Loading from '../../../utils/Loading'
 import Modal from '../../../utils/Modal'
 import useSeo from '../../../../hooks/useSeo'
 import { useAuth } from '../../../../context/AuthContext'
-import { useDivisas } from '../../../../context/DivisasContext'
+import { useDivisasContext } from '../../../../context/DivisasContext'
 
 import moment from 'moment'
 
 const Detalle = ({ gastos }) => {
   const { userUID } = useAuth()
-  const { divisaActual } = useDivisas()
+  const { divisaActual } = useDivisasContext()
   const { loading } = useContext(SaldoContext)
 
   const { id } = useParams()

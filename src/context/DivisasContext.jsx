@@ -3,7 +3,7 @@ import { agregarDivisaDB, actualizarDivisaDB } from '../firebase'
 
 export const divisasContext = createContext()
 
-export const useDivisas = () => {
+export const useDivisasContext = () => {
   const context = useContext(divisasContext)
   if (!context) {
     throw new Error('Error, no hay un proveedor de divisas.')

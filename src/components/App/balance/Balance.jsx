@@ -14,7 +14,7 @@ import ListaPorEtiqueta from './ListaPorEtiqueta'
 import useFiltrarGastosPorMes from '../../../hooks/useFiltrarGastosPorMes'
 
 import moment from 'moment'
-import { useDivisas } from '../../../context/DivisasContext'
+import { useDivisasContext } from '../../../context/DivisasContext'
 
 Chart.register(ArcElement, Tooltip, Legend)
 Chart.defaults.font.size = 17.5
@@ -23,7 +23,7 @@ Chart.defaults.font.weight = 'bold'
 const Balance = () => {
   const { gastos, saldoTotal, loading, exportarGastos, importarGastos, changeTotalPorMes } =
     useContext(SaldoContext)
-  const { divisaActual } = useDivisas()
+  const { divisaActual } = useDivisasContext()
 
   const [valueInput, setValueInput] = useState(moment().format('YYYY-MM'))
 

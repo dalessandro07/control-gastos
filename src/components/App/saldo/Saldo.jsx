@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useDivisas } from '../../../context/DivisasContext'
+import { useDivisasContext } from '../../../context/DivisasContext'
 
 import useShowSaldo from './hooks/useShowSaldo'
 import ExpiredServices from '../servicios/ExpiredServices'
@@ -8,7 +8,7 @@ import ExpiredServices from '../servicios/ExpiredServices'
 import { Ring } from '@uiball/loaders'
 
 const Saldo = () => {
-  const { divisaActual } = useDivisas()
+  const { divisaActual } = useDivisasContext()
   const { mesActual, saldoAMostrar, loading, servicios, totalPorMes, saldoTotal } = useShowSaldo()
 
   return (
