@@ -10,8 +10,8 @@ export default function CustomDialog({
   header,
   children,
   type = '',
-  color = '',
-  variant = ''
+  customColor = 'blue',
+  variant = 'filled'
 }) {
   const { width } = useResizeWindow()
   const { resumeColor } = useColor()
@@ -38,7 +38,7 @@ export default function CustomDialog({
   return (
     <>
       <Button
-        color={color || typeOfDialog[type].color}
+        color={customColor || typeOfDialog[type].color}
         size="sm"
         onClick={handleOpen}
         variant={variant || typeOfDialog[type].variant}>

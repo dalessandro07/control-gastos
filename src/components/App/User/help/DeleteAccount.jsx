@@ -25,7 +25,11 @@ const DeleteAccount = () => {
   })
 
   return (
-    <CustomDialog isSubmit buttonText="Eliminar mi cuenta" header="⚠️ ¿Desea eliminar su cuenta?">
+    <CustomDialog
+      type="delete"
+      isSubmit
+      buttonText="Eliminar mi cuenta"
+      header="⚠️ ¿Desea eliminar su cuenta?">
       <div className="flex flex-col items-start gap-8 px-2">
         <form onSubmit={handleSubmit(onSubmit)}>
           <header className="mb-8">
