@@ -2,7 +2,7 @@ import moment from 'moment'
 import * as yup from 'yup'
 
 const validationSchemaServices = yup.object().shape({
-  nombre: yup
+  nombreServicio: yup
     .string()
     .required('El nombre es requerido.')
     .max(20, 'El nombre no puede tener más de 20 caracteres.')
@@ -24,12 +24,9 @@ const validationSchemaServices = yup.object().shape({
     .max(100000, 'El monto no puede ser mayor a 100,000.')
     .min(0.1, 'El monto debe ser mayor a 0,10.'),
   fecha: yup
-    .number()
-    .typeError('No se ingresó una día válido.')
-    .required('El día de recordatorio es requerido.')
-    .default(Number(moment().format('DD')))
-    .max(31, 'El día de recordatorio no puede ser mayor a 31.')
-    .min(1, 'El día de recordatorio debe ser mayor a 1.')
+    .date()
+    .typeError('La fecha debe ser una fecha válida.')
+    .required('La fecha es requerida.')
 })
 
 const validationSchemaGasto = yup.object().shape({

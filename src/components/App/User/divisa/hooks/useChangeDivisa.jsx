@@ -1,5 +1,5 @@
-import { useAuth } from '../../../../context/AuthContext'
-import { useDivisasContext } from '../../../../context/DivisasContext'
+import { useAuth } from '../../../../../context/AuthContext'
+import { useDivisasContext } from '../../../../../context/DivisasContext'
 
 import { toast } from 'react-toastify'
 
@@ -13,11 +13,11 @@ const useChangeDivisa = () => {
     } else {
       changeDivisa({ ...divisaActual, divisa: value }, userUID)
     }
-    toast.success('¡Divisa cambiada correctamente!')
+    toast.success('¡Moneda cambiada correctamente!')
   }
 
   const divisas = {
-    '': 'Ninguna divisa',
+    '': 'Ninguna moneda',
     'S/': 'Soles',
     $: 'Dólares, Pesos',
     '€': 'Euros'

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext'
 import { useColor } from '../../../context/ColorContext'
+
 import UserAvatar from './../User/utils/UserAvatar'
 
 const Header = () => {
@@ -42,7 +43,7 @@ const Header = () => {
 
       {user && (
         <Link className="pr-1" to="/">
-          <UserAvatar user={user} />
+          <UserAvatar />
         </Link>
       )}
     </header>

@@ -1,18 +1,18 @@
 import React from 'react'
+
+import { useAuth } from '../../../../context/AuthContext'
 import { useColor } from '../../../../context/ColorContext'
 
-import moment from 'moment'
+import useCreationTime from '../hooks/useCreationTime'
 
-const UserAvatar = ({ user, isUserSection = false }) => {
+const UserAvatar = ({ isUserSection = false }) => {
+  const { user } = useAuth()
   const { photoURL, displayName } = user
   const { colorActual, resumeColor } = useColor()
+  const { createdAt } = useCreationTime()
 
+  const completeName = displayName ?? user?.email?.split('@')[0] ?? 'Usuario'
   const nameLogo = displayName?.at(0) ?? 'U'
-  const completeName = user?.displayName ?? user?.email?.split('@')[0] ?? 'Usuario'
-
-  const createdAtTimestamp = new Date(Number(user?.reloadUserInfo?.createdAt))
-  const createdAt = moment(createdAtTimestamp).fromNow()
-
   const border = resumeColor === 'amber' ? 'border-amber-400' : 'border-indigo-200'
 
   return (

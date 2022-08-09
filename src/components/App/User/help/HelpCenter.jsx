@@ -1,13 +1,19 @@
 import React from 'react'
+import { useAuth } from '../../../../context/AuthContext'
 
 import { Button } from '@material-tailwind/react'
 import DeleteAccount from './DeleteAccount'
 
 const HelpCenter = () => {
+  const { user } = useAuth()
+
+  const firstName = user?.displayName.split(' ')[0]
+  const name = user?.displayName ? firstName : 'Hola,'
+
   return (
     <section className="my-5 flex flex-col items-center gap-4">
       <header className="mb-5">
-        <h3 className="text-lg font-bold">¿Cómo podemos ayudarte?</h3>
+        <h3 className="text-lg font-bold">{user?.displayName && name} ¿Cómo podemos ayudarte?</h3>
       </header>
 
       <section className="flex flex-col items-center gap-6">

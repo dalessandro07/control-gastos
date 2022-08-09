@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+import { useColor } from '../../../../context/ColorContext'
 
 import useChangeDivisa from './hooks/useChangeDivisa'
+import useDivisaSelected from './hooks/useDivisaSelected'
+
 import { Button, Select, Option } from '@material-tailwind/react'
-import { useColor } from '../../../context/ColorContext'
 
 const SelectDivisa = () => {
   const { resumeColor } = useColor()
-  const { divisas, saveDivisaDB, divisaActual } = useChangeDivisa()
-  const [divisaSelected, setDivisaSelected] = useState(divisaActual?.divisa || '')
-
-  const handleChangeDivisa = val => setDivisaSelected(val)
-  const saveDivisa = () => saveDivisaDB(divisaSelected)
+  const { divisas } = useChangeDivisa()
+  const { divisaSelected, handleChangeDivisa, saveDivisa } = useDivisaSelected()
 
   return (
     <article className="my-5 flex flex-col items-center justify-between gap-8">
@@ -23,7 +23,7 @@ const SelectDivisa = () => {
       </Select>
 
       <Button onClick={saveDivisa} size="sm" color={resumeColor} variant="gradient">
-        Guardar
+        Cambiar
       </Button>
     </article>
   )

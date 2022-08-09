@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
+
+import { useColor } from '../../../context/ColorContext'
+import useResizeWindow from '../../../hooks/useResizeWindow'
+
 import { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react'
 
-import useResizeWindow from '../../hooks/useResizeWindow'
-
-export default function CustomDialog({ buttonText, header, children }) {
+export default function CustomDialog({
+  buttonText,
+  header,
+  children,
+  type = '',
+  color = '',
+  variant = ''
+}) {
   const { width } = useResizeWindow()
+  const { resumeColor } = useColor()
 
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(!open)
@@ -14,9 +24,24 @@ export default function CustomDialog({ buttonText, header, children }) {
     unmount: { scale: 0.9, y: -100 }
   }
 
+  const typeOfDialog = {
+    delete: {
+      color: 'red',
+      variant: 'outlined'
+    },
+    new: {
+      color: resumeColor || 'green',
+      variant: 'filled'
+    }
+  }
+
   return (
     <>
-      <Button color="red" size="sm" onClick={handleOpen} variant="outlined">
+      <Button
+        color={color || typeOfDialog[type].color}
+        size="sm"
+        onClick={handleOpen}
+        variant={variant || typeOfDialog[type].variant}>
         {buttonText}
       </Button>
 

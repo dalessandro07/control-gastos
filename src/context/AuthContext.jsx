@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 
 import { auth } from '../firebase'
 
@@ -49,13 +49,11 @@ const AuthProvider = ({ children }) => {
 
   const deleteAccount = () => deleteUser(auth.currentUser)
 
-  useEffect(() => {
-    onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser)
-      setUserUID(currentUser?.uid ?? null)
-      setLoading(false)
-    })
-  }, [])
+  onAuthStateChanged(auth, currentUser => {
+    setUser(currentUser)
+    setUserUID(currentUser?.uid ?? null)
+    setLoading(false)
+  })
 
   const valueToExport = {
     register,

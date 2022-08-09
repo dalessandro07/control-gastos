@@ -5,7 +5,7 @@ import { useColor } from '../../../../context/ColorContext'
 
 import useDeleteAccount from './hooks/useDeleteAccount'
 
-import CustomDialog from '../../../utils/CustomDialog'
+import CustomDialog from '../../../utils/Dialog/CustomDialog'
 import CustomInput from '../../../utils/Input/CustomInput'
 import ErrorAlert from '../../../utils/Error/ErrorAlert'
 
