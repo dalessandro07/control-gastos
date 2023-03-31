@@ -7,7 +7,7 @@ const Copyright = () => {
         Desarrollado por
         <a
           className="ml-1 font-semibold hover:underline"
-          href="https://www.linkedin.com/in/alessandro-rios/"
+          href="https://alessandrorios.com"
           target="_blank"
           rel="noreferrer">
           Alessandro Rios
@@ -37,3 +37,4 @@ const Copyright = () => {
 }
 
 export default Copyright
+

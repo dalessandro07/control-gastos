@@ -8,7 +8,7 @@ const MeetDeveloper = () => {
       <Button color="teal" size="sm" variant="text">
         <a
           className="flex items-center gap-2 bg-gradient-to-l from-teal-600 to-teal-300 bg-clip-text text-transparent"
-          href="https://www.linkedin.com/in/alessandro-rios/">
+          href="https://alessandrorios.com">
           LinkedIn
         </a>
       </Button>
